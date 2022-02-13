@@ -46,13 +46,13 @@ class _RedactionViewState extends State<RedactionView> {
 
   late FormGroup form;
   Uint8List? image;
+  late String imageURL;
   late bool addTags;
   late List<String> tags;
   late bool addDescriptin;
   final int maxTags = 10;
   late int namberOfCards;
   late List<FormGroup> cardForm;
-  late String imageURL;
 
   @override
   void initState() {
@@ -449,7 +449,7 @@ class _RedactionViewState extends State<RedactionView> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(10),
                                           child: Text(
-                                            e,
+                                            '#$e',
                                             style: const TextStyle(
                                                 color: Colors.white),
                                           ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:study/blocs/accaunt/account_bloc.dart';
+import 'package:study/models/app_user.dart';
 import 'package:study/pages/profile/bloc/profile_bloc.dart';
 import 'package:study/pages/profile/view/profile_view.dart';
+import 'package:study/provider/account_provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -17,7 +20,8 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
 
-    profileBloc = ProfileBloc();
+    profileBloc = ProfileBloc(userProvider: context.read<UserProvider>())
+      ..add(const ProfileEvent.started());
   }
 
   @override
@@ -32,7 +36,15 @@ class _ProfilePageState extends State<ProfilePage> {
       value: profileBloc,
       child: Scaffold(
         appBar: AppBar(),
-        body: const ProfileView(),
+        body: ProfileView(
+          onUpdate: (AppUser appUser) {
+            profileBloc.add(ProfileEvent.update(appUser));
+            context.read<AccountBloc>().add(const AccountEvent.load());
+          },
+          onLogOut: () {
+            profileBloc.add(const ProfileEvent.logOut());
+          },
+        ),
       ),
     );
   }

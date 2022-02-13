@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:study/blocs/accaunt/account_bloc.dart';
 import 'package:study/pages/authorization/view/authorization_page.dart';
 import 'package:study/pages/home/view/home_page.dart';
 import 'package:study/pages/registration/bloc/registration_bloc.dart';
@@ -89,6 +90,7 @@ class _RegistrationViewState extends State<RegistrationView> {
         listener: (BuildContext context, RegistrationState state) {
       state.maybeWhen(
         success: () {
+          context.read<AccountBloc>().add(const AccountEvent.load());
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

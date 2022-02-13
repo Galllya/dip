@@ -46,6 +46,17 @@ class AuthMethods {
           uid: cred.user!.uid,
           email: email,
           photoURL: photoURL,
+          subscrip: [],
+          subscribers: [],
+          showEvery: true,
+          writeCanAll: true,
+          statCanSeeEvery: true,
+          points: 0,
+          description: '',
+          gender: '',
+          dateBirth: DateTime(1000, 1, 1),
+          uni: '',
+          work: '',
         );
 
         await fireStore
@@ -93,5 +104,47 @@ class AuthMethods {
       res = 'Произошла ошибка';
     }
     return res;
+  }
+
+  Future<void> signOut() async {
+    await auth.signOut();
+  }
+
+  Future<void> updateUser({
+    required AppUser appUser,
+    Uint8List? file,
+  }) async {
+    String photoURL = appUser.photoURL!;
+    if (file != null) {
+      photoURL = await StorageMethods().uploadImageToStorage(
+        childName: 'profilePics',
+        file: file,
+      );
+    }
+
+    final Map<String, dynamic> user = appUser.toJson();
+
+    appUser = AppUser(
+      userName: appUser.userName,
+      uid: appUser.uid,
+      email: appUser.email,
+      photoURL: photoURL,
+      subscrip: appUser.subscrip,
+      subscribers: appUser.subscribers,
+      showEvery: appUser.showEvery,
+      writeCanAll: appUser.writeCanAll,
+      statCanSeeEvery: appUser.statCanSeeEvery,
+      points: appUser.points,
+      description: appUser.description,
+      gender: appUser.gender,
+      dateBirth: appUser.dateBirth,
+      uni: appUser.uni,
+      work: appUser.work,
+    );
+
+    await fireStore
+        .collection('users')
+        .doc(appUser.uid)
+        .update(appUser.toJson());
   }
 }

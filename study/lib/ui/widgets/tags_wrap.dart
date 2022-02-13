@@ -26,7 +26,7 @@ class TagsWrap extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Text(
-                  e,
+                  '#$e',
                   style: const TextStyle(color: Colors.white),
                 ),
               ),

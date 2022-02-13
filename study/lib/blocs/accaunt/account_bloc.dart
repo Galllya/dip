@@ -26,6 +26,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   }
 
   Stream<AccountState> _load() async* {
+    yield const AccountState.initial();
+
     yield* state.maybeMap(
       initial: (initialState) async* {
         yield const AccountState.loading();

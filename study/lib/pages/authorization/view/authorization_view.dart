@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:study/blocs/accaunt/account_bloc.dart';
 import 'package:study/pages/authorization/bloc/authorization_bloc.dart';
 import 'package:study/pages/home/view/home_page.dart';
 import 'package:study/pages/registration/view/registration_page.dart';
@@ -43,6 +44,7 @@ class _AuthorizationViewState extends State<AuthorizationView> {
       listener: (BuildContext context, AuthorizationState state) {
         state.maybeWhen(
           success: () {
+            context.read<AccountBloc>().add(const AccountEvent.load());
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(

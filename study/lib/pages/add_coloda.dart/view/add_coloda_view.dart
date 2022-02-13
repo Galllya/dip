@@ -453,7 +453,7 @@ class _AddColodaViewState extends State<AddColodaView> {
                                           child: Padding(
                                             padding: const EdgeInsets.all(10),
                                             child: Text(
-                                              e,
+                                              '#$e',
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),

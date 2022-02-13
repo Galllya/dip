@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:study/pages/colod/widgets/delete_dialog.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/widget_style.dart';
 
 class ModalProfileSetting extends StatefulWidget {
   final bool showEvery;
   final Function onChange;
-  final bool takeMyHaveAuthor;
-  final Function deleteColod;
+  final bool writeCanAll;
+  final bool statCanSeeEvery;
+  final Function deleteAccount;
+  final Function logOut;
 
   const ModalProfileSetting({
     Key? key,
     required this.showEvery,
     required this.onChange,
-    required this.takeMyHaveAuthor,
-    required this.deleteColod,
+    required this.writeCanAll,
+    required this.deleteAccount,
+    required this.statCanSeeEvery,
+    required this.logOut,
   }) : super(key: key);
 
   @override
@@ -25,12 +28,14 @@ class ModalProfileSetting extends StatefulWidget {
 
 class _ModalProfileSettingState extends State<ModalProfileSetting> {
   late bool showEvery;
-  late bool takeMyHaveAuthor;
+  late bool writeCanAll;
+  late bool statCanSeeEvery;
 
   @override
   void initState() {
     showEvery = widget.showEvery;
-    takeMyHaveAuthor = widget.takeMyHaveAuthor;
+    writeCanAll = widget.writeCanAll;
+    statCanSeeEvery = widget.statCanSeeEvery;
 
     super.initState();
   }
@@ -87,10 +92,10 @@ class _ModalProfileSettingState extends State<ModalProfileSetting> {
                 Row(
                   children: [
                     Switch(
-                      value: takeMyHaveAuthor,
+                      value: writeCanAll,
                       onChanged: (bool value) {
                         setState(() {
-                          takeMyHaveAuthor = value;
+                          writeCanAll = value;
                         });
                       },
                       activeTrackColor: softColor,
@@ -102,33 +107,44 @@ class _ModalProfileSettingState extends State<ModalProfileSetting> {
                     ),
                   ],
                 ),
+                Row(
+                  children: [
+                    Switch(
+                      value: statCanSeeEvery,
+                      onChanged: (bool value) {
+                        setState(() {
+                          statCanSeeEvery = value;
+                        });
+                      },
+                      activeTrackColor: softColor,
+                      activeColor: primaryCoolColor,
+                    ),
+                    Text(
+                      'мою статистику видят все пользователи',
+                      style: getStyle(),
+                    ),
+                  ],
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 InkWell(
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return DeliteDialog(
-                            deleteColod: () {
-                              widget.deleteColod();
-                            },
-                          );
-                        });
+                    Navigator.pop(context);
+                    widget.logOut();
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Row(
                       children: [
                         SvgPicture.asset(
-                          'assets/icons/icon_delete.svg',
+                          'assets/icons/log-out.svg',
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         const Text(
-                          'удалить колоду',
+                          'выйти из аккаунта',
                           style: TextStyle(
                             color: primaryColor,
                             fontSize: 16,
@@ -139,6 +155,35 @@ class _ModalProfileSettingState extends State<ModalProfileSetting> {
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                // InkWell(
+                //   onTap: () {
+                //     widget.deleteAccount();
+                //   },
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(left: 20),
+                //     child: Row(
+                //       children: [
+                //         SvgPicture.asset(
+                //           'assets/icons/icon_delete.svg',
+                //         ),
+                //         const SizedBox(
+                //           width: 10,
+                //         ),
+                //         const Text(
+                //           'удалить аккаунт',
+                //           style: TextStyle(
+                //             color: primaryColor,
+                //             fontSize: 16,
+                //             decoration: TextDecoration.underline,
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
               ],
             ),
             Padding(
@@ -147,8 +192,13 @@ class _ModalProfileSettingState extends State<ModalProfileSetting> {
                 style: WidgetStyle().mainElevatedButtonStyle(),
                 onPressed: () {
                   if (widget.showEvery != showEvery ||
-                      widget.takeMyHaveAuthor != takeMyHaveAuthor) {
-                    widget.onChange(showEvery, takeMyHaveAuthor);
+                      widget.writeCanAll != writeCanAll ||
+                      widget.statCanSeeEvery != statCanSeeEvery) {
+                    widget.onChange(
+                      showEvery,
+                      writeCanAll,
+                      statCanSeeEvery,
+                    );
                   }
                   Navigator.pop(context);
                 },

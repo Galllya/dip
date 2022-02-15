@@ -79,4 +79,12 @@ class ColodaProvider {
     );
     return res;
   }
+
+  Future<List<Coloda>> getAllColods({
+    required String searchText,
+  }) async {
+    return await colodaMethods.getAllColods(
+      seatchText: searchText,
+    );
+  }
 }

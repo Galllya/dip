@@ -52,7 +52,7 @@ class CardInColoda extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(8, 8, 20, 0),
                         child: InkWell(
                           onTap: () {
-                            deleteCard(indexOfCard);
+                            deleteCard(indexOfCard, form);
                           },
                           child: SvgPicture.asset(
                             'assets/icons/icon_close.svg',

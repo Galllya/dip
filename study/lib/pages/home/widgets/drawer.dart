@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:study/blocs/accaunt/account_bloc.dart';
+import 'package:study/pages/exchange/view/exchange_page.dart';
 import 'package:study/pages/profile/view/profile_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/text_style.dart';
@@ -65,6 +66,12 @@ class DrawerCustom extends StatelessWidget {
               ),
             ),
             ListTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ExchangePage()));
+              },
               leading: SvgPicture.asset('assets/icons/icon_exchange.svg'),
               title: Text(
                 'Обмен',

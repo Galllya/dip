@@ -220,4 +220,32 @@ class ColodaMethods {
     }
     return res;
   }
+
+  Future<List<Coloda>> getAllColods({
+    required String seatchText,
+  }) async {
+    User currentUser = auth.currentUser!;
+    List<Coloda> colods = [];
+    dynamic a;
+    try {
+      a = await fireStore
+          .collection('colods')
+          // .where('uid', isNotEqualTo: currentUser.uid)
+          .where("name", isGreaterThanOrEqualTo: seatchText)
+          .where("name", isLessThanOrEqualTo: "$seatchText\uf7ff")
+          .get();
+
+      for (var element in a.docChanges) {
+        if (Coloda.fromSnap(element.doc).uid != currentUser.uid) {
+          colods.add(
+            Coloda.fromSnap(element.doc),
+          );
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    return colods;
+  }
 }

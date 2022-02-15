@@ -178,16 +178,27 @@ class _AddColodaViewState extends State<AddColodaView> {
           if (shodStart) {
             cards.clear();
 
-            for (var element in cardForm) {
+            cardArray.controls.forEach((element) {
               if (element.valid) {
                 cards.add(
                   model.Card(
-                    term: element.control('term').value,
+                    term: (element as FormGroup).control('term').value,
                     definition: element.control('definition').value,
                   ),
                 );
               }
-            }
+            });
+
+            // for (var element in cardForm) {
+            //   if (element.valid) {
+            //     cards.add(
+            //       model.Card(
+            //         term: element.control('term').value,
+            //         definition: element.control('definition').value,
+            //       ),
+            //     );
+            //   }
+            // }
 
             if (form.control('name').valid && cards.isNotEmpty) {
               widget.putColoda(
@@ -478,9 +489,13 @@ class _AddColodaViewState extends State<AddColodaView> {
                         itemBuilder: (BuildContext context, int index) {
                           return CardInColoda(
                             indexOfCard: index,
-                            deleteCard: (int indexFrom) {
+                            deleteCard: (int indexFrom, FormGroup takeForm) {
                               setState(() {
-                                cardArray.removeAt(indexFrom);
+                                print(cardArray.controls);
+
+                                print(takeForm.value);
+                                cardArray.remove(takeForm);
+                                // cardArray.removeAt(indexFrom);
 
                                 namberOfCards--;
                               });

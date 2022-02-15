@@ -12,101 +12,113 @@ class AboutMe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (user.description != null)
-            Text(
-              user.description!,
-              style: const TextStyle(
-                color: primaryColor,
-                fontSize: 18,
-              ),
+    return !((user.description != '') &&
+            ((user.gender == 'Женский') || ((user.gender == 'Мужской'))) &&
+            (user.dateBirth != DateTime(1000, 1, 1)) &&
+            (user.uni != '') &&
+            (user.work != ''))
+        ? Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              'У вас пока нет описания',
+              style: getBoldTextStyle(),
             ),
-          if (user.gender != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Row(
-                children: [
+          )
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (user.description != '')
                   Text(
-                    'Пол:',
-                    style: getUnderTextStyle(),
+                    user.description!,
+                    style: const TextStyle(
+                      color: primaryColor,
+                      fontSize: 18,
+                    ),
                   ),
-                  const SizedBox(
-                    width: 4,
+                if ((user.gender == 'Женский') || ((user.gender == 'Мужской')))
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Пол:',
+                          style: getUnderTextStyle(),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          user.gender!,
+                          style: getBoldTextStyle(),
+                        ),
+                      ],
+                    ),
                   ),
-                  Text(
-                    user.gender!,
-                    style: getBoldTextStyle(),
+                if (user.dateBirth != DateTime(1000, 1, 1))
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Row(
+                      children: [
+                        Text(
+                          'День рождения:',
+                          style: getUnderTextStyle(),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          DateFormat('dd.MM.yyyy').format(user.dateBirth!),
+                          style: getBoldTextStyle(),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
+                if (user.uni != '')
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Место учебы:',
+                          style: getUnderTextStyle(),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          user.uni!,
+                          style: getBoldTextStyle(),
+                        ),
+                      ],
+                    ),
+                  ),
+                if (user.work != '')
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Место работы:',
+                          style: getUnderTextStyle(),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          user.work!,
+                          style: getBoldTextStyle(),
+                        ),
+                      ],
+                    ),
+                  ),
+                const SizedBox(
+                  height: 40,
+                ),
+              ],
             ),
-          if (user.dateBirth != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Row(
-                children: [
-                  Text(
-                    'День рождения:',
-                    style: getUnderTextStyle(),
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    DateFormat('dd.MM.yyyy').format(user.dateBirth!),
-                    style: getBoldTextStyle(),
-                  ),
-                ],
-              ),
-            ),
-          if (user.uni != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Row(
-                children: [
-                  Text(
-                    'Место учебы:',
-                    style: getUnderTextStyle(),
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    user.uni!,
-                    style: getBoldTextStyle(),
-                  ),
-                ],
-              ),
-            ),
-          if (user.work != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Row(
-                children: [
-                  Text(
-                    'Место работы:',
-                    style: getUnderTextStyle(),
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    user.work!,
-                    style: getBoldTextStyle(),
-                  ),
-                ],
-              ),
-            ),
-          const SizedBox(
-            height: 40,
-          ),
-        ],
-      ),
-    );
+          );
   }
 }
 

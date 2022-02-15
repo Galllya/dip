@@ -39,6 +39,7 @@ class RedactionBloc extends Bloc<RedactionEvent, RedactionState> {
     String uid,
     DateTime? dateNow,
     Uint8List? file,
+    String? userName,
   ) async* {
     yield const RedactionState.initial();
 
@@ -56,6 +57,7 @@ class RedactionBloc extends Bloc<RedactionEvent, RedactionState> {
           docId: uid,
           dateNow: dateNow,
           file: file,
+          authorName: userName,
         );
 
         if (res == "success") {

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:study/blocs/accaunt/account_bloc.dart';
 import 'package:study/models/coloda/card.dart' as model;
 import 'package:study/models/coloda/coloda_detail.dart';
 import 'package:study/pages/add_coloda.dart/widgets/card_in_coloda.dart';
@@ -30,6 +31,7 @@ class RedactionView extends StatefulWidget {
     required String uid,
     DateTime? dateNow,
     Uint8List? file,
+    String? userName,
   }) updateColoda;
   const RedactionView({
     Key? key,
@@ -53,6 +55,7 @@ class _RedactionViewState extends State<RedactionView> {
   final int maxTags = 10;
   late int namberOfCards;
   late List<FormGroup> cardForm;
+  late String userName;
 
   @override
   void initState() {
@@ -62,7 +65,12 @@ class _RedactionViewState extends State<RedactionView> {
     addDescriptin = widget.coloda.description == '' ? false : true;
     cardForm = [];
     imageURL = widget.coloda.imageURL!;
-
+    context.read<AccountBloc>().state.maybeWhen(
+          orElse: () {},
+          loaded: (user) {
+            userName = user.userName!;
+          },
+        );
     form = FormGroup(
       {
         'name': FormControl<String>(
@@ -183,6 +191,7 @@ class _RedactionViewState extends State<RedactionView> {
                 dateNow: widget.coloda.dateCreate,
                 photoURL: imageURL == '' ? '' : imageURL,
                 uid: widget.coloda.colodId!,
+                userName: userName,
               );
             } else {
               if (!form.control('name').valid && cards.isEmpty) {

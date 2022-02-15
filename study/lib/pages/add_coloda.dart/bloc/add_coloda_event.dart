@@ -11,6 +11,7 @@ class AddColodaEvent with _$AddColodaEvent {
     bool? showEvery,
     bool? takeMyHaveAuthour,
     List<String>? tags,
+    String userNamem,
   ) = _PutColoda;
   const factory AddColodaEvent.make() = _Make;
   const factory AddColodaEvent.showModal() = _ShowModal;

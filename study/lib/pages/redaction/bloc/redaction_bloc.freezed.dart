@@ -31,7 +31,8 @@ class _$RedactionEventTearOff {
       List<String>? tags,
       String uid,
       DateTime? dateNow,
-      Uint8List? file) {
+      Uint8List? file,
+      String? userName) {
     return _UpdateColod(
       name,
       description,
@@ -43,6 +44,7 @@ class _$RedactionEventTearOff {
       uid,
       dateNow,
       file,
+      userName,
     );
   }
 
@@ -69,7 +71,8 @@ mixin _$RedactionEvent {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)
+            Uint8List? file,
+            String? userName)
         updateColod,
     required TResult Function() make,
   }) =>
@@ -87,7 +90,8 @@ mixin _$RedactionEvent {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)?
+            Uint8List? file,
+            String? userName)?
         updateColod,
     TResult Function()? make,
   }) =>
@@ -105,7 +109,8 @@ mixin _$RedactionEvent {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)?
+            Uint8List? file,
+            String? userName)?
         updateColod,
     TResult Function()? make,
     required TResult orElse(),
@@ -200,7 +205,8 @@ class _$_Started implements _Started {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)
+            Uint8List? file,
+            String? userName)
         updateColod,
     required TResult Function() make,
   }) {
@@ -221,7 +227,8 @@ class _$_Started implements _Started {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)?
+            Uint8List? file,
+            String? userName)?
         updateColod,
     TResult Function()? make,
   }) {
@@ -242,7 +249,8 @@ class _$_Started implements _Started {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)?
+            Uint8List? file,
+            String? userName)?
         updateColod,
     TResult Function()? make,
     required TResult orElse(),
@@ -307,7 +315,8 @@ abstract class _$UpdateColodCopyWith<$Res> {
       List<String>? tags,
       String uid,
       DateTime? dateNow,
-      Uint8List? file});
+      Uint8List? file,
+      String? userName});
 }
 
 /// @nodoc
@@ -333,6 +342,7 @@ class __$UpdateColodCopyWithImpl<$Res>
     Object? uid = freezed,
     Object? dateNow = freezed,
     Object? file = freezed,
+    Object? userName = freezed,
   }) {
     return _then(_UpdateColod(
       name == freezed
@@ -375,6 +385,10 @@ class __$UpdateColodCopyWithImpl<$Res>
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
+      userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -392,7 +406,8 @@ class _$_UpdateColod implements _UpdateColod {
       this.tags,
       this.uid,
       this.dateNow,
-      this.file);
+      this.file,
+      this.userName);
 
   @override
   final String? name;
@@ -414,10 +429,12 @@ class _$_UpdateColod implements _UpdateColod {
   final DateTime? dateNow;
   @override
   final Uint8List? file;
+  @override
+  final String? userName;
 
   @override
   String toString() {
-    return 'RedactionEvent.updateColod(name: $name, description: $description, cards: $cards, imageURL: $imageURL, showEvery: $showEvery, takeMyHaveAuthour: $takeMyHaveAuthour, tags: $tags, uid: $uid, dateNow: $dateNow, file: $file)';
+    return 'RedactionEvent.updateColod(name: $name, description: $description, cards: $cards, imageURL: $imageURL, showEvery: $showEvery, takeMyHaveAuthour: $takeMyHaveAuthour, tags: $tags, uid: $uid, dateNow: $dateNow, file: $file, userName: $userName)';
   }
 
   @override
@@ -448,7 +465,10 @@ class _$_UpdateColod implements _UpdateColod {
                 const DeepCollectionEquality()
                     .equals(other.dateNow, dateNow)) &&
             (identical(other.file, file) ||
-                const DeepCollectionEquality().equals(other.file, file)));
+                const DeepCollectionEquality().equals(other.file, file)) &&
+            (identical(other.userName, userName) ||
+                const DeepCollectionEquality()
+                    .equals(other.userName, userName)));
   }
 
   @override
@@ -463,7 +483,8 @@ class _$_UpdateColod implements _UpdateColod {
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(uid) ^
       const DeepCollectionEquality().hash(dateNow) ^
-      const DeepCollectionEquality().hash(file);
+      const DeepCollectionEquality().hash(file) ^
+      const DeepCollectionEquality().hash(userName);
 
   @JsonKey(ignore: true)
   @override
@@ -484,12 +505,13 @@ class _$_UpdateColod implements _UpdateColod {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)
+            Uint8List? file,
+            String? userName)
         updateColod,
     required TResult Function() make,
   }) {
     return updateColod(name, description, cards, imageURL, showEvery,
-        takeMyHaveAuthour, tags, uid, dateNow, file);
+        takeMyHaveAuthour, tags, uid, dateNow, file, userName);
   }
 
   @override
@@ -506,12 +528,13 @@ class _$_UpdateColod implements _UpdateColod {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)?
+            Uint8List? file,
+            String? userName)?
         updateColod,
     TResult Function()? make,
   }) {
     return updateColod?.call(name, description, cards, imageURL, showEvery,
-        takeMyHaveAuthour, tags, uid, dateNow, file);
+        takeMyHaveAuthour, tags, uid, dateNow, file, userName);
   }
 
   @override
@@ -528,14 +551,15 @@ class _$_UpdateColod implements _UpdateColod {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)?
+            Uint8List? file,
+            String? userName)?
         updateColod,
     TResult Function()? make,
     required TResult orElse(),
   }) {
     if (updateColod != null) {
       return updateColod(name, description, cards, imageURL, showEvery,
-          takeMyHaveAuthour, tags, uid, dateNow, file);
+          takeMyHaveAuthour, tags, uid, dateNow, file, userName);
     }
     return orElse();
   }
@@ -586,7 +610,8 @@ abstract class _UpdateColod implements RedactionEvent {
       List<String>? tags,
       String uid,
       DateTime? dateNow,
-      Uint8List? file) = _$_UpdateColod;
+      Uint8List? file,
+      String? userName) = _$_UpdateColod;
 
   String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -598,6 +623,7 @@ abstract class _UpdateColod implements RedactionEvent {
   String get uid => throw _privateConstructorUsedError;
   DateTime? get dateNow => throw _privateConstructorUsedError;
   Uint8List? get file => throw _privateConstructorUsedError;
+  String? get userName => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$UpdateColodCopyWith<_UpdateColod> get copyWith =>
       throw _privateConstructorUsedError;
@@ -651,7 +677,8 @@ class _$_Make implements _Make {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)
+            Uint8List? file,
+            String? userName)
         updateColod,
     required TResult Function() make,
   }) {
@@ -672,7 +699,8 @@ class _$_Make implements _Make {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)?
+            Uint8List? file,
+            String? userName)?
         updateColod,
     TResult Function()? make,
   }) {
@@ -693,7 +721,8 @@ class _$_Make implements _Make {
             List<String>? tags,
             String uid,
             DateTime? dateNow,
-            Uint8List? file)?
+            Uint8List? file,
+            String? userName)?
         updateColod,
     TResult Function()? make,
     required TResult orElse(),

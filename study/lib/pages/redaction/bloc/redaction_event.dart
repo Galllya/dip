@@ -14,6 +14,7 @@ class RedactionEvent with _$RedactionEvent {
     String uid,
     DateTime? dateNow,
     Uint8List? file,
+    String? userName,
   ) = _UpdateColod;
   const factory RedactionEvent.make() = _Make;
 }

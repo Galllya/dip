@@ -5,6 +5,8 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:study/pages/exchange/bloc/exchange_bloc.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/widget_style.dart';
+import 'package:study/ui/widgets/container_all_coloda.dart';
+import 'package:study/ui/widgets/container_coloda.dart';
 import 'package:study/ui/widgets/loading_custom.dart';
 import 'package:study/ui/widgets/scaffold_messages.dart';
 
@@ -90,9 +92,17 @@ class _ExchangeViewState extends State<ExchangeView> {
                 loaded: (colods) {
                   return colods.isNotEmpty
                       ? ListView(
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           children: [
-                            ...colods.map((e) => Text(e.name!)),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            ...colods.map(
+                              (e) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 12),
+                                  child: ContainerAllColoda(coloda: e)),
+                            ),
                           ],
                         )
                       : const Padding(

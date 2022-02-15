@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study/models/coloda/card.dart';
 import 'package:study/models/coloda/coloda.dart';
+import 'package:study/models/coloda/coloda_all.dart';
 import 'package:study/models/coloda/coloda_detail.dart';
 import 'package:study/resourses/storage_methods.dart';
 import 'package:uuid/uuid.dart';
@@ -81,6 +82,7 @@ class ColodaMethods {
     bool? showEvery,
     bool? takeMyHaveAuthour,
     List<String>? tags,
+    String? userName,
   }) async {
     User currentUser = auth.currentUser!;
 
@@ -121,6 +123,18 @@ class ColodaMethods {
         takeMyHaveAuthour: takeMyHaveAuthour,
         showEvery: showEvery,
       );
+      ColodaAll colodaAll = ColodaAll(
+        imageURL: photoURL,
+        name: name,
+        description: descriptionMein,
+        uid: currentUser.uid,
+        cards: cards,
+        dateCreate: dateNow,
+        tags: tags,
+        colodId: colodaId,
+        takeMyHaveAuthour: takeMyHaveAuthour,
+        authorName: userName,
+      );
 
       await fireStore
           .collection('colods')
@@ -131,6 +145,13 @@ class ColodaMethods {
           .collection('colods_detail')
           .doc(colodaId)
           .set(colodaDetail.toJson());
+
+      if (showEvery!) {
+        await fireStore
+            .collection('colods_all')
+            .doc(colodaId)
+            .set(colodaAll.toJson());
+      }
 
       res = 'success';
     } catch (err) {
@@ -151,6 +172,7 @@ class ColodaMethods {
     required String docId,
     DateTime? dateNow,
     Uint8List? file,
+    String? authorName,
   }) async {
     String res = "";
     User currentUser = auth.currentUser!;
@@ -186,6 +208,19 @@ class ColodaMethods {
       showEvery: showEvery,
     );
 
+    ColodaAll colodaAll = ColodaAll(
+      imageURL: photoURL,
+      name: name,
+      description: description,
+      uid: currentUser.uid,
+      cards: cards,
+      dateCreate: dateNow,
+      tags: tags,
+      colodId: docId,
+      takeMyHaveAuthour: takeMyHaveAuthour,
+      authorName: authorName,
+    );
+
     try {
       await fireStore
           .collection('colods')
@@ -195,6 +230,19 @@ class ColodaMethods {
           .collection('colods_detail')
           .doc(docId)
           .update(colodaDetail.toJson());
+
+      if (showEvery!) {
+        await fireStore
+            .collection('colods_all')
+            .doc(docId)
+            .set(colodaAll.toJson());
+        await fireStore
+            .collection('colods_all')
+            .doc(docId)
+            .update(colodaAll.toJson());
+      } else {
+        await fireStore.collection('colods_all').doc(docId).delete();
+      }
 
       res = 'success';
     } catch (err) {
@@ -212,6 +260,7 @@ class ColodaMethods {
     try {
       await fireStore.collection('colods').doc(docId).delete();
       await fireStore.collection('colods_detail').doc(docId).delete();
+      await fireStore.collection('colods_all').doc(docId).delete();
 
       res = 'success';
     } catch (err) {
@@ -221,24 +270,24 @@ class ColodaMethods {
     return res;
   }
 
-  Future<List<Coloda>> getAllColods({
+  Future<List<ColodaAll>> getAllColods({
     required String seatchText,
   }) async {
     User currentUser = auth.currentUser!;
-    List<Coloda> colods = [];
+    List<ColodaAll> colods = [];
     dynamic a;
     try {
       a = await fireStore
-          .collection('colods')
+          .collection('colods_all')
           // .where('uid', isNotEqualTo: currentUser.uid)
           .where("name", isGreaterThanOrEqualTo: seatchText)
           .where("name", isLessThanOrEqualTo: "$seatchText\uf7ff")
           .get();
 
       for (var element in a.docChanges) {
-        if (Coloda.fromSnap(element.doc).uid != currentUser.uid) {
+        if (ColodaAll.fromSnap(element.doc).uid != currentUser.uid) {
           colods.add(
-            Coloda.fromSnap(element.doc),
+            ColodaAll.fromSnap(element.doc),
           );
         }
       }

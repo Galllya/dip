@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:study/models/coloda/coloda.dart';
+import 'package:study/models/coloda/coloda_all.dart';
 import 'package:study/provider/coloda_provider.dart';
 
 part 'exchange_event.dart';

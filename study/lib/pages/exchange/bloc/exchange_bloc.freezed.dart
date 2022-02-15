@@ -392,7 +392,7 @@ class _$ExchangeStateTearOff {
     return const _Loading();
   }
 
-  _Loaded loaded({required List<Coloda> colodas}) {
+  _Loaded loaded({required List<ColodaAll> colodas}) {
     return _Loaded(
       colodas: colodas,
     );
@@ -414,7 +414,7 @@ mixin _$ExchangeState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Coloda> colodas) loaded,
+    required TResult Function(List<ColodaAll> colodas) loaded,
     required TResult Function(String? error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -422,7 +422,7 @@ mixin _$ExchangeState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coloda> colodas)? loaded,
+    TResult Function(List<ColodaAll> colodas)? loaded,
     TResult Function(String? error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -430,7 +430,7 @@ mixin _$ExchangeState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coloda> colodas)? loaded,
+    TResult Function(List<ColodaAll> colodas)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) =>
@@ -518,7 +518,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Coloda> colodas) loaded,
+    required TResult Function(List<ColodaAll> colodas) loaded,
     required TResult Function(String? error) error,
   }) {
     return initial();
@@ -529,7 +529,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coloda> colodas)? loaded,
+    TResult Function(List<ColodaAll> colodas)? loaded,
     TResult Function(String? error)? error,
   }) {
     return initial?.call();
@@ -540,7 +540,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coloda> colodas)? loaded,
+    TResult Function(List<ColodaAll> colodas)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -631,7 +631,7 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Coloda> colodas) loaded,
+    required TResult Function(List<ColodaAll> colodas) loaded,
     required TResult Function(String? error) error,
   }) {
     return loading();
@@ -642,7 +642,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coloda> colodas)? loaded,
+    TResult Function(List<ColodaAll> colodas)? loaded,
     TResult Function(String? error)? error,
   }) {
     return loading?.call();
@@ -653,7 +653,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coloda> colodas)? loaded,
+    TResult Function(List<ColodaAll> colodas)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -709,7 +709,7 @@ abstract class _Loading implements ExchangeState {
 abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Coloda> colodas});
+  $Res call({List<ColodaAll> colodas});
 }
 
 /// @nodoc
@@ -729,7 +729,7 @@ class __$LoadedCopyWithImpl<$Res> extends _$ExchangeStateCopyWithImpl<$Res>
       colodas: colodas == freezed
           ? _value.colodas
           : colodas // ignore: cast_nullable_to_non_nullable
-              as List<Coloda>,
+              as List<ColodaAll>,
     ));
   }
 }
@@ -740,7 +740,7 @@ class _$_Loaded implements _Loaded {
   const _$_Loaded({required this.colodas});
 
   @override
-  final List<Coloda> colodas;
+  final List<ColodaAll> colodas;
 
   @override
   String toString() {
@@ -769,7 +769,7 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Coloda> colodas) loaded,
+    required TResult Function(List<ColodaAll> colodas) loaded,
     required TResult Function(String? error) error,
   }) {
     return loaded(colodas);
@@ -780,7 +780,7 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coloda> colodas)? loaded,
+    TResult Function(List<ColodaAll> colodas)? loaded,
     TResult Function(String? error)? error,
   }) {
     return loaded?.call(colodas);
@@ -791,7 +791,7 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coloda> colodas)? loaded,
+    TResult Function(List<ColodaAll> colodas)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -840,9 +840,9 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements ExchangeState {
-  const factory _Loaded({required List<Coloda> colodas}) = _$_Loaded;
+  const factory _Loaded({required List<ColodaAll> colodas}) = _$_Loaded;
 
-  List<Coloda> get colodas => throw _privateConstructorUsedError;
+  List<ColodaAll> get colodas => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
 }
@@ -911,7 +911,7 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Coloda> colodas) loaded,
+    required TResult Function(List<ColodaAll> colodas) loaded,
     required TResult Function(String? error) error,
   }) {
     return error(this.error);
@@ -922,7 +922,7 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coloda> colodas)? loaded,
+    TResult Function(List<ColodaAll> colodas)? loaded,
     TResult Function(String? error)? error,
   }) {
     return error?.call(this.error);
@@ -933,7 +933,7 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Coloda> colodas)? loaded,
+    TResult Function(List<ColodaAll> colodas)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {

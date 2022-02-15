@@ -67,9 +67,18 @@ class _AddColodaPageState extends State<AddColodaPage> {
             bool? showEvery,
             bool? takeMyHaveAuthour,
             List<String>? tags,
+            String userName,
           ) {
-            addColodaBloc.add(AddColodaEvent.putColoda(name, description, cards,
-                file, showEvery, takeMyHaveAuthour, tags));
+            addColodaBloc.add(AddColodaEvent.putColoda(
+              name,
+              description,
+              cards,
+              file,
+              showEvery,
+              takeMyHaveAuthour,
+              tags,
+              userName,
+            ));
           },
         ),
       ),

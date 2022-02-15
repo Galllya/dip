@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:study/models/coloda/card.dart';
 import 'package:study/models/coloda/coloda.dart';
+import 'package:study/models/coloda/coloda_all.dart';
 import 'package:study/models/coloda/coloda_detail.dart';
 import 'package:study/resourses/coloda_methods.dart';
 
@@ -15,6 +16,7 @@ class ColodaProvider {
     bool? showEvery,
     bool? takeMyHaveAuthour,
     List<String>? tags,
+    String? userName,
   }) async {
     String res = await colodaMethods.putColoda(
       name: name,
@@ -24,6 +26,7 @@ class ColodaProvider {
       showEvery: showEvery,
       tags: tags,
       takeMyHaveAuthour: takeMyHaveAuthour,
+      userName: userName,
     );
     return res;
   }
@@ -55,6 +58,7 @@ class ColodaProvider {
     required String docId,
     DateTime? dateNow,
     Uint8List? file,
+    String? authorName,
   }) async {
     String res = await colodaMethods.updateColoda(
       name: name,
@@ -67,6 +71,7 @@ class ColodaProvider {
       docId: docId,
       dateNow: dateNow,
       file: file,
+      authorName: authorName,
     );
     return res;
   }
@@ -80,7 +85,7 @@ class ColodaProvider {
     return res;
   }
 
-  Future<List<Coloda>> getAllColods({
+  Future<List<ColodaAll>> getAllColods({
     required String searchText,
   }) async {
     return await colodaMethods.getAllColods(

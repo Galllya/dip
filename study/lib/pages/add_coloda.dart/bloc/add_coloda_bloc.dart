@@ -63,6 +63,7 @@ class AddColodaBloc extends Bloc<AddColodaEvent, AddColodaState> {
     bool? showEvery,
     bool? takeMyHaveAuthour,
     List<String>? tags,
+    String? userName,
   ) async* {
     yield const AddColodaState.initial();
     yield* state.maybeMap(
@@ -76,6 +77,7 @@ class AddColodaBloc extends Bloc<AddColodaEvent, AddColodaState> {
           showEvery: showEvery,
           takeMyHaveAuthour: takeMyHaveAuthour,
           tags: tags,
+          userName: userName,
         );
 
         if (res == "success") {

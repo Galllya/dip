@@ -40,6 +40,7 @@ class _AddColodaViewState extends State<AddColodaView> {
   late bool addTags;
   late List<String> tags;
   final int maxTags = 10;
+  late String userName;
 
   @override
   void initState() {
@@ -58,6 +59,13 @@ class _AddColodaViewState extends State<AddColodaView> {
     // form.control('tag').valueChanges.listen((value) {
     //   print(value);
     // });
+
+    context.read<AccountBloc>().state.maybeWhen(
+          orElse: () {},
+          loaded: (user) {
+            userName = user.userName!;
+          },
+        );
 
     super.initState();
   }
@@ -217,6 +225,7 @@ class _AddColodaViewState extends State<AddColodaView> {
                 showEvery,
                 takeMyHaveAuthor,
                 tags,
+                userName,
               );
             } else {
               if (!form.control('name').valid && cards.isEmpty) {
@@ -494,7 +503,7 @@ class _AddColodaViewState extends State<AddColodaView> {
                                 print(cardArray.controls);
 
                                 print(takeForm.value);
-                                cardArray.remove(takeForm);
+                                (cardArray).remove(takeForm);
                                 // cardArray.removeAt(indexFrom);
 
                                 namberOfCards--;

@@ -37,22 +37,29 @@ class DrawerCustom extends StatelessWidget {
                       image: user.photoURL!,
                       radius: 50,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          user.userName!,
-                          style: headerTextStyle,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          user.email!,
-                          style: headerTextStyle,
-                        ),
-                      ],
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            user.userName!,
+                            style: headerTextStyle,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            user.email!,
+                            style: headerTextStyle,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 );

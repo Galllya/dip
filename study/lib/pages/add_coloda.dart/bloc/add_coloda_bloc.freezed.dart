@@ -28,7 +28,8 @@ class _$AddColodaEventTearOff {
       Uint8List? file,
       bool? showEvery,
       bool? takeMyHaveAuthour,
-      List<String>? tags) {
+      List<String>? tags,
+      String userNamem) {
     return _PutColoda(
       name,
       description,
@@ -37,6 +38,7 @@ class _$AddColodaEventTearOff {
       showEvery,
       takeMyHaveAuthour,
       tags,
+      userNamem,
     );
   }
 
@@ -64,7 +66,8 @@ mixin _$AddColodaEvent {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)
+            List<String>? tags,
+            String userNamem)
         putColoda,
     required TResult Function() make,
     required TResult Function() showModal,
@@ -80,7 +83,8 @@ mixin _$AddColodaEvent {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)?
+            List<String>? tags,
+            String userNamem)?
         putColoda,
     TResult Function()? make,
     TResult Function()? showModal,
@@ -96,7 +100,8 @@ mixin _$AddColodaEvent {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)?
+            List<String>? tags,
+            String userNamem)?
         putColoda,
     TResult Function()? make,
     TResult Function()? showModal,
@@ -192,7 +197,8 @@ class _$_Started implements _Started {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)
+            List<String>? tags,
+            String userNamem)
         putColoda,
     required TResult Function() make,
     required TResult Function() showModal,
@@ -211,7 +217,8 @@ class _$_Started implements _Started {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)?
+            List<String>? tags,
+            String userNamem)?
         putColoda,
     TResult Function()? make,
     TResult Function()? showModal,
@@ -230,7 +237,8 @@ class _$_Started implements _Started {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)?
+            List<String>? tags,
+            String userNamem)?
         putColoda,
     TResult Function()? make,
     TResult Function()? showModal,
@@ -296,7 +304,8 @@ abstract class _$PutColodaCopyWith<$Res> {
       Uint8List? file,
       bool? showEvery,
       bool? takeMyHaveAuthour,
-      List<String>? tags});
+      List<String>? tags,
+      String userNamem});
 }
 
 /// @nodoc
@@ -317,6 +326,7 @@ class __$PutColodaCopyWithImpl<$Res> extends _$AddColodaEventCopyWithImpl<$Res>
     Object? showEvery = freezed,
     Object? takeMyHaveAuthour = freezed,
     Object? tags = freezed,
+    Object? userNamem = freezed,
   }) {
     return _then(_PutColoda(
       name == freezed
@@ -347,6 +357,10 @@ class __$PutColodaCopyWithImpl<$Res> extends _$AddColodaEventCopyWithImpl<$Res>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      userNamem == freezed
+          ? _value.userNamem
+          : userNamem // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -355,7 +369,7 @@ class __$PutColodaCopyWithImpl<$Res> extends _$AddColodaEventCopyWithImpl<$Res>
 
 class _$_PutColoda implements _PutColoda {
   const _$_PutColoda(this.name, this.description, this.cards, this.file,
-      this.showEvery, this.takeMyHaveAuthour, this.tags);
+      this.showEvery, this.takeMyHaveAuthour, this.tags, this.userNamem);
 
   @override
   final String name;
@@ -371,10 +385,12 @@ class _$_PutColoda implements _PutColoda {
   final bool? takeMyHaveAuthour;
   @override
   final List<String>? tags;
+  @override
+  final String userNamem;
 
   @override
   String toString() {
-    return 'AddColodaEvent.putColoda(name: $name, description: $description, cards: $cards, file: $file, showEvery: $showEvery, takeMyHaveAuthour: $takeMyHaveAuthour, tags: $tags)';
+    return 'AddColodaEvent.putColoda(name: $name, description: $description, cards: $cards, file: $file, showEvery: $showEvery, takeMyHaveAuthour: $takeMyHaveAuthour, tags: $tags, userNamem: $userNamem)';
   }
 
   @override
@@ -397,7 +413,10 @@ class _$_PutColoda implements _PutColoda {
                 const DeepCollectionEquality()
                     .equals(other.takeMyHaveAuthour, takeMyHaveAuthour)) &&
             (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)));
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.userNamem, userNamem) ||
+                const DeepCollectionEquality()
+                    .equals(other.userNamem, userNamem)));
   }
 
   @override
@@ -409,7 +428,8 @@ class _$_PutColoda implements _PutColoda {
       const DeepCollectionEquality().hash(file) ^
       const DeepCollectionEquality().hash(showEvery) ^
       const DeepCollectionEquality().hash(takeMyHaveAuthour) ^
-      const DeepCollectionEquality().hash(tags);
+      const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(userNamem);
 
   @JsonKey(ignore: true)
   @override
@@ -427,13 +447,14 @@ class _$_PutColoda implements _PutColoda {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)
+            List<String>? tags,
+            String userNamem)
         putColoda,
     required TResult Function() make,
     required TResult Function() showModal,
   }) {
-    return putColoda(
-        name, description, cards, file, showEvery, takeMyHaveAuthour, tags);
+    return putColoda(name, description, cards, file, showEvery,
+        takeMyHaveAuthour, tags, userNamem);
   }
 
   @override
@@ -447,13 +468,14 @@ class _$_PutColoda implements _PutColoda {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)?
+            List<String>? tags,
+            String userNamem)?
         putColoda,
     TResult Function()? make,
     TResult Function()? showModal,
   }) {
-    return putColoda?.call(
-        name, description, cards, file, showEvery, takeMyHaveAuthour, tags);
+    return putColoda?.call(name, description, cards, file, showEvery,
+        takeMyHaveAuthour, tags, userNamem);
   }
 
   @override
@@ -467,15 +489,16 @@ class _$_PutColoda implements _PutColoda {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)?
+            List<String>? tags,
+            String userNamem)?
         putColoda,
     TResult Function()? make,
     TResult Function()? showModal,
     required TResult orElse(),
   }) {
     if (putColoda != null) {
-      return putColoda(
-          name, description, cards, file, showEvery, takeMyHaveAuthour, tags);
+      return putColoda(name, description, cards, file, showEvery,
+          takeMyHaveAuthour, tags, userNamem);
     }
     return orElse();
   }
@@ -526,7 +549,8 @@ abstract class _PutColoda implements AddColodaEvent {
       Uint8List? file,
       bool? showEvery,
       bool? takeMyHaveAuthour,
-      List<String>? tags) = _$_PutColoda;
+      List<String>? tags,
+      String userNamem) = _$_PutColoda;
 
   String get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -535,6 +559,7 @@ abstract class _PutColoda implements AddColodaEvent {
   bool? get showEvery => throw _privateConstructorUsedError;
   bool? get takeMyHaveAuthour => throw _privateConstructorUsedError;
   List<String>? get tags => throw _privateConstructorUsedError;
+  String get userNamem => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$PutColodaCopyWith<_PutColoda> get copyWith =>
       throw _privateConstructorUsedError;
@@ -585,7 +610,8 @@ class _$_Make implements _Make {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)
+            List<String>? tags,
+            String userNamem)
         putColoda,
     required TResult Function() make,
     required TResult Function() showModal,
@@ -604,7 +630,8 @@ class _$_Make implements _Make {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)?
+            List<String>? tags,
+            String userNamem)?
         putColoda,
     TResult Function()? make,
     TResult Function()? showModal,
@@ -623,7 +650,8 @@ class _$_Make implements _Make {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)?
+            List<String>? tags,
+            String userNamem)?
         putColoda,
     TResult Function()? make,
     TResult Function()? showModal,
@@ -723,7 +751,8 @@ class _$_ShowModal implements _ShowModal {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)
+            List<String>? tags,
+            String userNamem)
         putColoda,
     required TResult Function() make,
     required TResult Function() showModal,
@@ -742,7 +771,8 @@ class _$_ShowModal implements _ShowModal {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)?
+            List<String>? tags,
+            String userNamem)?
         putColoda,
     TResult Function()? make,
     TResult Function()? showModal,
@@ -761,7 +791,8 @@ class _$_ShowModal implements _ShowModal {
             Uint8List? file,
             bool? showEvery,
             bool? takeMyHaveAuthour,
-            List<String>? tags)?
+            List<String>? tags,
+            String userNamem)?
         putColoda,
     TResult Function()? make,
     TResult Function()? showModal,

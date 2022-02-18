@@ -83,6 +83,7 @@ class ColodaMethods {
     bool? takeMyHaveAuthour,
     List<String>? tags,
     String? userName,
+    String? imageURL,
   }) async {
     User currentUser = auth.currentUser!;
 
@@ -90,6 +91,10 @@ class ColodaMethods {
     try {
       String descriptionMein = description == null ? '' : description;
       String photoURL = '';
+
+      if (imageURL != null) {
+        photoURL = imageURL;
+      }
       if (file != null) {
         photoURL = await StorageMethods().uploadImageToStorage(
             childName: 'colodaPics', file: file, isPost: true);
@@ -290,6 +295,30 @@ class ColodaMethods {
             ColodaAll.fromSnap(element.doc),
           );
         }
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    return colods;
+  }
+
+  Future<List<ColodaAll>> getColodsForUser({
+    required String uid,
+  }) async {
+    List<ColodaAll> colods = [];
+    dynamic a;
+    try {
+      a = await fireStore
+          .collection('colods_all')
+          .where('uid', isEqualTo: uid)
+          .orderBy("dateCreate", descending: true)
+          .get();
+
+      for (var element in a.docChanges) {
+        colods.add(
+          ColodaAll.fromSnap(element.doc),
+        );
       }
     } catch (e) {
       print(e);

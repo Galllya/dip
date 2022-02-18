@@ -17,6 +17,7 @@ class ColodaProvider {
     bool? takeMyHaveAuthour,
     List<String>? tags,
     String? userName,
+    String? imageURL,
   }) async {
     String res = await colodaMethods.putColoda(
       name: name,
@@ -27,6 +28,7 @@ class ColodaProvider {
       tags: tags,
       takeMyHaveAuthour: takeMyHaveAuthour,
       userName: userName,
+      imageURL: imageURL,
     );
     return res;
   }
@@ -91,5 +93,9 @@ class ColodaProvider {
     return await colodaMethods.getAllColods(
       seatchText: searchText,
     );
+  }
+
+  Future<List<ColodaAll>> getColodsForUser({required String uid}) async {
+    return await colodaMethods.getColodsForUser(uid: uid);
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -133,9 +134,12 @@ class _ProfileRedactionViewState extends State<ProfileRedactionView> {
           success: () {
             context.read<AccountBloc>().add(const AccountEvent.load());
 
-            Navigator.pushAndRemoveUntil(context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
-                (route) {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProfilePage(
+                          appUser: widget.appUser,
+                        )), (route) {
               return route.isFirst;
             });
           },

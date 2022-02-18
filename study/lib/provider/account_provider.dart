@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:study/models/another_user.dart';
 import 'package:study/models/app_user.dart';
 import 'package:study/resourses/auth_methods.dart';
 
@@ -20,5 +21,34 @@ class UserProvider {
     Uint8List? file,
   }) async {
     await authMethods.updateUser(appUser: appUser, file: file);
+  }
+
+  Future<List<AppUser>> getAllUsers({
+    required String searchText,
+  }) async {
+    return await authMethods.getAllUsers(
+      seatchText: searchText,
+    );
+  }
+
+  Future<void> folow({
+    required String anotherUserUID,
+    required List<String> anotherUserSubscribers,
+    required List<String> curUserSubscrip,
+    Uint8List? file,
+  }) async {
+    await authMethods.folow(
+      anotherUserUID: anotherUserUID,
+      anotherUserSubscribers: anotherUserSubscribers,
+      curUserSubscrip: curUserSubscrip,
+    );
+  }
+
+  Future<List<AnotherUser>> getUsers({
+    required List<String> uid,
+  }) async {
+    return await authMethods.getUser(
+      uid: uid,
+    );
   }
 }

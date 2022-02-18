@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:study/pages/exchange/bloc/exchange_bloc.dart';
-import 'package:study/pages/exchange/view/exchange_view.dart';
+import 'package:study/pages/exchange/exchange_view/exchange_view.dart';
+import 'package:study/pages/exchange/exchange_view/users_view.dart';
+import 'package:study/provider/account_provider.dart';
 import 'package:study/provider/coloda_provider.dart';
+import 'package:study/resourses/auth_methods.dart';
 import 'package:study/ui/sourse/colors.dart';
 
 class ExchangePage extends StatefulWidget {
@@ -20,7 +23,10 @@ class _ExchangePageState extends State<ExchangePage> {
   void initState() {
     super.initState();
 
-    exchangeBloc = ExchangeBloc(colodaProvider: context.read<ColodaProvider>());
+    exchangeBloc = ExchangeBloc(
+      userProvider: context.read<UserProvider>(),
+      colodaProvider: context.read<ColodaProvider>(),
+    );
   }
 
   @override
@@ -45,7 +51,11 @@ class _ExchangePageState extends State<ExchangePage> {
         value: exchangeBloc,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Обмен'),
+            title: Text(_selectedIndex == 0
+                ? 'Обмен'
+                : _selectedIndex == 1
+                    ? 'Пользователи'
+                    : 'Рейтинг'),
           ),
           body: _selectedIndex == 0
               ? ExchangeView(
@@ -54,7 +64,11 @@ class _ExchangePageState extends State<ExchangePage> {
                   },
                 )
               : _selectedIndex == 1
-                  ? const Text('users')
+                  ? UsersView(
+                      onSearch: (String searchString) {
+                        exchangeBloc.add(ExchangeEvent.loadUsers(searchString));
+                      },
+                    )
                   : const Text('raiting'),
           bottomNavigationBar: BottomNavigationBar(
             items: <BottomNavigationBarItem>[

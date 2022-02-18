@@ -2,7 +2,10 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:study/models/another_user.dart';
 import 'package:study/models/app_user.dart';
+import 'package:study/models/litl/folow.dart';
+import 'package:study/models/litl/folowers.dart';
 import 'package:study/resourses/storage_methods.dart';
 
 class AuthMethods {
@@ -146,5 +149,69 @@ class AuthMethods {
         .collection('users')
         .doc(appUser.uid)
         .update(appUser.toJson());
+  }
+
+  Future<List<AppUser>> getAllUsers({
+    required String seatchText,
+  }) async {
+    User currentUser = auth.currentUser!;
+    List<AppUser> users = [];
+    dynamic a;
+    try {
+      a = await fireStore
+          .collection('users')
+          .where("userName", isGreaterThanOrEqualTo: seatchText)
+          .where("userName", isLessThanOrEqualTo: "$seatchText\uf7ff")
+          .get();
+
+      for (var element in a.docChanges) {
+        if ((AppUser.fromSnap(element.doc).uid != currentUser.uid) &&
+            (AppUser.fromSnap(element.doc).showEvery!)) {
+          users.add(
+            AppUser.fromSnap(element.doc),
+          );
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    return users;
+  }
+
+  Future<void> folow({
+    required String anotherUserUID,
+    required List<String> anotherUserSubscribers,
+    required List<String> curUserSubscrip,
+  }) async {
+    curUserSubscrip.add(anotherUserUID);
+    User currentUser = auth.currentUser!;
+    anotherUserSubscribers.add(currentUser.uid);
+    Folow folow = Folow(folow: curUserSubscrip);
+    Folowers folowers = Folowers(folow: anotherUserSubscribers);
+
+    await fireStore
+        .collection('users')
+        .doc(currentUser.uid)
+        .update(folow.toJson());
+
+    await fireStore
+        .collection('users')
+        .doc(anotherUserUID)
+        .update(folowers.toJson());
+  }
+
+  Future<List<AnotherUser>> getUser({
+    required List<String> uid,
+  }) async {
+    List<AnotherUser> anotherUser = [];
+
+    uid.forEach((element) async {
+      DocumentSnapshot snap =
+          await fireStore.collection('users').doc(element).get();
+      anotherUser.add(AnotherUser.fromSnap(snap));
+    });
+
+    return anotherUser;
   }
 }

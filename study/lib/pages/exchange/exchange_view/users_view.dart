@@ -6,22 +6,22 @@ import 'package:study/pages/exchange/bloc/exchange_bloc.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/widget_style.dart';
 import 'package:study/ui/widgets/container_all_coloda.dart';
-import 'package:study/ui/widgets/container_coloda.dart';
+import 'package:study/ui/widgets/container_user.dart';
 import 'package:study/ui/widgets/loading_custom.dart';
 import 'package:study/ui/widgets/scaffold_messages.dart';
 
-class ExchangeView extends StatefulWidget {
+class UsersView extends StatefulWidget {
   final Function onSearch;
-  const ExchangeView({
+  const UsersView({
     Key? key,
     required this.onSearch,
   }) : super(key: key);
 
   @override
-  State<ExchangeView> createState() => _ExchangeViewState();
+  State<UsersView> createState() => _UsersViewState();
 }
 
-class _ExchangeViewState extends State<ExchangeView> {
+class _UsersViewState extends State<UsersView> {
   final form = FormGroup({
     'search': FormControl<String>(
       validators: [],
@@ -50,8 +50,10 @@ class _ExchangeViewState extends State<ExchangeView> {
                     ),
                     IconButton(
                       onPressed: () {
-                        if (form.control('search').value != null) {
+                        if ((form.control('search').value != null) &&
+                            (form.control('search').value != '')) {
                           widget.onSearch(form.control('search').value);
+                          FocusScope.of(context).requestFocus(FocusNode());
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                               CustomScaffoldMessages()
@@ -72,7 +74,7 @@ class _ExchangeViewState extends State<ExchangeView> {
                     padding: EdgeInsets.only(top: 200),
                     child: Center(
                       child: Text(
-                        'Введите текс для поиска подходящей колоды',
+                        'Введите текс для поиска нужного пользователя',
                         style: TextStyle(
                           color: primaryColor,
                           fontSize: 16,
@@ -89,35 +91,38 @@ class _ExchangeViewState extends State<ExchangeView> {
                     child: Text('Произошла ошибка'),
                   );
                 },
-                loaded: (colods) {
-                  return colods.isNotEmpty
-                      ? ListView(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            ...colods.map(
-                              (e) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 12),
-                                  child: ContainerAllColoda(coloda: e)),
-                            ),
-                          ],
-                        )
-                      : const Padding(
-                          padding: EdgeInsets.only(top: 200),
-                          child: Center(
-                            child: Text(
-                              'К сожелению, нечего не найденно. Попробуйте перефрмулировать свой запрос. ',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: primaryColor,
-                                fontSize: 16,
+                loaded: (colodas, users) {
+                  return users == null
+                      ? const SizedBox()
+                      : users.isNotEmpty
+                          ? ListView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              children: [
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                ...users.map(
+                                  (e) => Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 12),
+                                      child: ContainerUser(user: e)),
+                                ),
+                              ],
+                            )
+                          : const Padding(
+                              padding: EdgeInsets.only(top: 200),
+                              child: Center(
+                                child: Text(
+                                  'К сожелению, нечего не найденно. Попробуйте перефрмулировать свой запрос. ',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: primaryColor,
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        );
+                            );
                 },
               ),
             ],

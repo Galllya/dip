@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:study/models/coloda/coloda_all.dart';
-import 'package:study/pages/colod/view/colod_page.dart';
 import 'package:study/pages/exchange_colod/view/exchange_colod_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/widgets/splash_clipper.dart';
 import 'package:intl/intl.dart';
 import 'package:study/ui/widgets/tags_wrap.dart';
 
-class ContainerAllColoda extends StatelessWidget {
+class ContainerColodaInUser extends StatelessWidget {
   final ColodaAll coloda;
   final bool showTegs;
-  const ContainerAllColoda({
+  const ContainerColodaInUser({
     Key? key,
     this.showTegs = false,
     required this.coloda,
@@ -64,16 +63,6 @@ class ContainerAllColoda extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  coloda.takeMyHaveAuthour!
-                                      ? '@${coloda.authorName!}'
-                                      : '@застенчивый',
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    color: primaryColor,
-                                  ),
-                                ),
                                 Text(
                                   "${coloda.cards!.length} ${Intl.plural(
                                     coloda.cards!.length,

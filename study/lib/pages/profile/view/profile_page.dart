@@ -7,7 +7,11 @@ import 'package:study/pages/profile/view/profile_view.dart';
 import 'package:study/provider/account_provider.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  final AppUser appUser;
+  const ProfilePage({
+    Key? key,
+    required this.appUser,
+  }) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -21,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
 
     profileBloc = ProfileBloc(userProvider: context.read<UserProvider>())
-      ..add(const ProfileEvent.started());
+      ..add(ProfileEvent.started(widget.appUser.subscribers!));
   }
 
   @override

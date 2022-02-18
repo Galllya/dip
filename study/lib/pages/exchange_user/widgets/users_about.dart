@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:study/models/app_user.dart';
+import 'package:study/pages/profile/widgets/about_me.dart';
 import 'package:study/ui/sourse/colors.dart';
 
-class AboutMe extends StatelessWidget {
+class UsersAbout extends StatelessWidget {
   final AppUser user;
-  const AboutMe({
+  const UsersAbout({
     Key? key,
     required this.user,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print(user.gender);
     return !((user.description != '') ||
             ((user.gender == 'Женский') || ((user.gender == 'Мужской'))) ||
             (user.dateBirth != DateTime(1000, 1, 1)) ||
@@ -21,7 +21,7 @@ class AboutMe extends StatelessWidget {
         ? Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              'У вас пока нет описания',
+              'Пользователь не добавил описание',
               style: getBoldTextStyle(),
             ),
           )
@@ -121,20 +121,4 @@ class AboutMe extends StatelessWidget {
             ),
           );
   }
-}
-
-TextStyle getUnderTextStyle() {
-  return const TextStyle(
-    color: primaryColor,
-    fontSize: 16,
-    decoration: TextDecoration.underline,
-  );
-}
-
-TextStyle getBoldTextStyle() {
-  return const TextStyle(
-    color: primaryColor,
-    fontSize: 16,
-    fontWeight: FontWeight.w700,
-  );
 }

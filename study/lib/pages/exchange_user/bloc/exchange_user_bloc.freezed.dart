@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'profile_bloc.dart';
+part of 'exchange_user_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,114 +14,114 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$ProfileEventTearOff {
-  const _$ProfileEventTearOff();
+class _$ExchangeUserEventTearOff {
+  const _$ExchangeUserEventTearOff();
 
-  _Started started(List<String> uid) {
+  _Started started(String uid) {
     return _Started(
       uid,
     );
   }
 
-  _LogOut logOut() {
-    return const _LogOut();
-  }
-
-  _Update update(AppUser appUser) {
-    return _Update(
-      appUser,
+  _Load load(String uid) {
+    return _Load(
+      uid,
     );
   }
 
-  _Load load(List<String> uid) {
-    return _Load(
-      uid,
+  _Folow folow(String anotherUserUID, List<String> anotherUserSubscribers,
+      List<String> curUserSubscrip) {
+    return _Folow(
+      anotherUserUID,
+      anotherUserSubscribers,
+      curUserSubscrip,
     );
   }
 }
 
 /// @nodoc
-const $ProfileEvent = _$ProfileEventTearOff();
+const $ExchangeUserEvent = _$ExchangeUserEventTearOff();
 
 /// @nodoc
-mixin _$ProfileEvent {
+mixin _$ExchangeUserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<String> uid) started,
-    required TResult Function() logOut,
-    required TResult Function(AppUser appUser) update,
-    required TResult Function(List<String> uid) load,
+    required TResult Function(String uid) started,
+    required TResult Function(String uid) load,
+    required TResult Function(String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)
+        folow,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<String> uid)? started,
-    TResult Function()? logOut,
-    TResult Function(AppUser appUser)? update,
-    TResult Function(List<String> uid)? load,
+    TResult Function(String uid)? started,
+    TResult Function(String uid)? load,
+    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip)?
+        folow,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String> uid)? started,
-    TResult Function()? logOut,
-    TResult Function(AppUser appUser)? update,
-    TResult Function(List<String> uid)? load,
+    TResult Function(String uid)? started,
+    TResult Function(String uid)? load,
+    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip)?
+        folow,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_LogOut value) logOut,
-    required TResult Function(_Update value) update,
     required TResult Function(_Load value) load,
+    required TResult Function(_Folow value) folow,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_LogOut value)? logOut,
-    TResult Function(_Update value)? update,
     TResult Function(_Load value)? load,
+    TResult Function(_Folow value)? folow,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_LogOut value)? logOut,
-    TResult Function(_Update value)? update,
     TResult Function(_Load value)? load,
+    TResult Function(_Folow value)? folow,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ProfileEventCopyWith<$Res> {
-  factory $ProfileEventCopyWith(
-          ProfileEvent value, $Res Function(ProfileEvent) then) =
-      _$ProfileEventCopyWithImpl<$Res>;
+abstract class $ExchangeUserEventCopyWith<$Res> {
+  factory $ExchangeUserEventCopyWith(
+          ExchangeUserEvent value, $Res Function(ExchangeUserEvent) then) =
+      _$ExchangeUserEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ProfileEventCopyWithImpl<$Res> implements $ProfileEventCopyWith<$Res> {
-  _$ProfileEventCopyWithImpl(this._value, this._then);
+class _$ExchangeUserEventCopyWithImpl<$Res>
+    implements $ExchangeUserEventCopyWith<$Res> {
+  _$ExchangeUserEventCopyWithImpl(this._value, this._then);
 
-  final ProfileEvent _value;
+  final ExchangeUserEvent _value;
   // ignore: unused_field
-  final $Res Function(ProfileEvent) _then;
+  final $Res Function(ExchangeUserEvent) _then;
 }
 
 /// @nodoc
 abstract class _$StartedCopyWith<$Res> {
   factory _$StartedCopyWith(_Started value, $Res Function(_Started) then) =
       __$StartedCopyWithImpl<$Res>;
-  $Res call({List<String> uid});
+  $Res call({String uid});
 }
 
 /// @nodoc
-class __$StartedCopyWithImpl<$Res> extends _$ProfileEventCopyWithImpl<$Res>
+class __$StartedCopyWithImpl<$Res> extends _$ExchangeUserEventCopyWithImpl<$Res>
     implements _$StartedCopyWith<$Res> {
   __$StartedCopyWithImpl(_Started _value, $Res Function(_Started) _then)
       : super(_value, (v) => _then(v as _Started));
@@ -137,7 +137,7 @@ class __$StartedCopyWithImpl<$Res> extends _$ProfileEventCopyWithImpl<$Res>
       uid == freezed
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as String,
     ));
   }
 }
@@ -148,11 +148,11 @@ class _$_Started implements _Started {
   const _$_Started(this.uid);
 
   @override
-  final List<String> uid;
+  final String uid;
 
   @override
   String toString() {
-    return 'ProfileEvent.started(uid: $uid)';
+    return 'ExchangeUserEvent.started(uid: $uid)';
   }
 
   @override
@@ -175,10 +175,11 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<String> uid) started,
-    required TResult Function() logOut,
-    required TResult Function(AppUser appUser) update,
-    required TResult Function(List<String> uid) load,
+    required TResult Function(String uid) started,
+    required TResult Function(String uid) load,
+    required TResult Function(String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)
+        folow,
   }) {
     return started(uid);
   }
@@ -186,10 +187,11 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<String> uid)? started,
-    TResult Function()? logOut,
-    TResult Function(AppUser appUser)? update,
-    TResult Function(List<String> uid)? load,
+    TResult Function(String uid)? started,
+    TResult Function(String uid)? load,
+    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip)?
+        folow,
   }) {
     return started?.call(uid);
   }
@@ -197,10 +199,11 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String> uid)? started,
-    TResult Function()? logOut,
-    TResult Function(AppUser appUser)? update,
-    TResult Function(List<String> uid)? load,
+    TResult Function(String uid)? started,
+    TResult Function(String uid)? load,
+    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip)?
+        folow,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -213,9 +216,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_LogOut value) logOut,
-    required TResult Function(_Update value) update,
     required TResult Function(_Load value) load,
+    required TResult Function(_Folow value) folow,
   }) {
     return started(this);
   }
@@ -224,9 +226,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_LogOut value)? logOut,
-    TResult Function(_Update value)? update,
     TResult Function(_Load value)? load,
+    TResult Function(_Folow value)? folow,
   }) {
     return started?.call(this);
   }
@@ -235,9 +236,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_LogOut value)? logOut,
-    TResult Function(_Update value)? update,
     TResult Function(_Load value)? load,
+    TResult Function(_Folow value)? folow,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -247,279 +247,24 @@ class _$_Started implements _Started {
   }
 }
 
-abstract class _Started implements ProfileEvent {
-  const factory _Started(List<String> uid) = _$_Started;
+abstract class _Started implements ExchangeUserEvent {
+  const factory _Started(String uid) = _$_Started;
 
-  List<String> get uid => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$StartedCopyWith<_Started> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$LogOutCopyWith<$Res> {
-  factory _$LogOutCopyWith(_LogOut value, $Res Function(_LogOut) then) =
-      __$LogOutCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$LogOutCopyWithImpl<$Res> extends _$ProfileEventCopyWithImpl<$Res>
-    implements _$LogOutCopyWith<$Res> {
-  __$LogOutCopyWithImpl(_LogOut _value, $Res Function(_LogOut) _then)
-      : super(_value, (v) => _then(v as _LogOut));
-
-  @override
-  _LogOut get _value => super._value as _LogOut;
-}
-
-/// @nodoc
-
-class _$_LogOut implements _LogOut {
-  const _$_LogOut();
-
-  @override
-  String toString() {
-    return 'ProfileEvent.logOut()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _LogOut);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(List<String> uid) started,
-    required TResult Function() logOut,
-    required TResult Function(AppUser appUser) update,
-    required TResult Function(List<String> uid) load,
-  }) {
-    return logOut();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<String> uid)? started,
-    TResult Function()? logOut,
-    TResult Function(AppUser appUser)? update,
-    TResult Function(List<String> uid)? load,
-  }) {
-    return logOut?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String> uid)? started,
-    TResult Function()? logOut,
-    TResult Function(AppUser appUser)? update,
-    TResult Function(List<String> uid)? load,
-    required TResult orElse(),
-  }) {
-    if (logOut != null) {
-      return logOut();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_LogOut value) logOut,
-    required TResult Function(_Update value) update,
-    required TResult Function(_Load value) load,
-  }) {
-    return logOut(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_LogOut value)? logOut,
-    TResult Function(_Update value)? update,
-    TResult Function(_Load value)? load,
-  }) {
-    return logOut?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_LogOut value)? logOut,
-    TResult Function(_Update value)? update,
-    TResult Function(_Load value)? load,
-    required TResult orElse(),
-  }) {
-    if (logOut != null) {
-      return logOut(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LogOut implements ProfileEvent {
-  const factory _LogOut() = _$_LogOut;
-}
-
-/// @nodoc
-abstract class _$UpdateCopyWith<$Res> {
-  factory _$UpdateCopyWith(_Update value, $Res Function(_Update) then) =
-      __$UpdateCopyWithImpl<$Res>;
-  $Res call({AppUser appUser});
-}
-
-/// @nodoc
-class __$UpdateCopyWithImpl<$Res> extends _$ProfileEventCopyWithImpl<$Res>
-    implements _$UpdateCopyWith<$Res> {
-  __$UpdateCopyWithImpl(_Update _value, $Res Function(_Update) _then)
-      : super(_value, (v) => _then(v as _Update));
-
-  @override
-  _Update get _value => super._value as _Update;
-
-  @override
-  $Res call({
-    Object? appUser = freezed,
-  }) {
-    return _then(_Update(
-      appUser == freezed
-          ? _value.appUser
-          : appUser // ignore: cast_nullable_to_non_nullable
-              as AppUser,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_Update implements _Update {
-  const _$_Update(this.appUser);
-
-  @override
-  final AppUser appUser;
-
-  @override
-  String toString() {
-    return 'ProfileEvent.update(appUser: $appUser)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Update &&
-            (identical(other.appUser, appUser) ||
-                const DeepCollectionEquality().equals(other.appUser, appUser)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(appUser);
-
-  @JsonKey(ignore: true)
-  @override
-  _$UpdateCopyWith<_Update> get copyWith =>
-      __$UpdateCopyWithImpl<_Update>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(List<String> uid) started,
-    required TResult Function() logOut,
-    required TResult Function(AppUser appUser) update,
-    required TResult Function(List<String> uid) load,
-  }) {
-    return update(appUser);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<String> uid)? started,
-    TResult Function()? logOut,
-    TResult Function(AppUser appUser)? update,
-    TResult Function(List<String> uid)? load,
-  }) {
-    return update?.call(appUser);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String> uid)? started,
-    TResult Function()? logOut,
-    TResult Function(AppUser appUser)? update,
-    TResult Function(List<String> uid)? load,
-    required TResult orElse(),
-  }) {
-    if (update != null) {
-      return update(appUser);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_LogOut value) logOut,
-    required TResult Function(_Update value) update,
-    required TResult Function(_Load value) load,
-  }) {
-    return update(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_LogOut value)? logOut,
-    TResult Function(_Update value)? update,
-    TResult Function(_Load value)? load,
-  }) {
-    return update?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_LogOut value)? logOut,
-    TResult Function(_Update value)? update,
-    TResult Function(_Load value)? load,
-    required TResult orElse(),
-  }) {
-    if (update != null) {
-      return update(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Update implements ProfileEvent {
-  const factory _Update(AppUser appUser) = _$_Update;
-
-  AppUser get appUser => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$UpdateCopyWith<_Update> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 abstract class _$LoadCopyWith<$Res> {
   factory _$LoadCopyWith(_Load value, $Res Function(_Load) then) =
       __$LoadCopyWithImpl<$Res>;
-  $Res call({List<String> uid});
+  $Res call({String uid});
 }
 
 /// @nodoc
-class __$LoadCopyWithImpl<$Res> extends _$ProfileEventCopyWithImpl<$Res>
+class __$LoadCopyWithImpl<$Res> extends _$ExchangeUserEventCopyWithImpl<$Res>
     implements _$LoadCopyWith<$Res> {
   __$LoadCopyWithImpl(_Load _value, $Res Function(_Load) _then)
       : super(_value, (v) => _then(v as _Load));
@@ -535,7 +280,7 @@ class __$LoadCopyWithImpl<$Res> extends _$ProfileEventCopyWithImpl<$Res>
       uid == freezed
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as String,
     ));
   }
 }
@@ -546,11 +291,11 @@ class _$_Load implements _Load {
   const _$_Load(this.uid);
 
   @override
-  final List<String> uid;
+  final String uid;
 
   @override
   String toString() {
-    return 'ProfileEvent.load(uid: $uid)';
+    return 'ExchangeUserEvent.load(uid: $uid)';
   }
 
   @override
@@ -573,10 +318,11 @@ class _$_Load implements _Load {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<String> uid) started,
-    required TResult Function() logOut,
-    required TResult Function(AppUser appUser) update,
-    required TResult Function(List<String> uid) load,
+    required TResult Function(String uid) started,
+    required TResult Function(String uid) load,
+    required TResult Function(String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)
+        folow,
   }) {
     return load(uid);
   }
@@ -584,10 +330,11 @@ class _$_Load implements _Load {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<String> uid)? started,
-    TResult Function()? logOut,
-    TResult Function(AppUser appUser)? update,
-    TResult Function(List<String> uid)? load,
+    TResult Function(String uid)? started,
+    TResult Function(String uid)? load,
+    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip)?
+        folow,
   }) {
     return load?.call(uid);
   }
@@ -595,10 +342,11 @@ class _$_Load implements _Load {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String> uid)? started,
-    TResult Function()? logOut,
-    TResult Function(AppUser appUser)? update,
-    TResult Function(List<String> uid)? load,
+    TResult Function(String uid)? started,
+    TResult Function(String uid)? load,
+    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip)?
+        folow,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -611,9 +359,8 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_LogOut value) logOut,
-    required TResult Function(_Update value) update,
     required TResult Function(_Load value) load,
+    required TResult Function(_Folow value) folow,
   }) {
     return load(this);
   }
@@ -622,9 +369,8 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_LogOut value)? logOut,
-    TResult Function(_Update value)? update,
     TResult Function(_Load value)? load,
+    TResult Function(_Folow value)? folow,
   }) {
     return load?.call(this);
   }
@@ -633,9 +379,8 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_LogOut value)? logOut,
-    TResult Function(_Update value)? update,
     TResult Function(_Load value)? load,
+    TResult Function(_Folow value)? folow,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -645,17 +390,192 @@ class _$_Load implements _Load {
   }
 }
 
-abstract class _Load implements ProfileEvent {
-  const factory _Load(List<String> uid) = _$_Load;
+abstract class _Load implements ExchangeUserEvent {
+  const factory _Load(String uid) = _$_Load;
 
-  List<String> get uid => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$LoadCopyWith<_Load> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-class _$ProfileStateTearOff {
-  const _$ProfileStateTearOff();
+abstract class _$FolowCopyWith<$Res> {
+  factory _$FolowCopyWith(_Folow value, $Res Function(_Folow) then) =
+      __$FolowCopyWithImpl<$Res>;
+  $Res call(
+      {String anotherUserUID,
+      List<String> anotherUserSubscribers,
+      List<String> curUserSubscrip});
+}
+
+/// @nodoc
+class __$FolowCopyWithImpl<$Res> extends _$ExchangeUserEventCopyWithImpl<$Res>
+    implements _$FolowCopyWith<$Res> {
+  __$FolowCopyWithImpl(_Folow _value, $Res Function(_Folow) _then)
+      : super(_value, (v) => _then(v as _Folow));
+
+  @override
+  _Folow get _value => super._value as _Folow;
+
+  @override
+  $Res call({
+    Object? anotherUserUID = freezed,
+    Object? anotherUserSubscribers = freezed,
+    Object? curUserSubscrip = freezed,
+  }) {
+    return _then(_Folow(
+      anotherUserUID == freezed
+          ? _value.anotherUserUID
+          : anotherUserUID // ignore: cast_nullable_to_non_nullable
+              as String,
+      anotherUserSubscribers == freezed
+          ? _value.anotherUserSubscribers
+          : anotherUserSubscribers // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      curUserSubscrip == freezed
+          ? _value.curUserSubscrip
+          : curUserSubscrip // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Folow implements _Folow {
+  const _$_Folow(
+      this.anotherUserUID, this.anotherUserSubscribers, this.curUserSubscrip);
+
+  @override
+  final String anotherUserUID;
+  @override
+  final List<String> anotherUserSubscribers;
+  @override
+  final List<String> curUserSubscrip;
+
+  @override
+  String toString() {
+    return 'ExchangeUserEvent.folow(anotherUserUID: $anotherUserUID, anotherUserSubscribers: $anotherUserSubscribers, curUserSubscrip: $curUserSubscrip)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Folow &&
+            (identical(other.anotherUserUID, anotherUserUID) ||
+                const DeepCollectionEquality()
+                    .equals(other.anotherUserUID, anotherUserUID)) &&
+            (identical(other.anotherUserSubscribers, anotherUserSubscribers) ||
+                const DeepCollectionEquality().equals(
+                    other.anotherUserSubscribers, anotherUserSubscribers)) &&
+            (identical(other.curUserSubscrip, curUserSubscrip) ||
+                const DeepCollectionEquality()
+                    .equals(other.curUserSubscrip, curUserSubscrip)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(anotherUserUID) ^
+      const DeepCollectionEquality().hash(anotherUserSubscribers) ^
+      const DeepCollectionEquality().hash(curUserSubscrip);
+
+  @JsonKey(ignore: true)
+  @override
+  _$FolowCopyWith<_Folow> get copyWith =>
+      __$FolowCopyWithImpl<_Folow>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String uid) started,
+    required TResult Function(String uid) load,
+    required TResult Function(String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)
+        folow,
+  }) {
+    return folow(anotherUserUID, anotherUserSubscribers, curUserSubscrip);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String uid)? started,
+    TResult Function(String uid)? load,
+    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip)?
+        folow,
+  }) {
+    return folow?.call(anotherUserUID, anotherUserSubscribers, curUserSubscrip);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String uid)? started,
+    TResult Function(String uid)? load,
+    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip)?
+        folow,
+    required TResult orElse(),
+  }) {
+    if (folow != null) {
+      return folow(anotherUserUID, anotherUserSubscribers, curUserSubscrip);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Load value) load,
+    required TResult Function(_Folow value) folow,
+  }) {
+    return folow(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Load value)? load,
+    TResult Function(_Folow value)? folow,
+  }) {
+    return folow?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Load value)? load,
+    TResult Function(_Folow value)? folow,
+    required TResult orElse(),
+  }) {
+    if (folow != null) {
+      return folow(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Folow implements ExchangeUserEvent {
+  const factory _Folow(
+      String anotherUserUID,
+      List<String> anotherUserSubscribers,
+      List<String> curUserSubscrip) = _$_Folow;
+
+  String get anotherUserUID => throw _privateConstructorUsedError;
+  List<String> get anotherUserSubscribers => throw _privateConstructorUsedError;
+  List<String> get curUserSubscrip => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$FolowCopyWith<_Folow> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$ExchangeUserStateTearOff {
+  const _$ExchangeUserStateTearOff();
 
   _Initial initial() {
     return const _Initial();
@@ -666,17 +586,13 @@ class _$ProfileStateTearOff {
   }
 
   _Loaded loaded(
-      {List<AnotherUser>? users,
-      dynamic isLogOutProcess = false,
-      bool? isLogOutSuccses,
-      dynamic isUpdateProcess = false,
-      bool? isUpdateSucces}) {
+      {required List<ColodaAll> colodas,
+      bool idFollowingProccess = false,
+      bool? isFollowSuccess}) {
     return _Loaded(
-      users: users,
-      isLogOutProcess: isLogOutProcess,
-      isLogOutSuccses: isLogOutSuccses,
-      isUpdateProcess: isUpdateProcess,
-      isUpdateSucces: isUpdateSucces,
+      colodas: colodas,
+      idFollowingProccess: idFollowingProccess,
+      isFollowSuccess: isFollowSuccess,
     );
   }
 
@@ -688,20 +604,16 @@ class _$ProfileStateTearOff {
 }
 
 /// @nodoc
-const $ProfileState = _$ProfileStateTearOff();
+const $ExchangeUserState = _$ExchangeUserStateTearOff();
 
 /// @nodoc
-mixin _$ProfileState {
+mixin _$ExchangeUserState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)
+    required TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)
         loaded,
     required TResult Function(String? error) error,
   }) =>
@@ -710,12 +622,8 @@ mixin _$ProfileState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)?
+    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
   }) =>
@@ -724,12 +632,8 @@ mixin _$ProfileState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)?
+    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -763,19 +667,20 @@ mixin _$ProfileState {
 }
 
 /// @nodoc
-abstract class $ProfileStateCopyWith<$Res> {
-  factory $ProfileStateCopyWith(
-          ProfileState value, $Res Function(ProfileState) then) =
-      _$ProfileStateCopyWithImpl<$Res>;
+abstract class $ExchangeUserStateCopyWith<$Res> {
+  factory $ExchangeUserStateCopyWith(
+          ExchangeUserState value, $Res Function(ExchangeUserState) then) =
+      _$ExchangeUserStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
-  _$ProfileStateCopyWithImpl(this._value, this._then);
+class _$ExchangeUserStateCopyWithImpl<$Res>
+    implements $ExchangeUserStateCopyWith<$Res> {
+  _$ExchangeUserStateCopyWithImpl(this._value, this._then);
 
-  final ProfileState _value;
+  final ExchangeUserState _value;
   // ignore: unused_field
-  final $Res Function(ProfileState) _then;
+  final $Res Function(ExchangeUserState) _then;
 }
 
 /// @nodoc
@@ -785,7 +690,7 @@ abstract class _$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
+class __$InitialCopyWithImpl<$Res> extends _$ExchangeUserStateCopyWithImpl<$Res>
     implements _$InitialCopyWith<$Res> {
   __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
       : super(_value, (v) => _then(v as _Initial));
@@ -801,7 +706,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'ProfileState.initial()';
+    return 'ExchangeUserState.initial()';
   }
 
   @override
@@ -817,12 +722,8 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)
+    required TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -834,12 +735,8 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)?
+    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
   }) {
@@ -851,12 +748,8 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)?
+    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -905,7 +798,7 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements ProfileState {
+abstract class _Initial implements ExchangeUserState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -916,7 +809,7 @@ abstract class _$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$LoadingCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
+class __$LoadingCopyWithImpl<$Res> extends _$ExchangeUserStateCopyWithImpl<$Res>
     implements _$LoadingCopyWith<$Res> {
   __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
       : super(_value, (v) => _then(v as _Loading));
@@ -932,7 +825,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'ProfileState.loading()';
+    return 'ExchangeUserState.loading()';
   }
 
   @override
@@ -948,12 +841,8 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)
+    required TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -965,12 +854,8 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)?
+    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
   }) {
@@ -982,12 +867,8 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)?
+    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -1036,7 +917,7 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements ProfileState {
+abstract class _Loading implements ExchangeUserState {
   const factory _Loading() = _$_Loading;
 }
 
@@ -1045,15 +926,13 @@ abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
   $Res call(
-      {List<AnotherUser>? users,
-      dynamic isLogOutProcess,
-      bool? isLogOutSuccses,
-      dynamic isUpdateProcess,
-      bool? isUpdateSucces});
+      {List<ColodaAll> colodas,
+      bool idFollowingProccess,
+      bool? isFollowSuccess});
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
+class __$LoadedCopyWithImpl<$Res> extends _$ExchangeUserStateCopyWithImpl<$Res>
     implements _$LoadedCopyWith<$Res> {
   __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
       : super(_value, (v) => _then(v as _Loaded));
@@ -1063,28 +942,22 @@ class __$LoadedCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? users = freezed,
-    Object? isLogOutProcess = freezed,
-    Object? isLogOutSuccses = freezed,
-    Object? isUpdateProcess = freezed,
-    Object? isUpdateSucces = freezed,
+    Object? colodas = freezed,
+    Object? idFollowingProccess = freezed,
+    Object? isFollowSuccess = freezed,
   }) {
     return _then(_Loaded(
-      users: users == freezed
-          ? _value.users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<AnotherUser>?,
-      isLogOutProcess:
-          isLogOutProcess == freezed ? _value.isLogOutProcess : isLogOutProcess,
-      isLogOutSuccses: isLogOutSuccses == freezed
-          ? _value.isLogOutSuccses
-          : isLogOutSuccses // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      isUpdateProcess:
-          isUpdateProcess == freezed ? _value.isUpdateProcess : isUpdateProcess,
-      isUpdateSucces: isUpdateSucces == freezed
-          ? _value.isUpdateSucces
-          : isUpdateSucces // ignore: cast_nullable_to_non_nullable
+      colodas: colodas == freezed
+          ? _value.colodas
+          : colodas // ignore: cast_nullable_to_non_nullable
+              as List<ColodaAll>,
+      idFollowingProccess: idFollowingProccess == freezed
+          ? _value.idFollowingProccess
+          : idFollowingProccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFollowSuccess: isFollowSuccess == freezed
+          ? _value.isFollowSuccess
+          : isFollowSuccess // ignore: cast_nullable_to_non_nullable
               as bool?,
     ));
   }
@@ -1094,58 +967,44 @@ class __$LoadedCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
 
 class _$_Loaded implements _Loaded {
   const _$_Loaded(
-      {this.users,
-      this.isLogOutProcess = false,
-      this.isLogOutSuccses,
-      this.isUpdateProcess = false,
-      this.isUpdateSucces});
+      {required this.colodas,
+      this.idFollowingProccess = false,
+      this.isFollowSuccess});
 
   @override
-  final List<AnotherUser>? users;
+  final List<ColodaAll> colodas;
   @JsonKey(defaultValue: false)
   @override
-  final dynamic isLogOutProcess;
+  final bool idFollowingProccess;
   @override
-  final bool? isLogOutSuccses;
-  @JsonKey(defaultValue: false)
-  @override
-  final dynamic isUpdateProcess;
-  @override
-  final bool? isUpdateSucces;
+  final bool? isFollowSuccess;
 
   @override
   String toString() {
-    return 'ProfileState.loaded(users: $users, isLogOutProcess: $isLogOutProcess, isLogOutSuccses: $isLogOutSuccses, isUpdateProcess: $isUpdateProcess, isUpdateSucces: $isUpdateSucces)';
+    return 'ExchangeUserState.loaded(colodas: $colodas, idFollowingProccess: $idFollowingProccess, isFollowSuccess: $isFollowSuccess)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Loaded &&
-            (identical(other.users, users) ||
-                const DeepCollectionEquality().equals(other.users, users)) &&
-            (identical(other.isLogOutProcess, isLogOutProcess) ||
+            (identical(other.colodas, colodas) ||
                 const DeepCollectionEquality()
-                    .equals(other.isLogOutProcess, isLogOutProcess)) &&
-            (identical(other.isLogOutSuccses, isLogOutSuccses) ||
+                    .equals(other.colodas, colodas)) &&
+            (identical(other.idFollowingProccess, idFollowingProccess) ||
                 const DeepCollectionEquality()
-                    .equals(other.isLogOutSuccses, isLogOutSuccses)) &&
-            (identical(other.isUpdateProcess, isUpdateProcess) ||
+                    .equals(other.idFollowingProccess, idFollowingProccess)) &&
+            (identical(other.isFollowSuccess, isFollowSuccess) ||
                 const DeepCollectionEquality()
-                    .equals(other.isUpdateProcess, isUpdateProcess)) &&
-            (identical(other.isUpdateSucces, isUpdateSucces) ||
-                const DeepCollectionEquality()
-                    .equals(other.isUpdateSucces, isUpdateSucces)));
+                    .equals(other.isFollowSuccess, isFollowSuccess)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(users) ^
-      const DeepCollectionEquality().hash(isLogOutProcess) ^
-      const DeepCollectionEquality().hash(isLogOutSuccses) ^
-      const DeepCollectionEquality().hash(isUpdateProcess) ^
-      const DeepCollectionEquality().hash(isUpdateSucces);
+      const DeepCollectionEquality().hash(colodas) ^
+      const DeepCollectionEquality().hash(idFollowingProccess) ^
+      const DeepCollectionEquality().hash(isFollowSuccess);
 
   @JsonKey(ignore: true)
   @override
@@ -1157,17 +1016,12 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)
+    required TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)
         loaded,
     required TResult Function(String? error) error,
   }) {
-    return loaded(users, isLogOutProcess, isLogOutSuccses, isUpdateProcess,
-        isUpdateSucces);
+    return loaded(colodas, idFollowingProccess, isFollowSuccess);
   }
 
   @override
@@ -1175,17 +1029,12 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)?
+    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
   }) {
-    return loaded?.call(users, isLogOutProcess, isLogOutSuccses,
-        isUpdateProcess, isUpdateSucces);
+    return loaded?.call(colodas, idFollowingProccess, isFollowSuccess);
   }
 
   @override
@@ -1193,19 +1042,14 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)?
+    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(users, isLogOutProcess, isLogOutSuccses, isUpdateProcess,
-          isUpdateSucces);
+      return loaded(colodas, idFollowingProccess, isFollowSuccess);
     }
     return orElse();
   }
@@ -1248,19 +1092,15 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements ProfileState {
+abstract class _Loaded implements ExchangeUserState {
   const factory _Loaded(
-      {List<AnotherUser>? users,
-      dynamic isLogOutProcess,
-      bool? isLogOutSuccses,
-      dynamic isUpdateProcess,
-      bool? isUpdateSucces}) = _$_Loaded;
+      {required List<ColodaAll> colodas,
+      bool idFollowingProccess,
+      bool? isFollowSuccess}) = _$_Loaded;
 
-  List<AnotherUser>? get users => throw _privateConstructorUsedError;
-  dynamic get isLogOutProcess => throw _privateConstructorUsedError;
-  bool? get isLogOutSuccses => throw _privateConstructorUsedError;
-  dynamic get isUpdateProcess => throw _privateConstructorUsedError;
-  bool? get isUpdateSucces => throw _privateConstructorUsedError;
+  List<ColodaAll> get colodas => throw _privateConstructorUsedError;
+  bool get idFollowingProccess => throw _privateConstructorUsedError;
+  bool? get isFollowSuccess => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
 }
@@ -1273,7 +1113,7 @@ abstract class _$ErrorCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ErrorCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
+class __$ErrorCopyWithImpl<$Res> extends _$ExchangeUserStateCopyWithImpl<$Res>
     implements _$ErrorCopyWith<$Res> {
   __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
       : super(_value, (v) => _then(v as _Error));
@@ -1304,7 +1144,7 @@ class _$_Error implements _Error {
 
   @override
   String toString() {
-    return 'ProfileState.error(error: $error)';
+    return 'ExchangeUserState.error(error: $error)';
   }
 
   @override
@@ -1329,12 +1169,8 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)
+    required TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)
         loaded,
     required TResult Function(String? error) error,
   }) {
@@ -1346,12 +1182,8 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)?
+    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
   }) {
@@ -1363,12 +1195,8 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<AnotherUser>? users,
-            dynamic isLogOutProcess,
-            bool? isLogOutSuccses,
-            dynamic isUpdateProcess,
-            bool? isUpdateSucces)?
+    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+            bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -1417,7 +1245,7 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements ProfileState {
+abstract class _Error implements ExchangeUserState {
   const factory _Error({String? error}) = _$_Error;
 
   String? get error => throw _privateConstructorUsedError;

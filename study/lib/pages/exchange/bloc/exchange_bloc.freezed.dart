@@ -28,6 +28,12 @@ class _$ExchangeEventTearOff {
       searchString,
     );
   }
+
+  _LoadUsers loadUsers(String searchString) {
+    return _LoadUsers(
+      searchString,
+    );
+  }
 }
 
 /// @nodoc
@@ -41,18 +47,21 @@ mixin _$ExchangeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String searchString) started,
     required TResult Function(String searchString) load,
+    required TResult Function(String searchString) loadUsers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String searchString)? started,
     TResult Function(String searchString)? load,
+    TResult Function(String searchString)? loadUsers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String searchString)? started,
     TResult Function(String searchString)? load,
+    TResult Function(String searchString)? loadUsers,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,18 +69,21 @@ mixin _$ExchangeEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Load value) load,
+    required TResult Function(_LoadUsers value) loadUsers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Load value)? load,
+    TResult Function(_LoadUsers value)? loadUsers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Load value)? load,
+    TResult Function(_LoadUsers value)? loadUsers,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -177,6 +189,7 @@ class _$_Started implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function(String searchString) started,
     required TResult Function(String searchString) load,
+    required TResult Function(String searchString) loadUsers,
   }) {
     return started(searchString);
   }
@@ -186,6 +199,7 @@ class _$_Started implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String searchString)? started,
     TResult Function(String searchString)? load,
+    TResult Function(String searchString)? loadUsers,
   }) {
     return started?.call(searchString);
   }
@@ -195,6 +209,7 @@ class _$_Started implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String searchString)? started,
     TResult Function(String searchString)? load,
+    TResult Function(String searchString)? loadUsers,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -208,6 +223,7 @@ class _$_Started implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Load value) load,
+    required TResult Function(_LoadUsers value) loadUsers,
   }) {
     return started(this);
   }
@@ -217,6 +233,7 @@ class _$_Started implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Load value)? load,
+    TResult Function(_LoadUsers value)? loadUsers,
   }) {
     return started?.call(this);
   }
@@ -226,6 +243,7 @@ class _$_Started implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Load value)? load,
+    TResult Function(_LoadUsers value)? loadUsers,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -312,6 +330,7 @@ class _$_Load implements _Load {
   TResult when<TResult extends Object?>({
     required TResult Function(String searchString) started,
     required TResult Function(String searchString) load,
+    required TResult Function(String searchString) loadUsers,
   }) {
     return load(searchString);
   }
@@ -321,6 +340,7 @@ class _$_Load implements _Load {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String searchString)? started,
     TResult Function(String searchString)? load,
+    TResult Function(String searchString)? loadUsers,
   }) {
     return load?.call(searchString);
   }
@@ -330,6 +350,7 @@ class _$_Load implements _Load {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String searchString)? started,
     TResult Function(String searchString)? load,
+    TResult Function(String searchString)? loadUsers,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -343,6 +364,7 @@ class _$_Load implements _Load {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Load value) load,
+    required TResult Function(_LoadUsers value) loadUsers,
   }) {
     return load(this);
   }
@@ -352,6 +374,7 @@ class _$_Load implements _Load {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Load value)? load,
+    TResult Function(_LoadUsers value)? loadUsers,
   }) {
     return load?.call(this);
   }
@@ -361,6 +384,7 @@ class _$_Load implements _Load {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Load value)? load,
+    TResult Function(_LoadUsers value)? loadUsers,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -381,6 +405,149 @@ abstract class _Load implements ExchangeEvent {
 }
 
 /// @nodoc
+abstract class _$LoadUsersCopyWith<$Res>
+    implements $ExchangeEventCopyWith<$Res> {
+  factory _$LoadUsersCopyWith(
+          _LoadUsers value, $Res Function(_LoadUsers) then) =
+      __$LoadUsersCopyWithImpl<$Res>;
+  @override
+  $Res call({String searchString});
+}
+
+/// @nodoc
+class __$LoadUsersCopyWithImpl<$Res> extends _$ExchangeEventCopyWithImpl<$Res>
+    implements _$LoadUsersCopyWith<$Res> {
+  __$LoadUsersCopyWithImpl(_LoadUsers _value, $Res Function(_LoadUsers) _then)
+      : super(_value, (v) => _then(v as _LoadUsers));
+
+  @override
+  _LoadUsers get _value => super._value as _LoadUsers;
+
+  @override
+  $Res call({
+    Object? searchString = freezed,
+  }) {
+    return _then(_LoadUsers(
+      searchString == freezed
+          ? _value.searchString
+          : searchString // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_LoadUsers implements _LoadUsers {
+  const _$_LoadUsers(this.searchString);
+
+  @override
+  final String searchString;
+
+  @override
+  String toString() {
+    return 'ExchangeEvent.loadUsers(searchString: $searchString)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _LoadUsers &&
+            (identical(other.searchString, searchString) ||
+                const DeepCollectionEquality()
+                    .equals(other.searchString, searchString)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(searchString);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LoadUsersCopyWith<_LoadUsers> get copyWith =>
+      __$LoadUsersCopyWithImpl<_LoadUsers>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String searchString) started,
+    required TResult Function(String searchString) load,
+    required TResult Function(String searchString) loadUsers,
+  }) {
+    return loadUsers(searchString);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String searchString)? started,
+    TResult Function(String searchString)? load,
+    TResult Function(String searchString)? loadUsers,
+  }) {
+    return loadUsers?.call(searchString);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String searchString)? started,
+    TResult Function(String searchString)? load,
+    TResult Function(String searchString)? loadUsers,
+    required TResult orElse(),
+  }) {
+    if (loadUsers != null) {
+      return loadUsers(searchString);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Load value) load,
+    required TResult Function(_LoadUsers value) loadUsers,
+  }) {
+    return loadUsers(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Load value)? load,
+    TResult Function(_LoadUsers value)? loadUsers,
+  }) {
+    return loadUsers?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Load value)? load,
+    TResult Function(_LoadUsers value)? loadUsers,
+    required TResult orElse(),
+  }) {
+    if (loadUsers != null) {
+      return loadUsers(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadUsers implements ExchangeEvent {
+  const factory _LoadUsers(String searchString) = _$_LoadUsers;
+
+  @override
+  String get searchString => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$LoadUsersCopyWith<_LoadUsers> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 class _$ExchangeStateTearOff {
   const _$ExchangeStateTearOff();
 
@@ -392,9 +559,10 @@ class _$ExchangeStateTearOff {
     return const _Loading();
   }
 
-  _Loaded loaded({required List<ColodaAll> colodas}) {
+  _Loaded loaded({List<ColodaAll>? colodas, List<AppUser>? users}) {
     return _Loaded(
       colodas: colodas,
+      users: users,
     );
   }
 
@@ -414,7 +582,8 @@ mixin _$ExchangeState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ColodaAll> colodas) loaded,
+    required TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)
+        loaded,
     required TResult Function(String? error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -422,7 +591,7 @@ mixin _$ExchangeState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas)? loaded,
+    TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)? loaded,
     TResult Function(String? error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -430,7 +599,7 @@ mixin _$ExchangeState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas)? loaded,
+    TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) =>
@@ -518,7 +687,8 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ColodaAll> colodas) loaded,
+    required TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)
+        loaded,
     required TResult Function(String? error) error,
   }) {
     return initial();
@@ -529,7 +699,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas)? loaded,
+    TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)? loaded,
     TResult Function(String? error)? error,
   }) {
     return initial?.call();
@@ -540,7 +710,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas)? loaded,
+    TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -631,7 +801,8 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ColodaAll> colodas) loaded,
+    required TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)
+        loaded,
     required TResult Function(String? error) error,
   }) {
     return loading();
@@ -642,7 +813,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas)? loaded,
+    TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)? loaded,
     TResult Function(String? error)? error,
   }) {
     return loading?.call();
@@ -653,7 +824,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas)? loaded,
+    TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -709,7 +880,7 @@ abstract class _Loading implements ExchangeState {
 abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
-  $Res call({List<ColodaAll> colodas});
+  $Res call({List<ColodaAll>? colodas, List<AppUser>? users});
 }
 
 /// @nodoc
@@ -724,12 +895,17 @@ class __$LoadedCopyWithImpl<$Res> extends _$ExchangeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? colodas = freezed,
+    Object? users = freezed,
   }) {
     return _then(_Loaded(
       colodas: colodas == freezed
           ? _value.colodas
           : colodas // ignore: cast_nullable_to_non_nullable
-              as List<ColodaAll>,
+              as List<ColodaAll>?,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<AppUser>?,
     ));
   }
 }
@@ -737,14 +913,16 @@ class __$LoadedCopyWithImpl<$Res> extends _$ExchangeStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded({required this.colodas});
+  const _$_Loaded({this.colodas, this.users});
 
   @override
-  final List<ColodaAll> colodas;
+  final List<ColodaAll>? colodas;
+  @override
+  final List<AppUser>? users;
 
   @override
   String toString() {
-    return 'ExchangeState.loaded(colodas: $colodas)';
+    return 'ExchangeState.loaded(colodas: $colodas, users: $users)';
   }
 
   @override
@@ -752,12 +930,17 @@ class _$_Loaded implements _Loaded {
     return identical(this, other) ||
         (other is _Loaded &&
             (identical(other.colodas, colodas) ||
-                const DeepCollectionEquality().equals(other.colodas, colodas)));
+                const DeepCollectionEquality()
+                    .equals(other.colodas, colodas)) &&
+            (identical(other.users, users) ||
+                const DeepCollectionEquality().equals(other.users, users)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(colodas);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(colodas) ^
+      const DeepCollectionEquality().hash(users);
 
   @JsonKey(ignore: true)
   @override
@@ -769,10 +952,11 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ColodaAll> colodas) loaded,
+    required TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)
+        loaded,
     required TResult Function(String? error) error,
   }) {
-    return loaded(colodas);
+    return loaded(colodas, users);
   }
 
   @override
@@ -780,10 +964,10 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas)? loaded,
+    TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)? loaded,
     TResult Function(String? error)? error,
   }) {
-    return loaded?.call(colodas);
+    return loaded?.call(colodas, users);
   }
 
   @override
@@ -791,12 +975,12 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas)? loaded,
+    TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(colodas);
+      return loaded(colodas, users);
     }
     return orElse();
   }
@@ -840,9 +1024,11 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements ExchangeState {
-  const factory _Loaded({required List<ColodaAll> colodas}) = _$_Loaded;
+  const factory _Loaded({List<ColodaAll>? colodas, List<AppUser>? users}) =
+      _$_Loaded;
 
-  List<ColodaAll> get colodas => throw _privateConstructorUsedError;
+  List<ColodaAll>? get colodas => throw _privateConstructorUsedError;
+  List<AppUser>? get users => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
 }
@@ -911,7 +1097,8 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ColodaAll> colodas) loaded,
+    required TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)
+        loaded,
     required TResult Function(String? error) error,
   }) {
     return error(this.error);
@@ -922,7 +1109,7 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas)? loaded,
+    TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)? loaded,
     TResult Function(String? error)? error,
   }) {
     return error?.call(this.error);
@@ -933,7 +1120,7 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas)? loaded,
+    TResult Function(List<ColodaAll>? colodas, List<AppUser>? users)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {

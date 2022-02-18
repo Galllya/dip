@@ -45,7 +45,7 @@ class _ProfileViewState extends State<ProfileView> {
   Widget build(BuildContext context) {
     final Map<int, Widget> _children = {
       0: Text(
-        'Друзья',
+        'Подписчики',
         style: currentSelection == 0
             ? const TextStyle(
                 fontWeight: FontWeight.w600,
@@ -76,7 +76,7 @@ class _ProfileViewState extends State<ProfileView> {
       listener: (BuildContext context, ProfileState state) {
         state.maybeWhen(
           orElse: () {},
-          loaded: (isLogOutProcess, isLogOutSuccses, isUpdateProcess,
+          loaded: (users, isLogOutProcess, isLogOutSuccses, isUpdateProcess,
               isUpdateSucces) {
             if (isLogOutSuccses != null && isLogOutSuccses) {
               Navigator.pushReplacement(
@@ -117,8 +117,8 @@ class _ProfileViewState extends State<ProfileView> {
                 return const LoadingCustom();
               }, error: (error) {
                 return const Center(child: Text('Произошла ошибка'));
-              }, loaded: (isLogOutProcess, isLogOutSuccses, isUpdateProcess,
-                  isUpdateSucces) {
+              }, loaded: (users, isLogOutProcess, isLogOutSuccses,
+                  isUpdateProcess, isUpdateSucces) {
                 return isLogOutProcess
                     ? const LoadingCustom()
                     : ListView(
@@ -384,8 +384,11 @@ class _ProfileViewState extends State<ProfileView> {
                           const SizedBox(
                             height: 12,
                           ),
-                          if (currentSelection == 0) Friends(),
-                          if (currentSelection == 1) Sobscribers(),
+                          if (currentSelection == 1) Friends(),
+                          if (currentSelection == 0)
+                            Sobscribers(
+                              users: users!,
+                            ),
                           if (currentSelection == 2)
                             AboutMe(
                               user: user,

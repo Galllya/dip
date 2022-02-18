@@ -4,4 +4,5 @@ part of 'exchange_bloc.dart';
 class ExchangeEvent with _$ExchangeEvent {
   const factory ExchangeEvent.started(String searchString) = _Started;
   const factory ExchangeEvent.load(String searchString) = _Load;
+  const factory ExchangeEvent.loadUsers(String searchString) = _LoadUsers;
 }

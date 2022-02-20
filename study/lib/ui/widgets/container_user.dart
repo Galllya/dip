@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:study/models/app_user.dart';
 import 'package:study/pages/exchange_user/view/exchange_user_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/widgets/get_image.dart';
 import 'package:study/ui/widgets/splash_clipper.dart';
 
 class ContainerUser extends StatelessWidget {
-  final AppUser user;
-  const ContainerUser({
+  bool fromProfile;
+  String uid;
+  String photoURL;
+  String userName;
+  int points;
+  bool writeCanAll;
+  bool statCanSeeEvery;
+  ContainerUser({
     Key? key,
-    required this.user,
+    this.fromProfile = false,
+    required this.uid,
+    required this.photoURL,
+    required this.userName,
+    required this.points,
+    required this.writeCanAll,
+    required this.statCanSeeEvery,
   }) : super(key: key);
 
   @override
@@ -31,7 +42,8 @@ class ContainerUser extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => ExchangeUserPage(
-                  user: user,
+                  fromProfile: fromProfile,
+                  uid: uid,
                 ),
               ),
             );
@@ -44,7 +56,7 @@ class ContainerUser extends StatelessWidget {
                 Row(
                   children: [
                     GetImage(
-                      image: user.photoURL!,
+                      image: photoURL,
                       radius: 30,
                     ),
                     const SizedBox(
@@ -54,7 +66,7 @@ class ContainerUser extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          user.userName!,
+                          userName,
                           style: const TextStyle(
                               color: primaryColor,
                               fontSize: 20,
@@ -64,7 +76,7 @@ class ContainerUser extends StatelessWidget {
                           height: 4,
                         ),
                         Text(
-                          '☆${user.points}',
+                          '☆$points',
                           style: const TextStyle(
                               color: primaryColor,
                               fontSize: 13,
@@ -76,7 +88,7 @@ class ContainerUser extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    user.writeCanAll!
+                    writeCanAll
                         ? CircleAvatar(
                             backgroundColor: primaryColor,
                             radius: 30,
@@ -93,7 +105,7 @@ class ContainerUser extends StatelessWidget {
                     const SizedBox(
                       width: 4,
                     ),
-                    user.statCanSeeEvery!
+                    statCanSeeEvery
                         ? CircleAvatar(
                             backgroundColor: primaryColor,
                             radius: 30,

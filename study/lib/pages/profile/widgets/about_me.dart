@@ -12,7 +12,6 @@ class AboutMe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(user.gender);
     return !((user.description != '') ||
             ((user.gender == 'Женский') || ((user.gender == 'Мужской'))) ||
             (user.dateBirth != DateTime(1000, 1, 1)) ||

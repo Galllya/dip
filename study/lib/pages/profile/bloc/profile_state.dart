@@ -6,6 +6,7 @@ class ProfileState with _$ProfileState {
   const factory ProfileState.loading() = _Loading;
   const factory ProfileState.loaded({
     List<AnotherUser>? users,
+    List<AnotherUser>? usersSub,
     @Default(false) isLogOutProcess,
     bool? isLogOutSuccses,
     @Default(false) isUpdateProcess,

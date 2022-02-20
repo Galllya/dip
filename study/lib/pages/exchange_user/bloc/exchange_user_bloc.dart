@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:study/models/another_user.dart';
+import 'package:study/models/app_user.dart';
 import 'package:study/models/coloda/coloda_all.dart';
 import 'package:study/provider/account_provider.dart';
 import 'package:study/provider/coloda_provider.dart';
@@ -37,7 +39,12 @@ class ExchangeUserBloc extends Bloc<ExchangeUserEvent, ExchangeUserState> {
 
         try {
           final colodas = await colodaProvider.getColodsForUser(uid: uid);
+          final user = await userProvider.getAnotUser(uid: uid);
+          final users = await userProvider.getUsers(uid: user.subscrip!);
+
           yield ExchangeUserState.loaded(
+            asers: users,
+            user: user,
             colodas: colodas,
           );
         } catch (e) {
@@ -49,6 +56,7 @@ class ExchangeUserBloc extends Bloc<ExchangeUserEvent, ExchangeUserState> {
   }
 
   Stream<ExchangeUserState> _folow(
+    bool isFollow,
     String anotherUserUID,
     List<String> anotherUserSubscribers,
     List<String> curUserSubscrip,
@@ -56,21 +64,33 @@ class ExchangeUserBloc extends Bloc<ExchangeUserEvent, ExchangeUserState> {
     yield* state.maybeMap(
       loaded: (loadedState) async* {
         yield ExchangeUserState.loaded(
+          asers: loadedState.asers,
+          user: loadedState.user,
           colodas: loadedState.colodas,
           idFollowingProccess: true,
         );
         try {
-          await userProvider.folow(
-            anotherUserUID: anotherUserUID,
-            anotherUserSubscribers: anotherUserSubscribers,
-            curUserSubscrip: curUserSubscrip,
-          );
+          isFollow
+              ? await userProvider.folow(
+                  anotherUserUID: anotherUserUID,
+                  anotherUserSubscribers: anotherUserSubscribers,
+                  curUserSubscrip: curUserSubscrip,
+                )
+              : await userProvider.unFolow(
+                  anotherUserUID: anotherUserUID,
+                  anotherUserSubscribers: anotherUserSubscribers,
+                  curUserSubscrip: curUserSubscrip,
+                );
           yield ExchangeUserState.loaded(
+              asers: loadedState.asers,
+              user: loadedState.user,
               colodas: loadedState.colodas,
               idFollowingProccess: false,
               isFollowSuccess: true);
         } catch (e) {
           yield ExchangeUserState.loaded(
+            asers: loadedState.asers,
+            user: loadedState.user,
             colodas: loadedState.colodas,
             idFollowingProccess: false,
             isFollowSuccess: false,

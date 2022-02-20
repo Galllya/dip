@@ -24,20 +24,23 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         load: _load,
       );
 
-  Stream<ProfileState> _started(List<String> uid) async* {
+  Stream<ProfileState> _started(List<String> uid, List<String> uidSub) async* {
     yield const ProfileState.initial();
-    yield* _load(uid);
+    yield* _load(uid, uidSub);
   }
 
-  Stream<ProfileState> _load(List<String> uid) async* {
+  Stream<ProfileState> _load(List<String> uid, List<String> uidSub) async* {
     yield* state.maybeMap(
       initial: (initialState) async* {
         yield const ProfileState.loading();
 
         try {
           final users = await userProvider.getUsers(uid: uid);
+          final usersSub = await userProvider.getUsers(uid: uidSub);
+
           yield ProfileState.loaded(
             users: users,
+            usersSub: usersSub,
           );
         } catch (e) {
           yield const ProfileState.error(error: 'Произошла ошибка');

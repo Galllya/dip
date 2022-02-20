@@ -185,6 +185,7 @@ class AuthMethods {
     required List<String> curUserSubscrip,
   }) async {
     curUserSubscrip.add(anotherUserUID);
+
     User currentUser = auth.currentUser!;
     anotherUserSubscribers.add(currentUser.uid);
     Folow folow = Folow(folow: curUserSubscrip);
@@ -206,12 +207,43 @@ class AuthMethods {
   }) async {
     List<AnotherUser> anotherUser = [];
 
-    uid.forEach((element) async {
+    await Future.forEach(uid, (element) async {
       DocumentSnapshot snap =
-          await fireStore.collection('users').doc(element).get();
+          await fireStore.collection('users').doc(element.toString()).get();
       anotherUser.add(AnotherUser.fromSnap(snap));
     });
 
     return anotherUser;
+  }
+
+  Future<AppUser> getAnotUser({
+    required String uid,
+  }) async {
+    DocumentSnapshot snap = await fireStore.collection('users').doc(uid).get();
+
+    return AppUser.fromSnap(snap);
+  }
+
+  Future<void> unFolow({
+    required String anotherUserUID,
+    required List<String> anotherUserSubscribers,
+    required List<String> curUserSubscrip,
+  }) async {
+    curUserSubscrip.remove(anotherUserUID);
+
+    User currentUser = auth.currentUser!;
+    anotherUserSubscribers.remove(currentUser.uid);
+    Folow folow = Folow(folow: curUserSubscrip);
+    Folowers folowers = Folowers(folow: anotherUserSubscribers);
+
+    await fireStore
+        .collection('users')
+        .doc(currentUser.uid)
+        .update(folow.toJson());
+
+    await fireStore
+        .collection('users')
+        .doc(anotherUserUID)
+        .update(folowers.toJson());
   }
 }

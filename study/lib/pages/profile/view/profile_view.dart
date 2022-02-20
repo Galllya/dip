@@ -45,7 +45,7 @@ class _ProfileViewState extends State<ProfileView> {
   Widget build(BuildContext context) {
     final Map<int, Widget> _children = {
       0: Text(
-        'Подписчики',
+        'Подписки',
         style: currentSelection == 0
             ? const TextStyle(
                 fontWeight: FontWeight.w600,
@@ -54,7 +54,7 @@ class _ProfileViewState extends State<ProfileView> {
             : const TextStyle(),
       ),
       1: Text(
-        'Подписки',
+        'Подписчики',
         style: currentSelection == 1
             ? const TextStyle(
                 fontWeight: FontWeight.w600,
@@ -76,8 +76,8 @@ class _ProfileViewState extends State<ProfileView> {
       listener: (BuildContext context, ProfileState state) {
         state.maybeWhen(
           orElse: () {},
-          loaded: (users, isLogOutProcess, isLogOutSuccses, isUpdateProcess,
-              isUpdateSucces) {
+          loaded: (users, usersSub, isLogOutProcess, isLogOutSuccses,
+              isUpdateProcess, isUpdateSucces) {
             if (isLogOutSuccses != null && isLogOutSuccses) {
               Navigator.pushReplacement(
                 context,
@@ -117,7 +117,7 @@ class _ProfileViewState extends State<ProfileView> {
                 return const LoadingCustom();
               }, error: (error) {
                 return const Center(child: Text('Произошла ошибка'));
-              }, loaded: (users, isLogOutProcess, isLogOutSuccses,
+              }, loaded: (users, usersSub, isLogOutProcess, isLogOutSuccses,
                   isUpdateProcess, isUpdateSucces) {
                 return isLogOutProcess
                     ? const LoadingCustom()
@@ -384,11 +384,18 @@ class _ProfileViewState extends State<ProfileView> {
                           const SizedBox(
                             height: 12,
                           ),
-                          if (currentSelection == 1) Friends(),
-                          if (currentSelection == 0)
+                          if (currentSelection == 1)
                             Sobscribers(
                               users: users!,
+                              title: 'подписчиков',
                             ),
+                          if (currentSelection == 0)
+                            usersSub == null
+                                ? const SizedBox()
+                                : Sobscribers(
+                                    title: 'подписок',
+                                    users: usersSub,
+                                  ),
                           if (currentSelection == 2)
                             AboutMe(
                               user: user,

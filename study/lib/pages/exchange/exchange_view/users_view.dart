@@ -106,7 +106,14 @@ class _UsersViewState extends State<UsersView> {
                                   (e) => Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 12),
-                                      child: ContainerUser(user: e)),
+                                      child: ContainerUser(
+                                        photoURL: e.photoURL!,
+                                        points: e.points!,
+                                        statCanSeeEvery: e.statCanSeeEvery!,
+                                        uid: e.uid!,
+                                        userName: e.userName!,
+                                        writeCanAll: e.writeCanAll!,
+                                      )),
                                 ),
                               ],
                             )

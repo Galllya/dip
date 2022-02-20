@@ -6,10 +6,13 @@ import 'package:study/ui/widgets/splash_clipper.dart';
 class RegimContainer extends StatelessWidget {
   final String title;
   final String iconName;
+  final Widget pageName;
+
   const RegimContainer({
     Key? key,
     required this.iconName,
     required this.title,
+    required this.pageName,
   }) : super(key: key);
 
   @override
@@ -25,7 +28,14 @@ class RegimContainer extends StatelessWidget {
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => pageName,
+              ),
+            );
+          },
           child: Column(
             children: [
               const SizedBox(

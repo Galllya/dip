@@ -408,7 +408,10 @@ class _ColodaViewState extends State<ColodaView> {
                           const SizedBox(
                             height: 12,
                           ),
-                          if (currentSelection == 0) Regime(),
+                          if (currentSelection == 0)
+                            Regime(
+                              cards: coloda.cards!,
+                            ),
                           if (currentSelection == 1)
                             Cards(
                               cards: coloda.cards!,

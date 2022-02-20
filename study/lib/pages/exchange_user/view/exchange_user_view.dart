@@ -15,12 +15,10 @@ import 'package:study/ui/widgets/get_image.dart';
 import 'package:study/ui/widgets/loading_custom.dart';
 
 class ExchangeUserView extends StatefulWidget {
-  final AppUser user;
   final Function onFollow;
 
   const ExchangeUserView({
     Key? key,
-    required this.user,
     required this.onFollow,
   }) : super(key: key);
 
@@ -69,7 +67,7 @@ class _ExchangeUserViewState extends State<ExchangeUserView> {
               return const Center(
                 child: Text('Произошла ошибка'),
               );
-            }, loaded: (user) {
+            }, loaded: (appUSer) {
               return state.maybeWhen(
                 orElse: () {
                   return const SizedBox();
@@ -82,7 +80,8 @@ class _ExchangeUserViewState extends State<ExchangeUserView> {
                     child: Text('Произошла ошибка'),
                   );
                 },
-                loaded: (colods, idFollowingProccess, isFollowSuccess) {
+                loaded: (asers, user, colods, idFollowingProccess,
+                    isFollowSuccess) {
                   return ListView(
                     children: [
                       DecoratedBox(
@@ -95,9 +94,9 @@ class _ExchangeUserViewState extends State<ExchangeUserView> {
                         ),
                         child: Column(
                           children: [
-                            widget.user.photoURL! == ''
+                            user.photoURL! == ''
                                 ? GetImage(
-                                    image: widget.user.photoURL!,
+                                    image: user.photoURL!,
                                     radius: 70,
                                   )
                                 : CircleAvatar(
@@ -106,7 +105,7 @@ class _ExchangeUserViewState extends State<ExchangeUserView> {
                                     child: CircleAvatar(
                                       radius: 70,
                                       backgroundImage: NetworkImage(
-                                        widget.user.photoURL!,
+                                        user.photoURL!,
                                       ),
                                     ),
                                   ),
@@ -114,7 +113,7 @@ class _ExchangeUserViewState extends State<ExchangeUserView> {
                               height: 12,
                             ),
                             Text(
-                              widget.user.userName!,
+                              user.userName!,
                               style: const TextStyle(
                                   fontSize: 36,
                                   fontWeight: FontWeight.w800,
@@ -123,77 +122,105 @@ class _ExchangeUserViewState extends State<ExchangeUserView> {
                             const SizedBox(
                               height: 26,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 40),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
+                            idFollowingProccess
+                                ? const SizedBox(
                                     height: 60,
-                                    child: ElevatedButton(
-                                      style: WidgetStyle()
-                                          .whiteElevatedButtonStyle(),
-                                      onPressed: () {
-                                        widget.onFollow(
-                                          widget.user.uid,
-                                          widget.user.subscribers,
-                                          user.subscrip,
-                                        );
-                                      },
-                                      child: Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            'assets/icons/icon_pan.svg',
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          const Text(
-                                            'подписаться',
-                                            style: TextStyle(
-                                              color: primaryColor,
-                                              fontWeight: FontWeight.w800,
-                                              fontSize: 18,
+                                    child: Center(
+                                        child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    )))
+                                : Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 40),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          height: 60,
+                                          child: ElevatedButton(
+                                            style: WidgetStyle()
+                                                .whiteElevatedButtonStyle(),
+                                            onPressed: () {
+                                              !user.subscribers!
+                                                      .contains(appUSer.uid)
+                                                  ? widget.onFollow(
+                                                      true,
+                                                      user.uid,
+                                                      user.subscribers,
+                                                      appUSer.subscrip,
+                                                    )
+                                                  : widget.onFollow(
+                                                      false,
+                                                      user.uid,
+                                                      user.subscribers,
+                                                      appUSer.subscrip,
+                                                    );
+                                            },
+                                            child: Row(
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/icons/icon_pan.svg',
+                                                ),
+                                                const SizedBox(
+                                                  width: 8,
+                                                ),
+                                                user.subscribers!
+                                                        .contains(appUSer.uid)
+                                                    ? const Text(
+                                                        'отписаться',
+                                                        style: TextStyle(
+                                                          color: primaryColor,
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                          fontSize: 18,
+                                                        ),
+                                                      )
+                                                    : const Text(
+                                                        'подписаться',
+                                                        style: TextStyle(
+                                                          color: primaryColor,
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                          fontSize: 18,
+                                                        ),
+                                                      ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        user.writeCanAll!
+                                            ? CircleAvatar(
+                                                backgroundColor: Colors.white,
+                                                radius: 30,
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: SvgPicture.asset(
+                                                    'assets/icons/icon_message.svg',
+                                                    color: primaryColor,
+                                                  ),
+                                                ),
+                                              )
+                                            : const SizedBox(
+                                                width: 60,
+                                              ),
+                                        user.statCanSeeEvery!
+                                            ? CircleAvatar(
+                                                backgroundColor: Colors.white,
+                                                radius: 30,
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: SvgPicture.asset(
+                                                    'assets/icons/icon_stat.svg',
+                                                  ),
+                                                ),
+                                              )
+                                            : const SizedBox(
+                                                width: 60,
+                                              ),
+                                      ],
                                     ),
                                   ),
-                                  widget.user.writeCanAll!
-                                      ? CircleAvatar(
-                                          backgroundColor: Colors.white,
-                                          radius: 30,
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: SvgPicture.asset(
-                                              'assets/icons/icon_message.svg',
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                        )
-                                      : const SizedBox(
-                                          width: 60,
-                                        ),
-                                  widget.user.statCanSeeEvery!
-                                      ? CircleAvatar(
-                                          backgroundColor: Colors.white,
-                                          radius: 30,
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: SvgPicture.asset(
-                                              'assets/icons/icon_stat.svg',
-                                            ),
-                                          ),
-                                        )
-                                      : const SizedBox(
-                                          width: 60,
-                                        ),
-                                ],
-                              ),
-                            ),
                             const SizedBox(
                               height: 24,
                             ),
@@ -262,10 +289,13 @@ class _ExchangeUserViewState extends State<ExchangeUserView> {
                         UsersColods(
                           colods: colods,
                         ),
-                      if (currentSelection == 1) UsersFolow(),
+                      if (currentSelection == 1)
+                        UsersFolow(
+                          users: asers,
+                        ),
                       if (currentSelection == 2)
                         UsersAbout(
-                          user: widget.user,
+                          user: user,
                         )
                     ],
                   );

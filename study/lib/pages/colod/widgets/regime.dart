@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:study/models/coloda/card.dart' as model;
+import 'package:study/pages/cards/view/cards_page.dart';
 import 'package:study/pages/colod/widgets/regim_container.dart';
+import 'package:study/pages/memorization/view/memorization_page.dart';
 
 class Regime extends StatelessWidget {
-  const Regime({Key? key}) : super(key: key);
+  final List<model.Card> cards;
+  const Regime({
+    Key? key,
+    required this.cards,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +20,49 @@ class Regime extends StatelessWidget {
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       crossAxisCount: 2,
-      children: const [
-        RegimContainer(iconName: 'icon_cards', title: "карточки"),
-        RegimContainer(iconName: 'icon_lerning', title: "заучивание"),
-        RegimContainer(iconName: 'icon_connect', title: "соединение"),
-        RegimContainer(iconName: 'icon_chose', title: "выбор"),
-        RegimContainer(iconName: 'icon_writte', title: "письмо"),
-        RegimContainer(iconName: 'icon_test', title: "тест")
+      children: [
+        RegimContainer(
+          iconName: 'icon_cards',
+          title: "карточки",
+          pageName: CardsPage(
+            cards: cards,
+          ),
+        ),
+        RegimContainer(
+          iconName: 'icon_lerning',
+          title: "заучивание",
+          pageName: MemorizationPage(
+            cards: cards,
+          ),
+        ),
+        RegimContainer(
+          iconName: 'icon_connect',
+          title: "соединение",
+          pageName: CardsPage(
+            cards: cards,
+          ),
+        ),
+        RegimContainer(
+          iconName: 'icon_chose',
+          title: "выбор",
+          pageName: CardsPage(
+            cards: cards,
+          ),
+        ),
+        RegimContainer(
+          iconName: 'icon_writte',
+          title: "письмо",
+          pageName: CardsPage(
+            cards: cards,
+          ),
+        ),
+        RegimContainer(
+          iconName: 'icon_test',
+          title: "тест",
+          pageName: CardsPage(
+            cards: cards,
+          ),
+        )
       ],
     );
   }

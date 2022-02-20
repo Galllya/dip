@@ -29,9 +29,10 @@ class _$ExchangeUserEventTearOff {
     );
   }
 
-  _Folow folow(String anotherUserUID, List<String> anotherUserSubscribers,
-      List<String> curUserSubscrip) {
+  _Folow folow(bool isFollow, String anotherUserUID,
+      List<String> anotherUserSubscribers, List<String> curUserSubscrip) {
     return _Folow(
+      isFollow,
       anotherUserUID,
       anotherUserSubscribers,
       curUserSubscrip,
@@ -48,7 +49,7 @@ mixin _$ExchangeUserEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String uid) started,
     required TResult Function(String uid) load,
-    required TResult Function(String anotherUserUID,
+    required TResult Function(bool isFollow, String anotherUserUID,
             List<String> anotherUserSubscribers, List<String> curUserSubscrip)
         folow,
   }) =>
@@ -57,8 +58,8 @@ mixin _$ExchangeUserEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
-            List<String> curUserSubscrip)?
+    TResult Function(bool isFollow, String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
         folow,
   }) =>
       throw _privateConstructorUsedError;
@@ -66,8 +67,8 @@ mixin _$ExchangeUserEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
-            List<String> curUserSubscrip)?
+    TResult Function(bool isFollow, String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
         folow,
     required TResult orElse(),
   }) =>
@@ -177,7 +178,7 @@ class _$_Started implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function(String uid) started,
     required TResult Function(String uid) load,
-    required TResult Function(String anotherUserUID,
+    required TResult Function(bool isFollow, String anotherUserUID,
             List<String> anotherUserSubscribers, List<String> curUserSubscrip)
         folow,
   }) {
@@ -189,8 +190,8 @@ class _$_Started implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
-            List<String> curUserSubscrip)?
+    TResult Function(bool isFollow, String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
         folow,
   }) {
     return started?.call(uid);
@@ -201,8 +202,8 @@ class _$_Started implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
-            List<String> curUserSubscrip)?
+    TResult Function(bool isFollow, String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
         folow,
     required TResult orElse(),
   }) {
@@ -320,7 +321,7 @@ class _$_Load implements _Load {
   TResult when<TResult extends Object?>({
     required TResult Function(String uid) started,
     required TResult Function(String uid) load,
-    required TResult Function(String anotherUserUID,
+    required TResult Function(bool isFollow, String anotherUserUID,
             List<String> anotherUserSubscribers, List<String> curUserSubscrip)
         folow,
   }) {
@@ -332,8 +333,8 @@ class _$_Load implements _Load {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
-            List<String> curUserSubscrip)?
+    TResult Function(bool isFollow, String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
         folow,
   }) {
     return load?.call(uid);
@@ -344,8 +345,8 @@ class _$_Load implements _Load {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
-            List<String> curUserSubscrip)?
+    TResult Function(bool isFollow, String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
         folow,
     required TResult orElse(),
   }) {
@@ -403,7 +404,8 @@ abstract class _$FolowCopyWith<$Res> {
   factory _$FolowCopyWith(_Folow value, $Res Function(_Folow) then) =
       __$FolowCopyWithImpl<$Res>;
   $Res call(
-      {String anotherUserUID,
+      {bool isFollow,
+      String anotherUserUID,
       List<String> anotherUserSubscribers,
       List<String> curUserSubscrip});
 }
@@ -419,11 +421,16 @@ class __$FolowCopyWithImpl<$Res> extends _$ExchangeUserEventCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? isFollow = freezed,
     Object? anotherUserUID = freezed,
     Object? anotherUserSubscribers = freezed,
     Object? curUserSubscrip = freezed,
   }) {
     return _then(_Folow(
+      isFollow == freezed
+          ? _value.isFollow
+          : isFollow // ignore: cast_nullable_to_non_nullable
+              as bool,
       anotherUserUID == freezed
           ? _value.anotherUserUID
           : anotherUserUID // ignore: cast_nullable_to_non_nullable
@@ -443,9 +450,11 @@ class __$FolowCopyWithImpl<$Res> extends _$ExchangeUserEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Folow implements _Folow {
-  const _$_Folow(
-      this.anotherUserUID, this.anotherUserSubscribers, this.curUserSubscrip);
+  const _$_Folow(this.isFollow, this.anotherUserUID,
+      this.anotherUserSubscribers, this.curUserSubscrip);
 
+  @override
+  final bool isFollow;
   @override
   final String anotherUserUID;
   @override
@@ -455,13 +464,16 @@ class _$_Folow implements _Folow {
 
   @override
   String toString() {
-    return 'ExchangeUserEvent.folow(anotherUserUID: $anotherUserUID, anotherUserSubscribers: $anotherUserSubscribers, curUserSubscrip: $curUserSubscrip)';
+    return 'ExchangeUserEvent.folow(isFollow: $isFollow, anotherUserUID: $anotherUserUID, anotherUserSubscribers: $anotherUserSubscribers, curUserSubscrip: $curUserSubscrip)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Folow &&
+            (identical(other.isFollow, isFollow) ||
+                const DeepCollectionEquality()
+                    .equals(other.isFollow, isFollow)) &&
             (identical(other.anotherUserUID, anotherUserUID) ||
                 const DeepCollectionEquality()
                     .equals(other.anotherUserUID, anotherUserUID)) &&
@@ -476,6 +488,7 @@ class _$_Folow implements _Folow {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(isFollow) ^
       const DeepCollectionEquality().hash(anotherUserUID) ^
       const DeepCollectionEquality().hash(anotherUserSubscribers) ^
       const DeepCollectionEquality().hash(curUserSubscrip);
@@ -490,11 +503,12 @@ class _$_Folow implements _Folow {
   TResult when<TResult extends Object?>({
     required TResult Function(String uid) started,
     required TResult Function(String uid) load,
-    required TResult Function(String anotherUserUID,
+    required TResult Function(bool isFollow, String anotherUserUID,
             List<String> anotherUserSubscribers, List<String> curUserSubscrip)
         folow,
   }) {
-    return folow(anotherUserUID, anotherUserSubscribers, curUserSubscrip);
+    return folow(
+        isFollow, anotherUserUID, anotherUserSubscribers, curUserSubscrip);
   }
 
   @override
@@ -502,11 +516,12 @@ class _$_Folow implements _Folow {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
-            List<String> curUserSubscrip)?
+    TResult Function(bool isFollow, String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
         folow,
   }) {
-    return folow?.call(anotherUserUID, anotherUserSubscribers, curUserSubscrip);
+    return folow?.call(
+        isFollow, anotherUserUID, anotherUserSubscribers, curUserSubscrip);
   }
 
   @override
@@ -514,13 +529,14 @@ class _$_Folow implements _Folow {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(String anotherUserUID, List<String> anotherUserSubscribers,
-            List<String> curUserSubscrip)?
+    TResult Function(bool isFollow, String anotherUserUID,
+            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
         folow,
     required TResult orElse(),
   }) {
     if (folow != null) {
-      return folow(anotherUserUID, anotherUserSubscribers, curUserSubscrip);
+      return folow(
+          isFollow, anotherUserUID, anotherUserSubscribers, curUserSubscrip);
     }
     return orElse();
   }
@@ -562,10 +578,12 @@ class _$_Folow implements _Folow {
 
 abstract class _Folow implements ExchangeUserEvent {
   const factory _Folow(
+      bool isFollow,
       String anotherUserUID,
       List<String> anotherUserSubscribers,
       List<String> curUserSubscrip) = _$_Folow;
 
+  bool get isFollow => throw _privateConstructorUsedError;
   String get anotherUserUID => throw _privateConstructorUsedError;
   List<String> get anotherUserSubscribers => throw _privateConstructorUsedError;
   List<String> get curUserSubscrip => throw _privateConstructorUsedError;
@@ -586,10 +604,14 @@ class _$ExchangeUserStateTearOff {
   }
 
   _Loaded loaded(
-      {required List<ColodaAll> colodas,
+      {required List<AnotherUser> asers,
+      required AppUser user,
+      required List<ColodaAll> colodas,
       bool idFollowingProccess = false,
       bool? isFollowSuccess}) {
     return _Loaded(
+      asers: asers,
+      user: user,
       colodas: colodas,
       idFollowingProccess: idFollowingProccess,
       isFollowSuccess: isFollowSuccess,
@@ -612,7 +634,11 @@ mixin _$ExchangeUserState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    required TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)
         loaded,
     required TResult Function(String? error) error,
@@ -622,7 +648,11 @@ mixin _$ExchangeUserState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
@@ -632,7 +662,11 @@ mixin _$ExchangeUserState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
@@ -722,7 +756,11 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    required TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)
         loaded,
     required TResult Function(String? error) error,
@@ -735,7 +773,11 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
@@ -748,7 +790,11 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
@@ -841,7 +887,11 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    required TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)
         loaded,
     required TResult Function(String? error) error,
@@ -854,7 +904,11 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
@@ -867,7 +921,11 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
@@ -926,7 +984,9 @@ abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
   $Res call(
-      {List<ColodaAll> colodas,
+      {List<AnotherUser> asers,
+      AppUser user,
+      List<ColodaAll> colodas,
       bool idFollowingProccess,
       bool? isFollowSuccess});
 }
@@ -942,11 +1002,21 @@ class __$LoadedCopyWithImpl<$Res> extends _$ExchangeUserStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? asers = freezed,
+    Object? user = freezed,
     Object? colodas = freezed,
     Object? idFollowingProccess = freezed,
     Object? isFollowSuccess = freezed,
   }) {
     return _then(_Loaded(
+      asers: asers == freezed
+          ? _value.asers
+          : asers // ignore: cast_nullable_to_non_nullable
+              as List<AnotherUser>,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as AppUser,
       colodas: colodas == freezed
           ? _value.colodas
           : colodas // ignore: cast_nullable_to_non_nullable
@@ -967,10 +1037,16 @@ class __$LoadedCopyWithImpl<$Res> extends _$ExchangeUserStateCopyWithImpl<$Res>
 
 class _$_Loaded implements _Loaded {
   const _$_Loaded(
-      {required this.colodas,
+      {required this.asers,
+      required this.user,
+      required this.colodas,
       this.idFollowingProccess = false,
       this.isFollowSuccess});
 
+  @override
+  final List<AnotherUser> asers;
+  @override
+  final AppUser user;
   @override
   final List<ColodaAll> colodas;
   @JsonKey(defaultValue: false)
@@ -981,13 +1057,17 @@ class _$_Loaded implements _Loaded {
 
   @override
   String toString() {
-    return 'ExchangeUserState.loaded(colodas: $colodas, idFollowingProccess: $idFollowingProccess, isFollowSuccess: $isFollowSuccess)';
+    return 'ExchangeUserState.loaded(asers: $asers, user: $user, colodas: $colodas, idFollowingProccess: $idFollowingProccess, isFollowSuccess: $isFollowSuccess)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Loaded &&
+            (identical(other.asers, asers) ||
+                const DeepCollectionEquality().equals(other.asers, asers)) &&
+            (identical(other.user, user) ||
+                const DeepCollectionEquality().equals(other.user, user)) &&
             (identical(other.colodas, colodas) ||
                 const DeepCollectionEquality()
                     .equals(other.colodas, colodas)) &&
@@ -1002,6 +1082,8 @@ class _$_Loaded implements _Loaded {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(asers) ^
+      const DeepCollectionEquality().hash(user) ^
       const DeepCollectionEquality().hash(colodas) ^
       const DeepCollectionEquality().hash(idFollowingProccess) ^
       const DeepCollectionEquality().hash(isFollowSuccess);
@@ -1016,12 +1098,16 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    required TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)
         loaded,
     required TResult Function(String? error) error,
   }) {
-    return loaded(colodas, idFollowingProccess, isFollowSuccess);
+    return loaded(asers, user, colodas, idFollowingProccess, isFollowSuccess);
   }
 
   @override
@@ -1029,12 +1115,17 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
   }) {
-    return loaded?.call(colodas, idFollowingProccess, isFollowSuccess);
+    return loaded?.call(
+        asers, user, colodas, idFollowingProccess, isFollowSuccess);
   }
 
   @override
@@ -1042,14 +1133,18 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(colodas, idFollowingProccess, isFollowSuccess);
+      return loaded(asers, user, colodas, idFollowingProccess, isFollowSuccess);
     }
     return orElse();
   }
@@ -1094,10 +1189,14 @@ class _$_Loaded implements _Loaded {
 
 abstract class _Loaded implements ExchangeUserState {
   const factory _Loaded(
-      {required List<ColodaAll> colodas,
+      {required List<AnotherUser> asers,
+      required AppUser user,
+      required List<ColodaAll> colodas,
       bool idFollowingProccess,
       bool? isFollowSuccess}) = _$_Loaded;
 
+  List<AnotherUser> get asers => throw _privateConstructorUsedError;
+  AppUser get user => throw _privateConstructorUsedError;
   List<ColodaAll> get colodas => throw _privateConstructorUsedError;
   bool get idFollowingProccess => throw _privateConstructorUsedError;
   bool? get isFollowSuccess => throw _privateConstructorUsedError;
@@ -1169,7 +1268,11 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    required TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)
         loaded,
     required TResult Function(String? error) error,
@@ -1182,7 +1285,11 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,
@@ -1195,7 +1302,11 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ColodaAll> colodas, bool idFollowingProccess,
+    TResult Function(
+            List<AnotherUser> asers,
+            AppUser user,
+            List<ColodaAll> colodas,
+            bool idFollowingProccess,
             bool? isFollowSuccess)?
         loaded,
     TResult Function(String? error)? error,

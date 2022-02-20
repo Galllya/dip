@@ -51,4 +51,24 @@ class UserProvider {
       uid: uid,
     );
   }
+
+  Future<AppUser> getAnotUser({
+    required String uid,
+  }) async {
+    AppUser user = await authMethods.getAnotUser(uid: uid);
+    return user;
+  }
+
+  Future<void> unFolow({
+    required String anotherUserUID,
+    required List<String> anotherUserSubscribers,
+    required List<String> curUserSubscrip,
+    Uint8List? file,
+  }) async {
+    await authMethods.unFolow(
+      anotherUserUID: anotherUserUID,
+      anotherUserSubscribers: anotherUserSubscribers,
+      curUserSubscrip: curUserSubscrip,
+    );
+  }
 }

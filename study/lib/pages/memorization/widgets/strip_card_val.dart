@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:study/pages/memorization/view/memorization_view.dart';
-import 'package:study/ui/sourse/colors.dart';
 
 class StripCardVal extends StatelessWidget {
   final String thisCard;

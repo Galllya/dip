@@ -61,9 +61,9 @@ class Coloda {
 
     List<String> tagsAsList = [];
 
-    (snapshot["tags"] as List<dynamic>).forEach((element) {
+    for (var element in (snapshot["tags"] as List<dynamic>)) {
       tagsAsList.add(element);
-    });
+    }
 
     return Coloda(
       imageURL: snapshot["imageURL"] as String,

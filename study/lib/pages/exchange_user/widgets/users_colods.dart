@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:study/models/coloda/coloda_all.dart';
 import 'package:study/pages/profile/widgets/about_me.dart';
-import 'package:study/ui/widgets/container_all_coloda.dart';
 import 'package:study/ui/widgets/container_coloda_in_user.dart';
 
 class UsersColods extends StatelessWidget {

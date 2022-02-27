@@ -8,7 +8,6 @@ import 'package:study/models/app_user.dart';
 import 'package:study/pages/authorization/view/authorization_page.dart';
 import 'package:study/pages/profile/bloc/profile_bloc.dart';
 import 'package:study/pages/profile/widgets/about_me.dart';
-import 'package:study/pages/profile/widgets/friends.dart';
 import 'package:study/pages/profile/widgets/modal_profile_settion.dart';
 import 'package:study/pages/profile/widgets/sobscribers.dart';
 import 'package:study/pages/profile_redaction.dart/view/profile_redaction_page.dart';

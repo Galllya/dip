@@ -58,15 +58,15 @@ class AppUser {
     List<String> subscribersAsList = [];
 
     if (snapshot["subscrip"] != null) {
-      (snapshot["subscrip"] as List<dynamic>).forEach((element) {
+      for (var element in (snapshot["subscrip"] as List<dynamic>)) {
         subscripAsList.add(element);
-      });
+      }
     }
 
     if (snapshot["subscribers"] != null) {
-      (snapshot["subscribers"] as List<dynamic>).forEach((element) {
+      for (var element in (snapshot["subscribers"] as List<dynamic>)) {
         subscribersAsList.add(element);
-      });
+      }
     }
     return AppUser(
       email: snapshot["email"],

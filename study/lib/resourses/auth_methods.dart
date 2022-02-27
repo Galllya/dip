@@ -173,7 +173,6 @@ class AuthMethods {
         }
       }
     } catch (e) {
-      print(e);
     }
 
     return users;

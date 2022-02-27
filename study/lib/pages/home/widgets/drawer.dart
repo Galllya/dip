@@ -18,7 +18,7 @@ class DrawerCustom extends StatelessWidget {
         builder: (BuildContext context, AccountState accountState) {
       return Drawer(
         child: accountState.maybeMap(orElse: () {
-          return LoadingCustom();
+          return const LoadingCustom();
         }, loaded: (user) {
           return ListView(
             padding: EdgeInsets.zero,

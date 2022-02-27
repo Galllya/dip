@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:study/models/coloda/card.dart' as model;
 import 'package:study/pages/memorization/bloc/memorization_bloc.dart';
-import 'package:study/pages/memorization/widgets/close_dialog.dart';
+import 'package:study/ui/widgets/close_dialog.dart';
 import 'package:study/pages/memorization/widgets/modal_memo_settion..dart';
 import 'package:study/pages/memorization/widgets/strip_card_val.dart';
 import 'package:study/pages/profile/widgets/about_me.dart';

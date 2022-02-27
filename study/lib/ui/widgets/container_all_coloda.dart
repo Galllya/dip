@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:study/models/coloda/coloda_all.dart';
-import 'package:study/pages/colod/view/colod_page.dart';
 import 'package:study/pages/exchange_colod/view/exchange_colod_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/widgets/splash_clipper.dart';

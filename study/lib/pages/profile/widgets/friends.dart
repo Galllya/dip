@@ -5,6 +5,6 @@ class Friends extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Друзья');
+    return const Text('Друзья');
   }
 }

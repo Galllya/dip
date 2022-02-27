@@ -14,7 +14,7 @@ class ProfileRedactionBloc
   final UserProvider userProvider;
   ProfileRedactionBloc({
     required this.userProvider,
-  }) : super(_Initial());
+  }) : super(const _Initial());
   @override
   Stream<ProfileRedactionState> mapEventToState(
     ProfileRedactionEvent event,

@@ -130,9 +130,11 @@ TextStyle getUnderTextStyle() {
   );
 }
 
-TextStyle getBoldTextStyle() {
-  return const TextStyle(
-    color: primaryColor,
+TextStyle getBoldTextStyle({
+  bool isWhite = false,
+}) {
+  return TextStyle(
+    color: isWhite ? Colors.white : primaryColor,
     fontSize: 16,
     fontWeight: FontWeight.w700,
   );

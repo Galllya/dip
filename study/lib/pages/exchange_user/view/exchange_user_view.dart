@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:study/blocs/accaunt/account_bloc.dart';
-import 'package:study/models/app_user.dart';
 import 'package:study/pages/exchange_user/bloc/exchange_user_bloc.dart';
 import 'package:study/pages/exchange_user/widgets/users_about.dart';
 import 'package:study/pages/exchange_user/widgets/users_colods.dart';

@@ -7,7 +7,11 @@ import 'package:study/pages/colods/widgets/end_drawer_in_colods.dart';
 import 'package:study/provider/coloda_provider.dart';
 
 class ColodsPage extends StatefulWidget {
-  const ColodsPage({Key? key}) : super(key: key);
+  final Function? onSelect;
+  const ColodsPage({
+    Key? key,
+    this.onSelect,
+  }) : super(key: key);
 
   @override
   State<ColodsPage> createState() => _ColodsPageState();
@@ -24,7 +28,7 @@ class _ColodsPageState extends State<ColodsPage> {
     colodsBloc = ColodsBloc(
       colodaProvider: context.read<ColodaProvider>(),
     )..add(
-        ColodsEvent.started(0),
+        const ColodsEvent.started(0),
       );
   }
 
@@ -99,6 +103,7 @@ class _ColodsPageState extends State<ColodsPage> {
               },
             ),
             body: ColodsView(
+              onSelect: widget.onSelect,
               onClose: () {
                 colodsBloc.add(
                   ColodsEvent.started(

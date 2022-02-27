@@ -6,7 +6,7 @@ part 'memorization_state.dart';
 part 'memorization_bloc.freezed.dart';
 
 class MemorizationBloc extends Bloc<MemorizationEvent, MemorizationState> {
-  MemorizationBloc() : super(_Initial());
+  MemorizationBloc() : super(const _Initial());
   @override
   Stream<MemorizationState> mapEventToState(
     MemorizationEvent event,

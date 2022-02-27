@@ -186,7 +186,7 @@ class _AddColodaViewState extends State<AddColodaView> {
           if (shodStart) {
             cards.clear();
 
-            cardArray.controls.forEach((element) {
+            for (var element in cardArray.controls) {
               if (element.valid) {
                 cards.add(
                   model.Card(
@@ -195,7 +195,7 @@ class _AddColodaViewState extends State<AddColodaView> {
                   ),
                 );
               }
-            });
+            }
 
             // for (var element in cardForm) {
             //   if (element.valid) {
@@ -500,9 +500,6 @@ class _AddColodaViewState extends State<AddColodaView> {
                             indexOfCard: index,
                             deleteCard: (int indexFrom, FormGroup takeForm) {
                               setState(() {
-                                print(cardArray.controls);
-
-                                print(takeForm.value);
                                 (cardArray).remove(takeForm);
                                 // cardArray.removeAt(indexFrom);
 

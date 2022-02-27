@@ -6,7 +6,6 @@ import 'package:study/pages/exchange/exchange_view/exchange_view.dart';
 import 'package:study/pages/exchange/exchange_view/users_view.dart';
 import 'package:study/provider/account_provider.dart';
 import 'package:study/provider/coloda_provider.dart';
-import 'package:study/resourses/auth_methods.dart';
 import 'package:study/ui/sourse/colors.dart';
 
 class ExchangePage extends StatefulWidget {

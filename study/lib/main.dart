@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:study/pages/authorization/view/authorization_page.dart';
 import 'package:study/pages/home/view/home_page.dart';
 import 'package:study/provider/account_provider.dart';
+import 'package:study/provider/collection_provider.dart';
 import 'package:study/provider/coloda_provider.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/theme.dart';
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
           ),
           Provider(
             create: (_) => ColodaProvider(),
+          ),
+          Provider(
+            create: (_) => CollectionProvider(),
           ),
         ],
         child: MaterialApp(

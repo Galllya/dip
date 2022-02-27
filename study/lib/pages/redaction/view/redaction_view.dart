@@ -1,6 +1,4 @@
-import 'dart:math';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -97,7 +95,7 @@ class _RedactionViewState extends State<RedactionView> {
   }
 
   void firstInitCard() {
-    widget.coloda.cards!.forEach((element) {
+    for (var element in widget.coloda.cards!) {
       cardForm.add(FormGroup(
         {
           'term': FormControl<String>(
@@ -114,7 +112,7 @@ class _RedactionViewState extends State<RedactionView> {
           ),
         },
       ));
-    });
+    }
   }
 
   void addCardFrom() {

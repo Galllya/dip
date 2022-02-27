@@ -9,10 +9,15 @@ import 'package:study/ui/widgets/tags_wrap.dart';
 class ContainerColoda extends StatelessWidget {
   final Coloda coloda;
   final bool showTegs;
+  final Function? onSelect;
+  final bool? cantTab;
+
   const ContainerColoda({
     Key? key,
     this.showTegs = false,
     required this.coloda,
+    this.onSelect,
+    this.cantTab,
   }) : super(key: key);
 
   @override
@@ -25,16 +30,23 @@ class ContainerColoda extends StatelessWidget {
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ColodPage(
-                  colodId: coloda.colodId!,
-                ),
-              ),
-            );
-          },
+          onTap: cantTab != null
+              ? null
+              : () {
+                  if (onSelect == null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ColodPage(
+                          colodId: coloda.colodId!,
+                        ),
+                      ),
+                    );
+                  } else {
+                    onSelect!(coloda);
+                    Navigator.pop(context);
+                  }
+                },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
             child: Column(

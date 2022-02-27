@@ -58,7 +58,6 @@ class ColodaMethods {
         );
       }
     } catch (e) {
-      print(e);
     }
 
     return colods;
@@ -160,7 +159,6 @@ class ColodaMethods {
 
       res = 'success';
     } catch (err) {
-      print(err);
       res = 'Произошла ошибка';
     }
     return res;
@@ -186,7 +184,6 @@ class ColodaMethods {
       photoURL = await StorageMethods().uploadImageToStorage(
           childName: 'colodaPics', file: file, isPost: true);
     }
-    print(photoURL);
 
     Coloda colodaToAll = Coloda(
       imageURL: photoURL,
@@ -251,7 +248,6 @@ class ColodaMethods {
 
       res = 'success';
     } catch (err) {
-      print(err);
       res = 'Произошла ошибка';
     }
     return res;
@@ -269,7 +265,6 @@ class ColodaMethods {
 
       res = 'success';
     } catch (err) {
-      print(err);
       res = 'Произошла ошибка';
     }
     return res;
@@ -297,7 +292,6 @@ class ColodaMethods {
         }
       }
     } catch (e) {
-      print(e);
     }
 
     return colods;
@@ -321,7 +315,6 @@ class ColodaMethods {
         );
       }
     } catch (e) {
-      print(e);
     }
 
     return colods;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:study/pages/add_collection/view/add_collection_page.dart';
 import 'package:study/pages/add_coloda.dart/view/add_coloda_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 
@@ -46,7 +47,14 @@ class SpeedDealCustom extends StatelessWidget {
           ),
           backgroundColor: lightPrimaryColor,
           label: 'Добавить коллекцию',
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AddCollectionPage(),
+              ),
+            );
+          },
         ),
       ],
     );

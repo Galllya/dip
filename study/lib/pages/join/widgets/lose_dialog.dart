@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/widget_style.dart';
 
-class CloseDialog extends StatefulWidget {
+class LoseDialog extends StatefulWidget {
   final Function next;
-  const CloseDialog({
+  const LoseDialog({
     Key? key,
     required this.next,
   }) : super(key: key);
 
   @override
-  State<CloseDialog> createState() => _CloseDialogState();
+  State<LoseDialog> createState() => _LoseDialogState();
 }
 
-class _CloseDialogState extends State<CloseDialog> {
+class _LoseDialogState extends State<LoseDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text(
-        'Вы завершили задание  :)',
+        'Вы не смогли пройти игру :(',
         style: TextStyle(
           color: primaryColor,
           fontSize: 22,

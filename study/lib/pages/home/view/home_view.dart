@@ -31,8 +31,8 @@ class _HomeViewState extends State<HomeView> {
           }, loaded: (user) {
             return ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              children: [
-                const SizedBox(
+              children: const [
+                SizedBox(
                   height: 26,
                 ),
                 TitleSlise(

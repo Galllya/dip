@@ -11,11 +11,14 @@ import 'package:study/ui/widgets/container_coloda.dart';
 import 'package:study/ui/widgets/loading_custom.dart';
 
 class ColodsView extends StatefulWidget {
+  final Function? onSelect;
+
   final Function onSearch;
   final Function onClose;
   const ColodsView({
     required this.onSearch,
     required this.onClose,
+    this.onSelect,
     Key? key,
   }) : super(key: key);
 
@@ -203,6 +206,7 @@ class _ColodsViewState extends State<ColodsView> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 12),
                             child: ContainerColoda(
+                              onSelect: widget.onSelect,
                               coloda: e,
                               showTegs: !isNameSearch,
                             ),

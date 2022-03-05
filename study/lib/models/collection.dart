@@ -21,18 +21,18 @@ class Collection {
     this.collectionId,
   });
 
-  Map<String, dynamic> toJson() {
-    List<Map<String, dynamic>> carsss = [];
+  set addTags(bool addTags) {}
 
+  Map<String, dynamic> toJson() {
     final Map<String, dynamic> res = {
       "imageURL": imageURL,
       "name": name,
       "description": description,
       "uid": uid,
-      "cards": carsss,
       "dateCreate": Timestamp.fromDate(dateCreate!),
       "colodsId": colodsId,
       "tags": tags,
+      "collectionId": collectionId,
     };
     return res;
   }

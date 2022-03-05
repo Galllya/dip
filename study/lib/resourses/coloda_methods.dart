@@ -6,6 +6,7 @@ import 'package:study/models/coloda/card.dart';
 import 'package:study/models/coloda/coloda.dart';
 import 'package:study/models/coloda/coloda_all.dart';
 import 'package:study/models/coloda/coloda_detail.dart';
+import 'package:study/models/statistic.dart';
 import 'package:study/resourses/storage_methods.dart';
 import 'package:uuid/uuid.dart';
 
@@ -57,8 +58,7 @@ class ColodaMethods {
           Coloda.fromSnap(element.doc),
         );
       }
-    } catch (e) {
-    }
+    } catch (e) {}
 
     return colods;
   }
@@ -139,6 +139,23 @@ class ColodaMethods {
         takeMyHaveAuthour: takeMyHaveAuthour,
         authorName: userName,
       );
+
+      StatisticColod statisticColod = const StatisticColod(
+        cards: 0,
+        memo: 0,
+        join: 0,
+        choice: 0,
+        wtite: 0,
+        test: 0,
+        goodTest: 0,
+        bedTest: 0,
+        coolTest: 0,
+      );
+
+      await fireStore
+          .collection('colodStatistic')
+          .doc(colodaId)
+          .set(statisticColod.toJson());
 
       await fireStore
           .collection('colods')
@@ -262,6 +279,7 @@ class ColodaMethods {
       await fireStore.collection('colods').doc(docId).delete();
       await fireStore.collection('colods_detail').doc(docId).delete();
       await fireStore.collection('colods_all').doc(docId).delete();
+      await fireStore.collection('colodStatistic').doc(docId).delete();
 
       res = 'success';
     } catch (err) {
@@ -291,8 +309,7 @@ class ColodaMethods {
           );
         }
       }
-    } catch (e) {
-    }
+    } catch (e) {}
 
     return colods;
   }
@@ -314,8 +331,7 @@ class ColodaMethods {
           ColodaAll.fromSnap(element.doc),
         );
       }
-    } catch (e) {
-    }
+    } catch (e) {}
 
     return colods;
   }

@@ -7,10 +7,13 @@ import 'package:study/ui/sourse/widget_style.dart';
 class SelectSearchTypeDialog extends StatefulWidget {
   final bool isNameSearch;
   final Function onChange;
+  final String? title;
+
   const SelectSearchTypeDialog({
     Key? key,
     required this.isNameSearch,
     required this.onChange,
+    this.title,
   }) : super(key: key);
 
   @override
@@ -76,7 +79,9 @@ class _SelectSearchTypeDialogState extends State<SelectSearchTypeDialog> {
                   activeColor: primaryColor,
                 ),
                 Text(
-                  'названию колоды',
+                  widget.title == null
+                      ? 'названию колоды'
+                      : 'названию ${widget.title}',
                   style: getStyle(),
                 ),
               ],

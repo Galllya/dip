@@ -4,10 +4,12 @@ import 'package:study/ui/sourse/colors.dart';
 class EndDrawerInColods extends StatefulWidget {
   final Function onSelect;
   final int val;
+  final String? title;
   const EndDrawerInColods({
     Key? key,
     required this.val,
     required this.onSelect,
+    this.title,
   }) : super(key: key);
 
   @override
@@ -40,7 +42,7 @@ class _EndDrawerInColodsState extends State<EndDrawerInColods> {
                       height: 60,
                     ),
                     Text(
-                      'карточек',
+                      widget.title == null ? 'карточек' : widget.title!,
                       style: getStyleForTitle(),
                     ),
                     Row(children: [

@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:study/models/coloda/coloda.dart';
-import 'package:study/pages/colod/view/colod_page.dart';
+import 'package:study/models/collection.dart';
+import 'package:study/pages/collection/view/collection_page.dart';
+import 'package:study/pages/collections/view/collections_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/widgets/splash_clipper.dart';
 import 'package:intl/intl.dart';
 import 'package:study/ui/widgets/tags_wrap.dart';
 
-class ContainerColoda extends StatelessWidget {
-  final Function? onDelete;
-  final Coloda coloda;
+class ContainerCollection extends StatelessWidget {
+  final Collection collection;
   final bool showTegs;
-  final Function? onSelect;
   final bool? cantTab;
-  final String? fromCollection;
 
-  const ContainerColoda({
+  const ContainerCollection({
     Key? key,
     this.showTegs = false,
-    required this.coloda,
-    this.onSelect,
+    required this.collection,
     this.cantTab,
-    this.fromCollection,
-    this.onDelete,
   }) : super(key: key);
 
   @override
@@ -37,45 +32,20 @@ class ContainerColoda extends StatelessWidget {
           onTap: cantTab != null
               ? null
               : () {
-                  if (onSelect == null) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => fromCollection == null
-                              ? ColodPage(
-                                  colodId: coloda.colodId!,
-                                )
-                              : ColodPage(
-                                  colodId: coloda.colodId!,
-                                  fromCollection: fromCollection,
-                                )),
-                    );
-                  } else {
-                    onSelect!(coloda);
-                    Navigator.pop(context);
-                  }
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CollectionPage(
+                        collectioId: collection.collectionId!,
+                      ),
+                    ),
+                  );
                 },
           child: Padding(
-            padding: onDelete == null
-                ? const EdgeInsets.symmetric(horizontal: 12, vertical: 24)
-                : const EdgeInsets.fromLTRB(12, 0, 12, 24),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (onDelete != null)
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: IconButton(
-                      onPressed: () {
-                        onDelete!(coloda);
-                      },
-                      iconSize: 20,
-                      icon: const Icon(
-                        Icons.close,
-                        color: primaryColor,
-                      ),
-                    ),
-                  ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -84,7 +54,7 @@ class ContainerColoda extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            coloda.name!,
+                            collection.name!,
                             maxLines: 3,
                             style: const TextStyle(
                                 fontSize: 20,
@@ -95,14 +65,14 @@ class ContainerColoda extends StatelessWidget {
                             height: 12,
                           ),
                           Text(
-                            "${coloda.cards} ${Intl.plural(
-                              coloda.cards!,
+                            "${collection.colodsId!.length} ${Intl.plural(
+                              collection.colodsId!.length,
                               locale: 'ru',
-                              other: 'карты',
-                              one: 'карта',
-                              two: 'карты',
-                              few: 'карты',
-                              many: 'карт',
+                              other: 'колоды',
+                              one: 'колода',
+                              two: 'колоды',
+                              few: 'колоды',
+                              many: 'колод',
                             )}",
                             style: const TextStyle(
                               fontSize: 16,
@@ -113,22 +83,22 @@ class ContainerColoda extends StatelessWidget {
                         ],
                       ),
                     ),
-                    coloda.imageURL != ''
+                    collection.imageURL != ''
                         ? Image(
                             height: 70,
                             width: 70,
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                              coloda.imageURL!,
+                              collection.imageURL!,
                             ),
                           )
                         : const SizedBox(),
                   ],
                 ),
-                if (coloda.tags!.isNotEmpty && showTegs)
+                if (collection.tags!.isNotEmpty && showTegs)
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: TagsWrap(tags: coloda.tags!),
+                    child: TagsWrap(tags: collection.tags!),
                   ),
               ],
             ),

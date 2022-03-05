@@ -5,48 +5,33 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:study/blocs/accaunt/account_bloc.dart';
-import 'package:study/models/coloda/card.dart' as model;
-import 'package:study/models/coloda/coloda_detail.dart';
-import 'package:study/pages/add_coloda.dart/widgets/card_in_coloda.dart';
-import 'package:study/pages/colod/view/colod_page.dart';
-import 'package:study/pages/redaction/bloc/redaction_bloc.dart';
+import 'package:study/models/collection.dart';
+import 'package:study/models/coloda/coloda.dart';
+import 'package:study/pages/collection/view/collection_page.dart';
+import 'package:study/pages/colods/view/colods_page.dart';
+import 'package:study/pages/redaction_collection/bloc/redaction_collection_bloc.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/widget_style.dart';
+import 'package:study/ui/widgets/container_coloda.dart';
 import 'package:study/ui/widgets/loading_custom.dart';
 import 'package:study/ui/widgets/pick_image.dart';
 import 'package:study/ui/widgets/scaffold_messages.dart';
 
-class RedactionView extends StatefulWidget {
-  final DetailColoda coloda;
-  final String? fromCollection;
+class RedactionCollectionView extends StatefulWidget {
+  final Collection collection;
 
-  final Function({
-    String? name,
-    String? description,
-    List<model.Card>? cards,
-    String? photoURL,
-    bool? showEvery,
-    bool? takeMyHaveAuthour,
-    List<String>? tags,
-    required String uid,
-    DateTime? dateNow,
-    Uint8List? file,
-    String? userName,
-  }) updateColoda;
-  const RedactionView({
+  final Function updateColoda;
+  const RedactionCollectionView({
     Key? key,
-    required this.coloda,
+    required this.collection,
     required this.updateColoda,
-    this.fromCollection,
   }) : super(key: key);
 
   @override
-  State<RedactionView> createState() => _RedactionViewState();
+  State<RedactionCollectionView> createState() => _RedactionCollectionView();
 }
 
-class _RedactionViewState extends State<RedactionView> {
-  final List<model.Card> cards = [];
-
+class _RedactionCollectionView extends State<RedactionCollectionView> {
   late FormGroup form;
   Uint8List? image;
   late String imageURL;
@@ -54,18 +39,18 @@ class _RedactionViewState extends State<RedactionView> {
   late List<String> tags;
   late bool addDescriptin;
   final int maxTags = 10;
-  late int namberOfCards;
-  late List<FormGroup> cardForm;
   late String userName;
+  late List<Coloda> colods;
 
   @override
   void initState() {
-    namberOfCards = widget.coloda.cards!.length;
-    addTags = widget.coloda.tags!.isEmpty ? false : true;
-    tags = widget.coloda.tags!;
-    addDescriptin = widget.coloda.description == '' ? false : true;
-    cardForm = [];
-    imageURL = widget.coloda.imageURL!;
+    colods = [];
+
+    addTags = widget.collection.addTags =
+        widget.collection.tags!.isEmpty ? false : true;
+    tags = widget.collection.tags!;
+    addDescriptin = widget.collection.description == '' ? false : true;
+    imageURL = widget.collection.imageURL!;
     context.read<AccountBloc>().state.maybeWhen(
           orElse: () {},
           loaded: (user) {
@@ -75,14 +60,14 @@ class _RedactionViewState extends State<RedactionView> {
     form = FormGroup(
       {
         'name': FormControl<String>(
-          value: widget.coloda.name,
+          value: widget.collection.name,
           validators: [
             Validators.required,
             Validators.maxLength(64),
           ],
         ),
         'description': FormControl<String>(
-          value: widget.coloda.description,
+          value: widget.collection.description,
           validators: [],
         ),
         'tag': FormControl<String>(
@@ -92,49 +77,8 @@ class _RedactionViewState extends State<RedactionView> {
         ),
       },
     );
-    firstInitCard();
 
     super.initState();
-  }
-
-  void firstInitCard() {
-    for (var element in widget.coloda.cards!) {
-      cardForm.add(FormGroup(
-        {
-          'term': FormControl<String>(
-            value: element.term,
-            validators: [
-              Validators.required,
-            ],
-          ),
-          'definition': FormControl<String>(
-            value: element.definition,
-            validators: [
-              Validators.required,
-            ],
-          ),
-        },
-      ));
-    }
-  }
-
-  void addCardFrom() {
-    for (int i = namberOfCards - 3; i < namberOfCards; i++) {
-      cardForm.add(FormGroup(
-        {
-          'term': FormControl<String>(
-            validators: [
-              Validators.required,
-            ],
-          ),
-          'definition': FormControl<String>(
-            validators: [
-              Validators.required,
-            ],
-          ),
-        },
-      ));
-    }
   }
 
   void selectImage() async {
@@ -147,16 +91,18 @@ class _RedactionViewState extends State<RedactionView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RedactionBloc, RedactionState>(
-        listener: (BuildContext context, RedactionState state) {
+    return BlocListener<RedactionCollectionBloc, RedactionCollectionState>(
+        listener: (BuildContext context, RedactionCollectionState state) {
       state.maybeWhen(
+        loaded: (colodsa) {
+          colods = colodsa!;
+        },
         success: () {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => ColodPage(
-                fromCollection: widget.fromCollection,
-                colodId: widget.coloda.colodId!,
+              builder: (context) => CollectionPage(
+                collectioId: widget.collection.collectionId!,
               ),
             ),
           );
@@ -165,52 +111,52 @@ class _RedactionViewState extends State<RedactionView> {
           ScaffoldMessenger.of(context)
               .showSnackBar(CustomScaffoldMessages().show(title: error!));
         },
-        normal: (
-          shodStart,
-        ) {
-          if (shodStart) {
-            cards.clear();
-            for (var element in cardForm) {
-              if (element.valid) {
-                cards.add(
-                  model.Card(
-                    term: element.control('term').value,
-                    definition: element.control('definition').value,
-                  ),
-                );
+        initial: (shoudStart) {
+          if (shoudStart) {
+            if (form.control('name').valid && colods.isNotEmpty) {
+              List<String> allColods = [];
+              for (var element in colods) {
+                allColods.add(element.colodId!);
               }
-            }
 
-            if (form.control('name').valid && cards.isNotEmpty) {
-              widget.updateColoda(
-                file: imageURL == '' ? image : null,
-                name: form.control('name').value,
-                description: form.control('description').value,
-                cards: cards,
-                showEvery: widget.coloda.showEvery,
+              Collection collection = Collection(
+                imageURL: null,
+                name: form
+                    .control(
+                      'name',
+                    )
+                    .value,
+                description: form
+                    .control(
+                      'description',
+                    )
+                    .value,
+                uid: widget.collection.uid,
+                colodsId: allColods,
+                dateCreate: widget.collection.dateCreate,
                 tags: tags,
-                takeMyHaveAuthour: widget.coloda.takeMyHaveAuthour,
-                dateNow: widget.coloda.dateCreate,
-                photoURL: imageURL == '' ? '' : imageURL,
-                uid: widget.coloda.colodId!,
-                userName: userName,
+                collectionId: widget.collection.collectionId,
+              );
+              widget.updateColoda(
+                collection,
+                image,
               );
             } else {
-              if (!form.control('name').valid && cards.isEmpty) {
+              if (!form.control('name').valid && colods.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
                     CustomScaffoldMessages().show(
                         title:
-                            'Добавьте название колоды и хотя-бы одну карточку'));
+                            'Добавьте название коллекции и хотя-бы одну колоду'));
               } else {
                 if (!form.control('name').valid) {
                   ScaffoldMessenger.of(context).showSnackBar(
                       CustomScaffoldMessages()
-                          .show(title: 'Добавьте название колоды'));
+                          .show(title: 'Добавьте название коллекции'));
                 }
-                if (cards.isEmpty) {
+                if (colods.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                       CustomScaffoldMessages()
-                          .show(title: 'Добавьте хотя-бы одну карточку'));
+                          .show(title: 'Добавьте хотя-бы одну колоду'));
                 }
               }
             }
@@ -218,9 +164,14 @@ class _RedactionViewState extends State<RedactionView> {
         },
         orElse: () {},
       );
-    }, child: BlocBuilder<RedactionBloc, RedactionState>(
-      builder: (BuildContext context, RedactionState state) {
+    }, child: BlocBuilder<RedactionCollectionBloc, RedactionCollectionState>(
+      builder: (BuildContext context, RedactionCollectionState state) {
         return state.maybeWhen(
+          loadingError: (error) {
+            return const Center(
+              child: Text('Произошла ошибка'),
+            );
+          },
           orElse: () {
             return ReactiveForm(
               formGroup: form,
@@ -477,32 +428,74 @@ class _RedactionViewState extends State<RedactionView> {
                   const SizedBox(
                     height: 20,
                   ),
-                  for (int i = 0; i < namberOfCards; i++)
-                    CardInColoda(
-                      indexOfCard: i,
-                      form: cardForm[i],
-                      deleteCard: () {},
-                    ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: primaryColor,
-                    child: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          namberOfCards += 3;
-                          addCardFrom();
-                        });
-                      },
-                      icon: SvgPicture.asset(
-                        'assets/icons/icon_bottom_arrow.svg',
-                        height: 28,
-                        width: 28,
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundColor: primaryColor,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ColodsPage(
+                                  onSelect: (
+                                    Coloda coloda1,
+                                  ) {
+                                    int num = 0;
+                                    for (var element in colods) {
+                                      if (element.name == coloda1.name) {
+                                        num++;
+                                      }
+                                    }
+                                    if (num == 0) {
+                                      if (colods
+                                          .where((element) =>
+                                              element.name == coloda1.name)
+                                          .isEmpty) {
+                                        setState(() {
+                                          colods.add(coloda1);
+                                        });
+                                      }
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          CustomScaffoldMessages().show(
+                                              title:
+                                                  'Вы уже добавили данную колоду'));
+                                    }
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                          icon: SvgPicture.asset(
+                            'assets/icons/icon_plus.svg',
+                            height: 28,
+                            width: 28,
+                          ),
+                        ),
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  for (int i = 0; i < colods.length; i++)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: ContainerColoda(
+                        onDelete: (Coloda coloda) {
+                          setState(() {
+                            colods.remove(coloda);
+                          });
+                        },
+                        cantTab: true,
+                        coloda: colods[colods.length - i - 1],
+                        showTegs: false,
+                      ),
+                    ),
                   const SizedBox(
                     height: 24,
                   ),

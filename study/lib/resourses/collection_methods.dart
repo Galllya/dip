@@ -14,24 +14,24 @@ class CollectionMethods {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore fireStore = FirebaseFirestore.instance;
 
-  Future<List<Coloda>> getUserColods({
+  Future<List<Collection>> getUserCollections({
     String? seatchText,
     required bool isTagsSearch,
   }) async {
     User currentUser = auth.currentUser!;
-    List<Coloda> colods = [];
+    List<Collection> collections = [];
     dynamic a;
     try {
       if (isTagsSearch) {
         if (seatchText != null) {
           a = await fireStore
-              .collection('colods')
+              .collection('collections')
               .where('uid', isEqualTo: currentUser.uid)
               .where("tags", arrayContains: seatchText)
               .get();
         } else {
           a = await fireStore
-              .collection('colods')
+              .collection('collections')
               .where('uid', isEqualTo: currentUser.uid)
               .orderBy("dateCreate", descending: true)
               .get();
@@ -39,14 +39,14 @@ class CollectionMethods {
       } else {
         if (seatchText != null) {
           a = await fireStore
-              .collection('colods')
+              .collection('collections')
               .where('uid', isEqualTo: currentUser.uid)
               .where("name", isGreaterThanOrEqualTo: seatchText)
               .where("name", isLessThanOrEqualTo: "$seatchText\uf7ff")
               .get();
         } else {
           a = await fireStore
-              .collection('colods')
+              .collection('collections')
               .where('uid', isEqualTo: currentUser.uid)
               .orderBy("dateCreate", descending: true)
               .get();
@@ -54,14 +54,15 @@ class CollectionMethods {
       }
 
       for (var element in a.docChanges) {
-        colods.add(
-          Coloda.fromSnap(element.doc),
+        collections.add(
+          Collection.fromSnap(element.doc),
         );
       }
     } catch (e) {
+      print(e);
     }
 
-    return colods;
+    return collections;
   }
 
   Future<String> putCollection({
@@ -88,10 +89,11 @@ class CollectionMethods {
 
       DateTime dateNow = DateTime.now();
 
+      String desc = collection.description ?? '';
       Collection collectionNow = Collection(
         imageURL: photoURL,
         name: collection.name,
-        description: collection.description,
+        description: desc,
         uid: currentUser.uid,
         colodsId: collection.colodsId,
         dateCreate: dateNow,
@@ -111,87 +113,59 @@ class CollectionMethods {
     return res;
   }
 
-  Future<String> updateColoda({
-    String? name,
-    String? description,
-    List<Card>? cards,
-    String? photoURL,
-    bool? showEvery,
-    bool? takeMyHaveAuthour,
-    List<String>? tags,
-    required String docId,
-    DateTime? dateNow,
+  Future<String> updateCollection({
+    required Collection collection,
     Uint8List? file,
-    String? authorName,
   }) async {
     String res = "";
     User currentUser = auth.currentUser!;
+    String photoURL = collection.imageURL ?? '';
 
     if (file != null) {
       photoURL = await StorageMethods().uploadImageToStorage(
           childName: 'colodaPics', file: file, isPost: true);
     }
 
-    Coloda colodaToAll = Coloda(
+    Collection collectionNow = Collection(
       imageURL: photoURL,
-      name: name,
+      name: collection.name,
+      description: collection.description,
       uid: currentUser.uid,
-      cards: cards!.length,
-      colodId: docId,
-      dateCreate: dateNow,
-      tags: tags,
-      takeMyHaveAuthour: takeMyHaveAuthour,
-      showEvery: showEvery,
-    );
-
-    DetailColoda colodaDetail = DetailColoda(
-      imageURL: photoURL,
-      name: name,
-      description: description,
-      uid: currentUser.uid,
-      cards: cards,
-      dateCreate: dateNow,
-      tags: tags,
-      colodId: docId,
-      takeMyHaveAuthour: takeMyHaveAuthour,
-      showEvery: showEvery,
-    );
-
-    ColodaAll colodaAll = ColodaAll(
-      imageURL: photoURL,
-      name: name,
-      description: description,
-      uid: currentUser.uid,
-      cards: cards,
-      dateCreate: dateNow,
-      tags: tags,
-      colodId: docId,
-      takeMyHaveAuthour: takeMyHaveAuthour,
-      authorName: authorName,
+      colodsId: collection.colodsId,
+      dateCreate: collection.dateCreate,
+      tags: collection.tags,
+      collectionId: collection.collectionId,
     );
 
     try {
       await fireStore
-          .collection('colods')
-          .doc(docId)
-          .update(colodaToAll.toJson());
-      await fireStore
-          .collection('colods_detail')
-          .doc(docId)
-          .update(colodaDetail.toJson());
+          .collection('collections')
+          .doc(collectionNow.collectionId)
+          .update(collectionNow.toJson());
+      res = 'success';
+    } catch (err) {
+      res = 'Произошла ошибка';
+    }
+    return res;
+  }
 
-      if (showEvery!) {
-        await fireStore
-            .collection('colods_all')
-            .doc(docId)
-            .set(colodaAll.toJson());
-        await fireStore
-            .collection('colods_all')
-            .doc(docId)
-            .update(colodaAll.toJson());
-      } else {
-        await fireStore.collection('colods_all').doc(docId).delete();
-      }
+  Future<Collection> getUserCollection({
+    required String collectionId,
+  }) async {
+    final collection =
+        await fireStore.collection('collections').doc(collectionId).get();
+
+    final Collection collectionDet = Collection.fromSnap(collection);
+    return collectionDet;
+  }
+
+  Future<String> deleteCollection({
+    required String docId,
+  }) async {
+    String res = "";
+
+    try {
+      await fireStore.collection('collections').doc(docId).delete();
 
       res = 'success';
     } catch (err) {
@@ -200,20 +174,17 @@ class CollectionMethods {
     return res;
   }
 
-  Future<String> deleteColoda({
-    required String docId,
+  Future<List<Coloda>> getColodsInCollection({
+    required List<String> colodsId,
   }) async {
-    String res = "";
+    List<Coloda> colods = [];
 
-    try {
-      await fireStore.collection('colods').doc(docId).delete();
-      await fireStore.collection('colods_detail').doc(docId).delete();
-      await fireStore.collection('colods_all').doc(docId).delete();
+    await Future.forEach(colodsId, (element) async {
+      DocumentSnapshot snap =
+          await fireStore.collection('colods').doc(element.toString()).get();
+      colods.add(Coloda.fromSnap(snap));
+    });
 
-      res = 'success';
-    } catch (err) {
-      res = 'Произошла ошибка';
-    }
-    return res;
+    return colods;
   }
 }

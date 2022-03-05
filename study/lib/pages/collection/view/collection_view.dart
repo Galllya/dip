@@ -6,51 +6,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:study/blocs/accaunt/account_bloc.dart';
-import 'package:study/models/coloda/card.dart' as model;
-import 'package:study/pages/colod/bloc/colod_bloc.dart';
-import 'package:study/pages/colod/widgets/about.dart';
-import 'package:study/pages/colod/widgets/cards.dart';
-import 'package:study/pages/colod/widgets/modal_setting.dart';
-import 'package:study/pages/colod/widgets/regime.dart';
-import 'package:study/pages/redaction/view/redaction_page.dart';
-import 'package:study/pages/stat_colod/view/stat_colod_page.dart';
+import 'package:study/pages/collection/bloc/collection_bloc.dart';
+import 'package:study/pages/collection/widgets/collection_detail.dart';
+import 'package:study/pages/collection/widgets/colods.dart';
+import 'package:study/pages/collection/widgets/modal_delete.dart';
+import 'package:study/pages/redaction_collection/view/redaction_collection_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/widget_style.dart';
 import 'package:study/ui/widgets/loading_custom.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:study/ui/widgets/scaffold_messages.dart';
 
-class ColodaView extends StatefulWidget {
+class CollectionView extends StatefulWidget {
   final Function onDeleteColod;
-  final Function updateAfterSuccsess;
   final Function closePage;
-  final String? fromCollection;
 
-  final Function({
-    String? name,
-    String? description,
-    List<model.Card>? cards,
-    String? photoURL,
-    bool? showEvery,
-    bool? takeMyHaveAuthour,
-    List<String>? tags,
-    required String uid,
-    DateTime? dateNow,
-  }) updateColod;
-  const ColodaView({
-    required this.updateAfterSuccsess,
+  const CollectionView({
     Key? key,
-    required this.updateColod,
     required this.onDeleteColod,
     required this.closePage,
-    this.fromCollection,
   }) : super(key: key);
 
   @override
-  State<ColodaView> createState() => _ColodaViewState();
+  State<CollectionView> createState() => _CollectionViewState();
 }
 
-class _ColodaViewState extends State<ColodaView> {
+class _CollectionViewState extends State<CollectionView> {
   late int currentSelection;
   final Uint8List u8 = Uint8List(12);
   final PageController controller = PageController();
@@ -70,7 +51,7 @@ class _ColodaViewState extends State<ColodaView> {
   Widget build(BuildContext context) {
     final Map<int, Widget> _children = {
       0: Text(
-        'Режимы',
+        'Колоды',
         style: currentSelection == 0
             ? const TextStyle(
                 fontWeight: FontWeight.w600,
@@ -79,7 +60,7 @@ class _ColodaViewState extends State<ColodaView> {
             : const TextStyle(),
       ),
       1: Text(
-        'Карточки',
+        'О коллекции',
         style: currentSelection == 1
             ? const TextStyle(
                 fontWeight: FontWeight.w600,
@@ -87,31 +68,12 @@ class _ColodaViewState extends State<ColodaView> {
               )
             : const TextStyle(),
       ),
-      2: Text(
-        'О колоде',
-        style: currentSelection == 2
-            ? const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              )
-            : const TextStyle(),
-      ),
     };
-    return BlocListener<ColodBloc, ColodState>(
-        listener: (BuildContext context, ColodState state) {
+    return BlocListener<CollectionBloc, CollectionState>(
+        listener: (BuildContext context, CollectionState state) {
       state.maybeWhen(
         orElse: () {},
-        loaded: (coloda, isUpdationg, isSuccses, isDeleteProccess,
-            isDeleteSuccess) {
-          if (isSuccses != null) {
-            if (!isSuccses) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  CustomScaffoldMessages()
-                      .show(title: 'Не получилось обновить'));
-            } else {
-              widget.updateAfterSuccsess();
-            }
-          }
+        loaded: (collection, colods, isDeleteProccess, isDeleteSuccess) {
           if (isDeleteSuccess != null) {
             if (isDeleteSuccess) {
               widget.closePage();
@@ -125,8 +87,8 @@ class _ColodaViewState extends State<ColodaView> {
       );
     }, child: BlocBuilder<AccountBloc, AccountState>(
       builder: (BuildContext context, AccountState accountState) {
-        return BlocBuilder<ColodBloc, ColodState>(
-          builder: (BuildContext context, ColodState state) {
+        return BlocBuilder<CollectionBloc, CollectionState>(
+          builder: (BuildContext context, CollectionState state) {
             return accountState.maybeWhen(orElse: () {
               return const Center(
                 child: Text('Произошла ошибка'),
@@ -140,8 +102,8 @@ class _ColodaViewState extends State<ColodaView> {
                 return Center(
                   child: Text(error!),
                 );
-              }, loaded: (coloda, isUpdationg, isSuccses, isDeleteProccess,
-                  isDeleteSuccess) {
+              }, loaded:
+                  (collection, colods, isDeleteProccess, isDeleteSuccess) {
                 return isDeleteProccess
                     ? const LoadingCustom()
                     : ListView(
@@ -156,7 +118,7 @@ class _ColodaViewState extends State<ColodaView> {
                             ),
                             child: Column(
                               children: [
-                                coloda.imageURL! == ''
+                                collection.imageURL! == ''
                                     ? Image(
                                         height: 200,
                                         width: 200,
@@ -170,7 +132,7 @@ class _ColodaViewState extends State<ColodaView> {
                                         child: CircleAvatar(
                                           radius: 70,
                                           backgroundImage: NetworkImage(
-                                            coloda.imageURL!,
+                                            collection.imageURL!,
                                           ),
                                         ),
                                       ),
@@ -178,7 +140,7 @@ class _ColodaViewState extends State<ColodaView> {
                                   height: 12,
                                 ),
                                 Text(
-                                  coloda.name!,
+                                  collection.name!,
                                   style: const TextStyle(
                                       fontSize: 36,
                                       fontWeight: FontWeight.w800,
@@ -208,30 +170,18 @@ class _ColodaViewState extends State<ColodaView> {
                                         height: 60,
                                         child: ElevatedButton(
                                           style: WidgetStyle()
-                                              .whiteElevatedButtonStyle()
-                                              .copyWith(
-                                                  backgroundColor: isUpdationg
-                                                      ? MaterialStateProperty
-                                                          .all<Color>(
-                                                              Colors.grey)
-                                                      : MaterialStateProperty
-                                                          .all<Color>(
-                                                              Colors.white)),
-                                          onPressed: isUpdationg
-                                              ? null
-                                              : () {
-                                                  Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          RedactionPage(
-                                                        fromCollection: widget
-                                                            .fromCollection,
-                                                        coloda: coloda,
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
+                                              .whiteElevatedButtonStyle(),
+                                          onPressed: () {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    RedactionCollectionPage(
+                                                  collection: collection,
+                                                ),
+                                              ),
+                                            );
+                                          },
                                           child: Row(
                                             children: [
                                               SvgPicture.asset(
@@ -256,87 +206,40 @@ class _ColodaViewState extends State<ColodaView> {
                                         backgroundColor: Colors.white,
                                         radius: 30,
                                         child: IconButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const StatColodPage(),
-                                              ),
-                                            );
-                                          },
+                                          onPressed: () {},
                                           icon: SvgPicture.asset(
                                             'assets/icons/icon_stat.svg',
                                           ),
                                         ),
                                       ),
-                                      isUpdationg
-                                          ? const SizedBox(
-                                              height: 60,
-                                              width: 60,
-                                              child: CircularProgressIndicator(
-                                                color: Colors.white,
-                                              ),
-                                            )
-                                          : CircleAvatar(
-                                              backgroundColor: Colors.white,
-                                              radius: 30,
-                                              child: IconButton(
-                                                onPressed: () {
-                                                  showModalBottomSheet<void>(
-                                                    context: context,
-                                                    shape:
-                                                        const RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(20),
-                                                        topRight:
-                                                            Radius.circular(20),
-                                                      ),
-                                                    ),
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return ModalSetting(
-                                                        deleteColod: () {
-                                                          widget
-                                                              .onDeleteColod();
-                                                        },
-                                                        showEvery:
-                                                            coloda.showEvery!,
-                                                        takeMyHaveAuthor: coloda
-                                                            .takeMyHaveAuthour!,
-                                                        onChange: (bool
-                                                                showEvery,
-                                                            bool
-                                                                takeMyHaveAuthour) {
-                                                          widget.updateColod(
-                                                            cards: coloda.cards,
-                                                            name: coloda.name,
-                                                            dateNow: coloda
-                                                                .dateCreate,
-                                                            photoURL:
-                                                                coloda.imageURL,
-                                                            description: coloda
-                                                                .description,
-                                                            showEvery:
-                                                                showEvery,
-                                                            tags: coloda.tags,
-                                                            takeMyHaveAuthour:
-                                                                takeMyHaveAuthour,
-                                                            uid:
-                                                                coloda.colodId!,
-                                                          );
-                                                        },
-                                                      );
-                                                    },
-                                                  );
-                                                },
-                                                icon: SvgPicture.asset(
-                                                  'assets/icons/icon_settings.svg',
+                                      CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        radius: 30,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            showModalBottomSheet<void>(
+                                              context: context,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(20),
+                                                  topRight: Radius.circular(20),
                                                 ),
                                               ),
-                                            ),
+                                              builder: (BuildContext context) {
+                                                return ModalDelete(
+                                                  deleteColod: () {
+                                                    widget.onDeleteColod();
+                                                  },
+                                                );
+                                              },
+                                            );
+                                          },
+                                          icon: SvgPicture.asset(
+                                            'assets/icons/icon_settings.svg',
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -353,7 +256,8 @@ class _ColodaViewState extends State<ColodaView> {
                                       Column(
                                         children: [
                                           Text(
-                                            coloda.cards!.length.toString(),
+                                            collection.colodsId!.length
+                                                .toString(),
                                             style: const TextStyle(
                                                 fontSize: 27,
                                                 fontWeight: FontWeight.w800,
@@ -361,13 +265,13 @@ class _ColodaViewState extends State<ColodaView> {
                                           ),
                                           Text(
                                             ' ${Intl.plural(
-                                              coloda.cards!.length,
+                                              collection.colodsId!.length,
                                               locale: 'ru',
-                                              other: 'карты',
-                                              one: 'карточка',
-                                              two: 'карточки',
-                                              few: 'карточки',
-                                              many: 'карточек',
+                                              other: 'колоды',
+                                              one: 'колода',
+                                              two: 'колоды',
+                                              few: 'колоды',
+                                              many: 'колод',
                                             )}',
                                             style: const TextStyle(
                                                 fontSize: 15,
@@ -423,20 +327,13 @@ class _ColodaViewState extends State<ColodaView> {
                             height: 12,
                           ),
                           if (currentSelection == 0)
-                            Regime(
-                              cards: coloda.cards!,
+                            Colods(
+                              collectionId: collection.collectionId!,
+                              colods: colods!,
                             ),
                           if (currentSelection == 1)
-                            Cards(
-                              cards: coloda.cards!,
-                            ),
-                          if (currentSelection == 2)
-                            About(
-                              created: coloda.dateCreate!,
-                              description: coloda.description == ''
-                                  ? ''
-                                  : coloda.description!,
-                              tags: coloda.tags!,
+                            CollectionDetail(
+                              collection: collection,
                             ),
                         ],
                       );

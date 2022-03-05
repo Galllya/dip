@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study/models/coloda/card.dart' as model;
+import 'package:study/pages/collection/view/collection_page.dart';
 import 'package:study/pages/colod/bloc/colod_bloc.dart';
 import 'package:study/pages/colod/view/colod_view.dart';
 import 'package:study/pages/colods/view/colods_page.dart';
@@ -8,9 +9,12 @@ import 'package:study/provider/coloda_provider.dart';
 
 class ColodPage extends StatefulWidget {
   final String colodId;
+  final String? fromCollection;
+
   const ColodPage({
     Key? key,
     required this.colodId,
+    this.fromCollection,
   }) : super(key: key);
 
   @override
@@ -19,11 +23,12 @@ class ColodPage extends StatefulWidget {
 
 class _ColodPageState extends State<ColodPage> {
   late ColodBloc colodBloc;
+  late String? fromCollection;
 
   @override
   void initState() {
     super.initState();
-
+    fromCollection = widget.fromCollection;
     colodBloc = ColodBloc(colodaProvider: context.read<ColodaProvider>())
       ..add(ColodEvent.started(widget.colodId));
   }
@@ -42,9 +47,13 @@ class _ColodPageState extends State<ColodPage> {
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
-              Navigator.pushAndRemoveUntil(context,
-                  MaterialPageRoute(builder: (context) => const ColodsPage()),
-                  (route) {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => fromCollection == null
+                        ? const ColodsPage()
+                        : CollectionPage(collectioId: fromCollection!),
+                  ), (route) {
                 return route.isFirst;
               });
             },
@@ -54,10 +63,15 @@ class _ColodPageState extends State<ColodPage> {
           ),
         ),
         body: ColodaView(
+          fromCollection: fromCollection,
           closePage: () {
-            Navigator.pushAndRemoveUntil(context,
-                MaterialPageRoute(builder: (context) => const ColodsPage()),
-                (route) {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => fromCollection == null
+                      ? const ColodsPage()
+                      : CollectionPage(collectioId: fromCollection!),
+                ), (route) {
               return route.isFirst;
             });
           },

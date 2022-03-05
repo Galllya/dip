@@ -10,8 +10,11 @@ import 'package:study/pages/redaction/view/redaction_view.dart';
 import 'package:study/provider/coloda_provider.dart';
 
 class RedactionPage extends StatefulWidget {
+  final String? fromCollection;
+
   final DetailColoda coloda;
   const RedactionPage({
+    this.fromCollection,
     Key? key,
     required this.coloda,
   }) : super(key: key);
@@ -49,6 +52,7 @@ class _RedactionPageState extends State<RedactionPage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ColodPage(
+                          fromCollection: widget.fromCollection,
                           colodId: widget.coloda.colodId!,
                         )),
               );
@@ -67,6 +71,7 @@ class _RedactionPageState extends State<RedactionPage> {
           ],
         ),
         body: RedactionView(
+          fromCollection: widget.fromCollection,
           updateColoda: ({
             String? name,
             String? description,

@@ -29,7 +29,8 @@ class _$ExchangeColodEventTearOff {
       bool? showEvery,
       bool? takeMyHaveAuthour,
       List<String>? tags,
-      String userNamem) {
+      String userNamem,
+      String? anotherUserUid) {
     return _PutColoda(
       name,
       description,
@@ -39,6 +40,7 @@ class _$ExchangeColodEventTearOff {
       takeMyHaveAuthour,
       tags,
       userNamem,
+      anotherUserUid,
     );
   }
 }
@@ -59,7 +61,8 @@ mixin _$ExchangeColodEvent {
             bool? showEvery,
             bool? takeMyHaveAuthour,
             List<String>? tags,
-            String userNamem)
+            String userNamem,
+            String? anotherUserUid)
         putColoda,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,7 +77,8 @@ mixin _$ExchangeColodEvent {
             bool? showEvery,
             bool? takeMyHaveAuthour,
             List<String>? tags,
-            String userNamem)?
+            String userNamem,
+            String? anotherUserUid)?
         putColoda,
   }) =>
       throw _privateConstructorUsedError;
@@ -89,7 +93,8 @@ mixin _$ExchangeColodEvent {
             bool? showEvery,
             bool? takeMyHaveAuthour,
             List<String>? tags,
-            String userNamem)?
+            String userNamem,
+            String? anotherUserUid)?
         putColoda,
     required TResult orElse(),
   }) =>
@@ -179,7 +184,8 @@ class _$_Started implements _Started {
             bool? showEvery,
             bool? takeMyHaveAuthour,
             List<String>? tags,
-            String userNamem)
+            String userNamem,
+            String? anotherUserUid)
         putColoda,
   }) {
     return started();
@@ -197,7 +203,8 @@ class _$_Started implements _Started {
             bool? showEvery,
             bool? takeMyHaveAuthour,
             List<String>? tags,
-            String userNamem)?
+            String userNamem,
+            String? anotherUserUid)?
         putColoda,
   }) {
     return started?.call();
@@ -215,7 +222,8 @@ class _$_Started implements _Started {
             bool? showEvery,
             bool? takeMyHaveAuthour,
             List<String>? tags,
-            String userNamem)?
+            String userNamem,
+            String? anotherUserUid)?
         putColoda,
     required TResult orElse(),
   }) {
@@ -274,7 +282,8 @@ abstract class _$PutColodaCopyWith<$Res> {
       bool? showEvery,
       bool? takeMyHaveAuthour,
       List<String>? tags,
-      String userNamem});
+      String userNamem,
+      String? anotherUserUid});
 }
 
 /// @nodoc
@@ -297,6 +306,7 @@ class __$PutColodaCopyWithImpl<$Res>
     Object? takeMyHaveAuthour = freezed,
     Object? tags = freezed,
     Object? userNamem = freezed,
+    Object? anotherUserUid = freezed,
   }) {
     return _then(_PutColoda(
       name == freezed
@@ -331,6 +341,10 @@ class __$PutColodaCopyWithImpl<$Res>
           ? _value.userNamem
           : userNamem // ignore: cast_nullable_to_non_nullable
               as String,
+      anotherUserUid == freezed
+          ? _value.anotherUserUid
+          : anotherUserUid // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -338,8 +352,16 @@ class __$PutColodaCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PutColoda implements _PutColoda {
-  const _$_PutColoda(this.name, this.description, this.cards, this.imageURL,
-      this.showEvery, this.takeMyHaveAuthour, this.tags, this.userNamem);
+  const _$_PutColoda(
+      this.name,
+      this.description,
+      this.cards,
+      this.imageURL,
+      this.showEvery,
+      this.takeMyHaveAuthour,
+      this.tags,
+      this.userNamem,
+      this.anotherUserUid);
 
   @override
   final String name;
@@ -357,10 +379,12 @@ class _$_PutColoda implements _PutColoda {
   final List<String>? tags;
   @override
   final String userNamem;
+  @override
+  final String? anotherUserUid;
 
   @override
   String toString() {
-    return 'ExchangeColodEvent.putColoda(name: $name, description: $description, cards: $cards, imageURL: $imageURL, showEvery: $showEvery, takeMyHaveAuthour: $takeMyHaveAuthour, tags: $tags, userNamem: $userNamem)';
+    return 'ExchangeColodEvent.putColoda(name: $name, description: $description, cards: $cards, imageURL: $imageURL, showEvery: $showEvery, takeMyHaveAuthour: $takeMyHaveAuthour, tags: $tags, userNamem: $userNamem, anotherUserUid: $anotherUserUid)';
   }
 
   @override
@@ -387,7 +411,10 @@ class _$_PutColoda implements _PutColoda {
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.userNamem, userNamem) ||
                 const DeepCollectionEquality()
-                    .equals(other.userNamem, userNamem)));
+                    .equals(other.userNamem, userNamem)) &&
+            (identical(other.anotherUserUid, anotherUserUid) ||
+                const DeepCollectionEquality()
+                    .equals(other.anotherUserUid, anotherUserUid)));
   }
 
   @override
@@ -400,7 +427,8 @@ class _$_PutColoda implements _PutColoda {
       const DeepCollectionEquality().hash(showEvery) ^
       const DeepCollectionEquality().hash(takeMyHaveAuthour) ^
       const DeepCollectionEquality().hash(tags) ^
-      const DeepCollectionEquality().hash(userNamem);
+      const DeepCollectionEquality().hash(userNamem) ^
+      const DeepCollectionEquality().hash(anotherUserUid);
 
   @JsonKey(ignore: true)
   @override
@@ -419,11 +447,12 @@ class _$_PutColoda implements _PutColoda {
             bool? showEvery,
             bool? takeMyHaveAuthour,
             List<String>? tags,
-            String userNamem)
+            String userNamem,
+            String? anotherUserUid)
         putColoda,
   }) {
     return putColoda(name, description, cards, imageURL, showEvery,
-        takeMyHaveAuthour, tags, userNamem);
+        takeMyHaveAuthour, tags, userNamem, anotherUserUid);
   }
 
   @override
@@ -438,11 +467,12 @@ class _$_PutColoda implements _PutColoda {
             bool? showEvery,
             bool? takeMyHaveAuthour,
             List<String>? tags,
-            String userNamem)?
+            String userNamem,
+            String? anotherUserUid)?
         putColoda,
   }) {
     return putColoda?.call(name, description, cards, imageURL, showEvery,
-        takeMyHaveAuthour, tags, userNamem);
+        takeMyHaveAuthour, tags, userNamem, anotherUserUid);
   }
 
   @override
@@ -457,13 +487,14 @@ class _$_PutColoda implements _PutColoda {
             bool? showEvery,
             bool? takeMyHaveAuthour,
             List<String>? tags,
-            String userNamem)?
+            String userNamem,
+            String? anotherUserUid)?
         putColoda,
     required TResult orElse(),
   }) {
     if (putColoda != null) {
       return putColoda(name, description, cards, imageURL, showEvery,
-          takeMyHaveAuthour, tags, userNamem);
+          takeMyHaveAuthour, tags, userNamem, anotherUserUid);
     }
     return orElse();
   }
@@ -509,7 +540,8 @@ abstract class _PutColoda implements ExchangeColodEvent {
       bool? showEvery,
       bool? takeMyHaveAuthour,
       List<String>? tags,
-      String userNamem) = _$_PutColoda;
+      String userNamem,
+      String? anotherUserUid) = _$_PutColoda;
 
   String get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -519,6 +551,7 @@ abstract class _PutColoda implements ExchangeColodEvent {
   bool? get takeMyHaveAuthour => throw _privateConstructorUsedError;
   List<String>? get tags => throw _privateConstructorUsedError;
   String get userNamem => throw _privateConstructorUsedError;
+  String? get anotherUserUid => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$PutColodaCopyWith<_PutColoda> get copyWith =>
       throw _privateConstructorUsedError;

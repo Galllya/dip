@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study/pages/stat_colod/bloc/stat_colod_bloc.dart';
 import 'package:study/pages/stat_colod/view/stat_colod_view.dart';
+import 'package:study/provider/statistic_provider.dart';
 
 class StatColodPage extends StatefulWidget {
-  const StatColodPage({Key? key}) : super(key: key);
+  final String colodId;
+  const StatColodPage({
+    Key? key,
+    required this.colodId,
+  }) : super(key: key);
 
   @override
   State<StatColodPage> createState() => _StatColodPageState();
@@ -17,7 +22,9 @@ class _StatColodPageState extends State<StatColodPage> {
   void initState() {
     super.initState();
 
-    statColodBloc = StatColodBloc();
+    statColodBloc =
+        StatColodBloc(statisticProvider: context.read<StatisticProvider>())
+          ..add(StatColodEvent.started(widget.colodId));
   }
 
   @override

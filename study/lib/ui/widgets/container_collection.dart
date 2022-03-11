@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:study/models/collection.dart';
 import 'package:study/pages/collection/view/collection_page.dart';
-import 'package:study/pages/collections/view/collections_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/widgets/splash_clipper.dart';
 import 'package:intl/intl.dart';
@@ -11,12 +10,14 @@ class ContainerCollection extends StatelessWidget {
   final Collection collection;
   final bool showTegs;
   final bool? cantTab;
+  final bool? fromHome;
 
   const ContainerCollection({
     Key? key,
     this.showTegs = false,
     required this.collection,
     this.cantTab,
+    this.fromHome = false,
   }) : super(key: key);
 
   @override
@@ -36,6 +37,7 @@ class ContainerCollection extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => CollectionPage(
+                        fromHome: fromHome,
                         collectioId: collection.collectionId!,
                       ),
                     ),

@@ -5,6 +5,8 @@ import 'package:study/pages/home/bloc/home_bloc.dart';
 import 'package:study/pages/home/view/home_view.dart';
 import 'package:study/pages/home/widgets/drawer.dart';
 import 'package:study/pages/home/widgets/speed_deal.dart';
+import 'package:study/provider/collection_provider.dart';
+import 'package:study/provider/coloda_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,7 +23,10 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     context.read<AccountBloc>().add(const AccountEvent.load());
 
-    homeBloc = HomeBloc();
+    homeBloc = HomeBloc(
+      collectionProvider: context.read<CollectionProvider>(),
+      colodaProvider: context.read<ColodaProvider>(),
+    )..add(const HomeEvent.started());
   }
 
   @override

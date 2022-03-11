@@ -261,7 +261,9 @@ class _ColodaViewState extends State<ColodaView> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const StatColodPage(),
+                                                    StatColodPage(
+                                                  colodId: coloda.colodId!,
+                                                ),
                                               ),
                                             );
                                           },
@@ -424,7 +426,9 @@ class _ColodaViewState extends State<ColodaView> {
                           ),
                           if (currentSelection == 0)
                             Regime(
+                              numberCards: coloda.cards!.length,
                               cards: coloda.cards!,
+                              colodId: coloda.colodId!,
                             ),
                           if (currentSelection == 1)
                             Cards(

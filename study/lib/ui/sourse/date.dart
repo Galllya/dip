@@ -8,7 +8,6 @@ class DateCustom {
       case 2:
         mount = 'феврале';
         break;
-
       case 3:
         mount = 'марте';
         break;
@@ -52,7 +51,6 @@ class DateCustom {
       case 2:
         mount = 'Б';
         break;
-
       case 3:
         mount = 'В';
         break;

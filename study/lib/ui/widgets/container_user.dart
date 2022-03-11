@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:study/pages/chat_detail/view/chat_detail_page.dart';
 import 'package:study/pages/exchange_user/view/exchange_user_page.dart';
+import 'package:study/pages/stat_user/view/stat_user_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/widgets/get_image.dart';
 import 'package:study/ui/widgets/splash_clipper.dart';
@@ -93,7 +95,16 @@ class ContainerUser extends StatelessWidget {
                             backgroundColor: primaryColor,
                             radius: 30,
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ChatDetailPage(
+                                              imageId: photoURL,
+                                              name: userName,
+                                              uid: uid,
+                                            )));
+                              },
                               icon: SvgPicture.asset(
                                 'assets/icons/icon_message.svg',
                               ),
@@ -110,7 +121,16 @@ class ContainerUser extends StatelessWidget {
                             backgroundColor: primaryColor,
                             radius: 30,
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => StatUserPage(
+                                      uid: uid,
+                                    ),
+                                  ),
+                                );
+                              },
                               icon: SvgPicture.asset(
                                 'assets/icons/icon_stat.svg',
                                 color: Colors.white,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:study/pages/add_collection/view/add_collection_page.dart';
 import 'package:study/pages/collections/bloc/collections_bloc.dart';
 import 'package:study/pages/collections/view/collections_view.dart';
 import 'package:study/pages/colods/widgets/end_drawer_in_colods.dart';
@@ -54,6 +55,16 @@ class _CollectionsPageState extends State<CollectionsPage> {
                 ),
               ),
               actions: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddCollectionPage(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.my_library_add)),
                 IconButton(
                   onPressed: () {
                     collectionsBloc

@@ -6,6 +6,7 @@ import 'package:study/models/coloda/card.dart' as model;
 import 'package:study/pages/cards/widgets/modal_cards_setting.dart';
 import 'package:study/pages/profile/widgets/about_me.dart';
 import 'package:study/ui/sourse/colors.dart';
+import 'package:study/ui/widgets/scaffold_messages.dart';
 import 'package:study/ui/widgets/splash_clipper.dart';
 
 class CardsView extends StatefulWidget {

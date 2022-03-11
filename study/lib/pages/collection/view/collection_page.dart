@@ -3,13 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:study/pages/collection/bloc/collection_bloc.dart';
 import 'package:study/pages/collection/view/collection_view.dart';
 import 'package:study/pages/collections/view/collections_page.dart';
+import 'package:study/pages/home/view/home_page.dart';
 import 'package:study/provider/collection_provider.dart';
 
 class CollectionPage extends StatefulWidget {
   final String collectioId;
+  final bool? fromHome;
   const CollectionPage({
     Key? key,
     required this.collectioId,
+    this.fromHome = false,
   }) : super(key: key);
 
   @override
@@ -40,26 +43,30 @@ class _CollectionPageState extends State<CollectionPage> {
       value: collectionBloc,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const CollectionsPage()), (route) {
-                return route.isFirst;
-              });
-            },
-            icon: const Icon(
-              Icons.arrow_back,
+            // leading: IconButton(
+            //   onPressed: () {
+            //     Navigator.pushAndRemoveUntil(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => widget.fromHome!
+            //                 ? const HomePage()
+            //                 : const CollectionsPage()), (route) {
+            //       return route.isFirst;
+            //     });
+            //   },
+            //   icon: const Icon(
+            //     Icons.arrow_back,
+            //   ),
+            // ),
             ),
-          ),
-        ),
         body: CollectionView(
           closePage: () {
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const CollectionsPage()), (route) {
+                    builder: (context) => widget.fromHome!
+                        ? const HomePage()
+                        : const CollectionsPage()), (route) {
               return route.isFirst;
             });
           },

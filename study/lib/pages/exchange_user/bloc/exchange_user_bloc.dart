@@ -60,6 +60,8 @@ class ExchangeUserBloc extends Bloc<ExchangeUserEvent, ExchangeUserState> {
     String anotherUserUID,
     List<String> anotherUserSubscribers,
     List<String> curUserSubscrip,
+    int points,
+    int realPoints,
   ) async* {
     yield* state.maybeMap(
       loaded: (loadedState) async* {
@@ -75,11 +77,15 @@ class ExchangeUserBloc extends Bloc<ExchangeUserEvent, ExchangeUserState> {
                   anotherUserUID: anotherUserUID,
                   anotherUserSubscribers: anotherUserSubscribers,
                   curUserSubscrip: curUserSubscrip,
+                  points: points,
+                  realPoints: realPoints,
                 )
               : await userProvider.unFolow(
                   anotherUserUID: anotherUserUID,
                   anotherUserSubscribers: anotherUserSubscribers,
                   curUserSubscrip: curUserSubscrip,
+                  points: points,
+                  realPoints: realPoints,
                 );
           yield ExchangeUserState.loaded(
               asers: loadedState.asers,

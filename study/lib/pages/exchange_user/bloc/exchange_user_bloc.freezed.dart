@@ -29,13 +29,20 @@ class _$ExchangeUserEventTearOff {
     );
   }
 
-  _Folow folow(bool isFollow, String anotherUserUID,
-      List<String> anotherUserSubscribers, List<String> curUserSubscrip) {
+  _Folow folow(
+      bool isFollow,
+      String anotherUserUID,
+      List<String> anotherUserSubscribers,
+      List<String> curUserSubscrip,
+      int points,
+      int realPoints) {
     return _Folow(
       isFollow,
       anotherUserUID,
       anotherUserSubscribers,
       curUserSubscrip,
+      points,
+      realPoints,
     );
   }
 }
@@ -49,8 +56,13 @@ mixin _$ExchangeUserEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String uid) started,
     required TResult Function(String uid) load,
-    required TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)
+    required TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)
         folow,
   }) =>
       throw _privateConstructorUsedError;
@@ -58,8 +70,13 @@ mixin _$ExchangeUserEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
+    TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)?
         folow,
   }) =>
       throw _privateConstructorUsedError;
@@ -67,8 +84,13 @@ mixin _$ExchangeUserEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
+    TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)?
         folow,
     required TResult orElse(),
   }) =>
@@ -178,8 +200,13 @@ class _$_Started implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function(String uid) started,
     required TResult Function(String uid) load,
-    required TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)
+    required TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)
         folow,
   }) {
     return started(uid);
@@ -190,8 +217,13 @@ class _$_Started implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
+    TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)?
         folow,
   }) {
     return started?.call(uid);
@@ -202,8 +234,13 @@ class _$_Started implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
+    TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)?
         folow,
     required TResult orElse(),
   }) {
@@ -321,8 +358,13 @@ class _$_Load implements _Load {
   TResult when<TResult extends Object?>({
     required TResult Function(String uid) started,
     required TResult Function(String uid) load,
-    required TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)
+    required TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)
         folow,
   }) {
     return load(uid);
@@ -333,8 +375,13 @@ class _$_Load implements _Load {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
+    TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)?
         folow,
   }) {
     return load?.call(uid);
@@ -345,8 +392,13 @@ class _$_Load implements _Load {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
+    TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)?
         folow,
     required TResult orElse(),
   }) {
@@ -407,7 +459,9 @@ abstract class _$FolowCopyWith<$Res> {
       {bool isFollow,
       String anotherUserUID,
       List<String> anotherUserSubscribers,
-      List<String> curUserSubscrip});
+      List<String> curUserSubscrip,
+      int points,
+      int realPoints});
 }
 
 /// @nodoc
@@ -425,6 +479,8 @@ class __$FolowCopyWithImpl<$Res> extends _$ExchangeUserEventCopyWithImpl<$Res>
     Object? anotherUserUID = freezed,
     Object? anotherUserSubscribers = freezed,
     Object? curUserSubscrip = freezed,
+    Object? points = freezed,
+    Object? realPoints = freezed,
   }) {
     return _then(_Folow(
       isFollow == freezed
@@ -443,6 +499,14 @@ class __$FolowCopyWithImpl<$Res> extends _$ExchangeUserEventCopyWithImpl<$Res>
           ? _value.curUserSubscrip
           : curUserSubscrip // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      points == freezed
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as int,
+      realPoints == freezed
+          ? _value.realPoints
+          : realPoints // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -450,8 +514,13 @@ class __$FolowCopyWithImpl<$Res> extends _$ExchangeUserEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Folow implements _Folow {
-  const _$_Folow(this.isFollow, this.anotherUserUID,
-      this.anotherUserSubscribers, this.curUserSubscrip);
+  const _$_Folow(
+      this.isFollow,
+      this.anotherUserUID,
+      this.anotherUserSubscribers,
+      this.curUserSubscrip,
+      this.points,
+      this.realPoints);
 
   @override
   final bool isFollow;
@@ -461,10 +530,14 @@ class _$_Folow implements _Folow {
   final List<String> anotherUserSubscribers;
   @override
   final List<String> curUserSubscrip;
+  @override
+  final int points;
+  @override
+  final int realPoints;
 
   @override
   String toString() {
-    return 'ExchangeUserEvent.folow(isFollow: $isFollow, anotherUserUID: $anotherUserUID, anotherUserSubscribers: $anotherUserSubscribers, curUserSubscrip: $curUserSubscrip)';
+    return 'ExchangeUserEvent.folow(isFollow: $isFollow, anotherUserUID: $anotherUserUID, anotherUserSubscribers: $anotherUserSubscribers, curUserSubscrip: $curUserSubscrip, points: $points, realPoints: $realPoints)';
   }
 
   @override
@@ -482,7 +555,12 @@ class _$_Folow implements _Folow {
                     other.anotherUserSubscribers, anotherUserSubscribers)) &&
             (identical(other.curUserSubscrip, curUserSubscrip) ||
                 const DeepCollectionEquality()
-                    .equals(other.curUserSubscrip, curUserSubscrip)));
+                    .equals(other.curUserSubscrip, curUserSubscrip)) &&
+            (identical(other.points, points) ||
+                const DeepCollectionEquality().equals(other.points, points)) &&
+            (identical(other.realPoints, realPoints) ||
+                const DeepCollectionEquality()
+                    .equals(other.realPoints, realPoints)));
   }
 
   @override
@@ -491,7 +569,9 @@ class _$_Folow implements _Folow {
       const DeepCollectionEquality().hash(isFollow) ^
       const DeepCollectionEquality().hash(anotherUserUID) ^
       const DeepCollectionEquality().hash(anotherUserSubscribers) ^
-      const DeepCollectionEquality().hash(curUserSubscrip);
+      const DeepCollectionEquality().hash(curUserSubscrip) ^
+      const DeepCollectionEquality().hash(points) ^
+      const DeepCollectionEquality().hash(realPoints);
 
   @JsonKey(ignore: true)
   @override
@@ -503,12 +583,17 @@ class _$_Folow implements _Folow {
   TResult when<TResult extends Object?>({
     required TResult Function(String uid) started,
     required TResult Function(String uid) load,
-    required TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)
+    required TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)
         folow,
   }) {
-    return folow(
-        isFollow, anotherUserUID, anotherUserSubscribers, curUserSubscrip);
+    return folow(isFollow, anotherUserUID, anotherUserSubscribers,
+        curUserSubscrip, points, realPoints);
   }
 
   @override
@@ -516,12 +601,17 @@ class _$_Folow implements _Folow {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
+    TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)?
         folow,
   }) {
-    return folow?.call(
-        isFollow, anotherUserUID, anotherUserSubscribers, curUserSubscrip);
+    return folow?.call(isFollow, anotherUserUID, anotherUserSubscribers,
+        curUserSubscrip, points, realPoints);
   }
 
   @override
@@ -529,14 +619,19 @@ class _$_Folow implements _Folow {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String uid)? started,
     TResult Function(String uid)? load,
-    TResult Function(bool isFollow, String anotherUserUID,
-            List<String> anotherUserSubscribers, List<String> curUserSubscrip)?
+    TResult Function(
+            bool isFollow,
+            String anotherUserUID,
+            List<String> anotherUserSubscribers,
+            List<String> curUserSubscrip,
+            int points,
+            int realPoints)?
         folow,
     required TResult orElse(),
   }) {
     if (folow != null) {
-      return folow(
-          isFollow, anotherUserUID, anotherUserSubscribers, curUserSubscrip);
+      return folow(isFollow, anotherUserUID, anotherUserSubscribers,
+          curUserSubscrip, points, realPoints);
     }
     return orElse();
   }
@@ -581,12 +676,16 @@ abstract class _Folow implements ExchangeUserEvent {
       bool isFollow,
       String anotherUserUID,
       List<String> anotherUserSubscribers,
-      List<String> curUserSubscrip) = _$_Folow;
+      List<String> curUserSubscrip,
+      int points,
+      int realPoints) = _$_Folow;
 
   bool get isFollow => throw _privateConstructorUsedError;
   String get anotherUserUID => throw _privateConstructorUsedError;
   List<String> get anotherUserSubscribers => throw _privateConstructorUsedError;
   List<String> get curUserSubscrip => throw _privateConstructorUsedError;
+  int get points => throw _privateConstructorUsedError;
+  int get realPoints => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$FolowCopyWith<_Folow> get copyWith => throw _privateConstructorUsedError;
 }

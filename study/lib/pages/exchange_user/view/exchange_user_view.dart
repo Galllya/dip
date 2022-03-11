@@ -4,10 +4,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:study/blocs/accaunt/account_bloc.dart';
+import 'package:study/pages/chat_detail/view/chat_detail_page.dart';
 import 'package:study/pages/exchange_user/bloc/exchange_user_bloc.dart';
 import 'package:study/pages/exchange_user/widgets/users_about.dart';
 import 'package:study/pages/exchange_user/widgets/users_colods.dart';
 import 'package:study/pages/exchange_user/widgets/users_folow.dart';
+import 'package:study/pages/stat_user/view/stat_user_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/widget_style.dart';
 import 'package:study/ui/widgets/get_image.dart';
@@ -148,12 +150,16 @@ class _ExchangeUserViewState extends State<ExchangeUserView> {
                                                       user.uid,
                                                       user.subscribers,
                                                       appUSer.subscrip,
+                                                      user.points,
+                                                      user.realPoints,
                                                     )
                                                   : widget.onFollow(
                                                       false,
                                                       user.uid,
                                                       user.subscribers,
                                                       appUSer.subscrip,
+                                                      user.points,
+                                                      user.realPoints,
                                                     );
                                             },
                                             child: Row(
@@ -193,7 +199,20 @@ class _ExchangeUserViewState extends State<ExchangeUserView> {
                                                 backgroundColor: Colors.white,
                                                 radius: 30,
                                                 child: IconButton(
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ChatDetailPage(
+                                                                  imageId: user
+                                                                      .photoURL!,
+                                                                  name: user
+                                                                      .userName!,
+                                                                  uid:
+                                                                      user.uid!,
+                                                                )));
+                                                  },
                                                   icon: SvgPicture.asset(
                                                     'assets/icons/icon_message.svg',
                                                     color: primaryColor,
@@ -208,7 +227,18 @@ class _ExchangeUserViewState extends State<ExchangeUserView> {
                                                 backgroundColor: Colors.white,
                                                 radius: 30,
                                                 child: IconButton(
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            StatUserPage(
+                                                          uid: user.uid,
+                                                          appUser: user,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
                                                   icon: SvgPicture.asset(
                                                     'assets/icons/icon_stat.svg',
                                                   ),

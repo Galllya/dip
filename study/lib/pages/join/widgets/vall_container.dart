@@ -29,11 +29,22 @@ class ValContainer extends StatelessWidget {
             onTap: () {
               onTab();
             },
+            onLongPress: () {
+              showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                    content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Center(child: Text(title))],
+                )),
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Center(
                 child: Text(
                   title,
+                  overflow: TextOverflow.ellipsis,
                   style: getBoldTextStyle(isWhite: isWrong),
                 ),
               ),

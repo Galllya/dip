@@ -73,12 +73,16 @@ class _ExchangeUserPageState extends State<ExchangeUserPage> {
             String anotherUserUID,
             List<String> anotherUserSubscribers,
             List<String> curUserSubscrip,
+            int points,
+            int realPoints,
           ) {
             exchangeUserBloc.add(ExchangeUserEvent.folow(
               isFollow,
               anotherUserUID,
               anotherUserSubscribers,
               curUserSubscrip,
+              points,
+              realPoints,
             ));
           },
         ),

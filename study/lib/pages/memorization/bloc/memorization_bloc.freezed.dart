@@ -24,6 +24,13 @@ class _$MemorizationEventTearOff {
   _ShowSheet showSheet() {
     return const _ShowSheet();
   }
+
+  _ResSend resSend(StatisticColod statisticColod, String colodId) {
+    return _ResSend(
+      statisticColod,
+      colodId,
+    );
+  }
 }
 
 /// @nodoc
@@ -35,18 +42,22 @@ mixin _$MemorizationEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() showSheet,
+    required TResult Function(StatisticColod statisticColod, String colodId)
+        resSend,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? showSheet,
+    TResult Function(StatisticColod statisticColod, String colodId)? resSend,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? showSheet,
+    TResult Function(StatisticColod statisticColod, String colodId)? resSend,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,18 +65,21 @@ mixin _$MemorizationEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_ShowSheet value) showSheet,
+    required TResult Function(_ResSend value) resSend,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_ShowSheet value)? showSheet,
+    TResult Function(_ResSend value)? resSend,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_ShowSheet value)? showSheet,
+    TResult Function(_ResSend value)? resSend,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,6 +141,8 @@ class _$_Started implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() showSheet,
+    required TResult Function(StatisticColod statisticColod, String colodId)
+        resSend,
   }) {
     return started();
   }
@@ -136,6 +152,7 @@ class _$_Started implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? showSheet,
+    TResult Function(StatisticColod statisticColod, String colodId)? resSend,
   }) {
     return started?.call();
   }
@@ -145,6 +162,7 @@ class _$_Started implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? showSheet,
+    TResult Function(StatisticColod statisticColod, String colodId)? resSend,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -158,6 +176,7 @@ class _$_Started implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_ShowSheet value) showSheet,
+    required TResult Function(_ResSend value) resSend,
   }) {
     return started(this);
   }
@@ -167,6 +186,7 @@ class _$_Started implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_ShowSheet value)? showSheet,
+    TResult Function(_ResSend value)? resSend,
   }) {
     return started?.call(this);
   }
@@ -176,6 +196,7 @@ class _$_Started implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_ShowSheet value)? showSheet,
+    TResult Function(_ResSend value)? resSend,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -230,6 +251,8 @@ class _$_ShowSheet implements _ShowSheet {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() showSheet,
+    required TResult Function(StatisticColod statisticColod, String colodId)
+        resSend,
   }) {
     return showSheet();
   }
@@ -239,6 +262,7 @@ class _$_ShowSheet implements _ShowSheet {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? showSheet,
+    TResult Function(StatisticColod statisticColod, String colodId)? resSend,
   }) {
     return showSheet?.call();
   }
@@ -248,6 +272,7 @@ class _$_ShowSheet implements _ShowSheet {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? showSheet,
+    TResult Function(StatisticColod statisticColod, String colodId)? resSend,
     required TResult orElse(),
   }) {
     if (showSheet != null) {
@@ -261,6 +286,7 @@ class _$_ShowSheet implements _ShowSheet {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_ShowSheet value) showSheet,
+    required TResult Function(_ResSend value) resSend,
   }) {
     return showSheet(this);
   }
@@ -270,6 +296,7 @@ class _$_ShowSheet implements _ShowSheet {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_ShowSheet value)? showSheet,
+    TResult Function(_ResSend value)? resSend,
   }) {
     return showSheet?.call(this);
   }
@@ -279,6 +306,7 @@ class _$_ShowSheet implements _ShowSheet {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_ShowSheet value)? showSheet,
+    TResult Function(_ResSend value)? resSend,
     required TResult orElse(),
   }) {
     if (showSheet != null) {
@@ -290,6 +318,158 @@ class _$_ShowSheet implements _ShowSheet {
 
 abstract class _ShowSheet implements MemorizationEvent {
   const factory _ShowSheet() = _$_ShowSheet;
+}
+
+/// @nodoc
+abstract class _$ResSendCopyWith<$Res> {
+  factory _$ResSendCopyWith(_ResSend value, $Res Function(_ResSend) then) =
+      __$ResSendCopyWithImpl<$Res>;
+  $Res call({StatisticColod statisticColod, String colodId});
+}
+
+/// @nodoc
+class __$ResSendCopyWithImpl<$Res> extends _$MemorizationEventCopyWithImpl<$Res>
+    implements _$ResSendCopyWith<$Res> {
+  __$ResSendCopyWithImpl(_ResSend _value, $Res Function(_ResSend) _then)
+      : super(_value, (v) => _then(v as _ResSend));
+
+  @override
+  _ResSend get _value => super._value as _ResSend;
+
+  @override
+  $Res call({
+    Object? statisticColod = freezed,
+    Object? colodId = freezed,
+  }) {
+    return _then(_ResSend(
+      statisticColod == freezed
+          ? _value.statisticColod
+          : statisticColod // ignore: cast_nullable_to_non_nullable
+              as StatisticColod,
+      colodId == freezed
+          ? _value.colodId
+          : colodId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ResSend implements _ResSend {
+  const _$_ResSend(this.statisticColod, this.colodId);
+
+  @override
+  final StatisticColod statisticColod;
+  @override
+  final String colodId;
+
+  @override
+  String toString() {
+    return 'MemorizationEvent.resSend(statisticColod: $statisticColod, colodId: $colodId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ResSend &&
+            (identical(other.statisticColod, statisticColod) ||
+                const DeepCollectionEquality()
+                    .equals(other.statisticColod, statisticColod)) &&
+            (identical(other.colodId, colodId) ||
+                const DeepCollectionEquality().equals(other.colodId, colodId)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(statisticColod) ^
+      const DeepCollectionEquality().hash(colodId);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ResSendCopyWith<_ResSend> get copyWith =>
+      __$ResSendCopyWithImpl<_ResSend>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() showSheet,
+    required TResult Function(StatisticColod statisticColod, String colodId)
+        resSend,
+  }) {
+    return resSend(statisticColod, colodId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? showSheet,
+    TResult Function(StatisticColod statisticColod, String colodId)? resSend,
+  }) {
+    return resSend?.call(statisticColod, colodId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? showSheet,
+    TResult Function(StatisticColod statisticColod, String colodId)? resSend,
+    required TResult orElse(),
+  }) {
+    if (resSend != null) {
+      return resSend(statisticColod, colodId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ShowSheet value) showSheet,
+    required TResult Function(_ResSend value) resSend,
+  }) {
+    return resSend(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ShowSheet value)? showSheet,
+    TResult Function(_ResSend value)? resSend,
+  }) {
+    return resSend?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ShowSheet value)? showSheet,
+    TResult Function(_ResSend value)? resSend,
+    required TResult orElse(),
+  }) {
+    if (resSend != null) {
+      return resSend(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ResSend implements MemorizationEvent {
+  const factory _ResSend(StatisticColod statisticColod, String colodId) =
+      _$_ResSend;
+
+  StatisticColod get statisticColod => throw _privateConstructorUsedError;
+  String get colodId => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ResSendCopyWith<_ResSend> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

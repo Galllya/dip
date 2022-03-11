@@ -34,6 +34,7 @@ class ExchangeColodBloc extends Bloc<ExchangeColodEvent, ExchangeColodState> {
     bool? takeMyHaveAuthour,
     List<String>? tags,
     String? userName,
+    String? anotherUserUid,
   ) async* {
     yield const ExchangeColodState.initial();
     yield* state.maybeMap(
@@ -48,6 +49,7 @@ class ExchangeColodBloc extends Bloc<ExchangeColodEvent, ExchangeColodState> {
           takeMyHaveAuthour: takeMyHaveAuthour,
           tags: tags,
           userName: userName,
+          anotherUserUid: anotherUserUid,
         );
 
         if (res == "success") {

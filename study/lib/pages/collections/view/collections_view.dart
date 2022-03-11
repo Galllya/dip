@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:study/pages/add_collection/view/add_collection_page.dart';
 import 'package:study/pages/collections/bloc/collections_bloc.dart';
 import 'package:study/pages/colods/widgets/select_search_type_dialog.dart';
 import 'package:study/ui/sourse/colors.dart';
@@ -155,66 +156,94 @@ class _CollectionsViewState extends State<CollectionsView> {
                 const SizedBox(
                   height: 20,
                 ),
-                ...collections.map(
-                  (e) {
-                    if (shodShowForCardsFilter(
-                      cardsFilter: cardsFilter,
-                      cardsLen: e.colodsId!.length,
-                    )) {
-                      final dif =
-                          DateTime.now().difference(e.dateCreate!).inDays;
-                      String text = '';
-                      bool shodShow = false;
-                      if (dif == 0) {
-                        text = 'сегодня';
-                      }
-                      if (((dif <= 7)) && (dif != 0)) {
-                        text = 'в течениe недели';
-                      }
-                      if (((dif <= 31)) && (dif > 7)) {
-                        text = 'в течениe месяца';
-                      }
-                      if (((dif <= 365)) && (dif > 31)) {
-                        text =
-                            'в ${DateCustom().getMount(e.dateCreate!.month)} ${e.dateCreate!.year} года';
-                      }
-                      if (dif > 365) {
-                        text = 'в ${e.dateCreate!.year} году';
-                      }
-                      if (last == text) {
-                        shodShow = false;
-                      } else {
-                        shodShow = true;
-                      }
-                      last = text;
-                      return Column(
-                        children: [
-                          if (shodShow)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 10),
-                              child: Text(
-                                text,
-                                style: const TextStyle(
-                                  color: primaryColor,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                if (collections.isEmpty)
+                  Column(
+                    children: [
+                      const Text(
+                        'У вас пока нет коллекий',
+                        style: TextStyle(fontSize: 16, color: primaryColor),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AddCollectionPage(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Создате первую',
+                          style: TextStyle(
+                            color: primaryColor,
+                            decoration: TextDecoration.underline,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                if (collections.isNotEmpty)
+                  ...collections.map(
+                    (e) {
+                      if (shodShowForCardsFilter(
+                        cardsFilter: cardsFilter,
+                        cardsLen: e.colodsId!.length,
+                      )) {
+                        final dif =
+                            DateTime.now().difference(e.dateCreate!).inDays;
+                        String text = '';
+                        bool shodShow = false;
+                        if (dif == 0) {
+                          text = 'сегодня';
+                        }
+                        if (((dif <= 7)) && (dif != 0)) {
+                          text = 'в течениe недели';
+                        }
+                        if (((dif <= 31)) && (dif > 7)) {
+                          text = 'в течениe месяца';
+                        }
+                        if (((dif <= 365)) && (dif > 31)) {
+                          text =
+                              'в ${DateCustom().getMount(e.dateCreate!.month)} ${e.dateCreate!.year} года';
+                        }
+                        if (dif > 365) {
+                          text = 'в ${e.dateCreate!.year} году';
+                        }
+                        if (last == text) {
+                          shodShow = false;
+                        } else {
+                          shodShow = true;
+                        }
+                        last = text;
+                        return Column(
+                          children: [
+                            if (shodShow)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: Text(
+                                  text,
+                                  style: const TextStyle(
+                                    color: primaryColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: ContainerCollection(
+                                collection: e,
+                                showTegs: !isNameSearch,
+                              ),
                             ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 12),
-                            child: ContainerCollection(
-                              collection: e,
-                              showTegs: !isNameSearch,
-                            ),
-                          ),
-                        ],
-                      );
-                    } else {
-                      return const SizedBox();
-                    }
-                  },
-                ),
+                          ],
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  ),
               ],
             ),
           );

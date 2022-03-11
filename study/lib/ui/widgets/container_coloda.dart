@@ -13,6 +13,7 @@ class ContainerColoda extends StatelessWidget {
   final Function? onSelect;
   final bool? cantTab;
   final String? fromCollection;
+  final bool? fromHome;
 
   const ContainerColoda({
     Key? key,
@@ -22,6 +23,7 @@ class ContainerColoda extends StatelessWidget {
     this.cantTab,
     this.fromCollection,
     this.onDelete,
+    this.fromHome = false,
   }) : super(key: key);
 
   @override
@@ -44,6 +46,7 @@ class ContainerColoda extends StatelessWidget {
                           builder: (context) => fromCollection == null
                               ? ColodPage(
                                   colodId: coloda.colodId!,
+                                  fromHome: fromHome,
                                 )
                               : ColodPage(
                                   colodId: coloda.colodId!,

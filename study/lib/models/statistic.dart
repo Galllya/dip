@@ -10,6 +10,7 @@ class StatisticColod {
   final int? goodTest;
   final int? bedTest;
   final int? coolTest;
+  final String? uid;
 
   const StatisticColod({
     this.cards,
@@ -21,6 +22,7 @@ class StatisticColod {
     this.goodTest,
     this.bedTest,
     this.coolTest,
+    this.uid,
   });
 
   Map<String, dynamic> toJson() => {
@@ -33,6 +35,7 @@ class StatisticColod {
         "goodTest": goodTest,
         "bedTest": bedTest,
         "coolTest": coolTest,
+        "uid": uid,
       };
 
   static StatisticColod fromSnap(DocumentSnapshot snap) {
@@ -47,6 +50,7 @@ class StatisticColod {
       goodTest: snapshot["goodTest"],
       bedTest: snapshot["bedTest"],
       coolTest: snapshot["coolTest"],
+      uid: snapshot["uid"],
     );
   }
 }

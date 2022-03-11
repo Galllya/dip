@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:study/pages/add_coloda.dart/view/add_coloda_page.dart';
 import 'package:study/pages/colods/bloc/colods_bloc.dart';
 import 'package:study/pages/colods/view/colods_view.dart';
 import 'package:study/pages/colods/widgets/end_drawer_in_colods.dart';
@@ -57,6 +58,16 @@ class _ColodsPageState extends State<ColodsPage> {
                 ),
               ),
               actions: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddColodaPage(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.my_library_add)),
                 IconButton(
                   onPressed: () {
                     colodsBloc.add(const ColodsEvent.changeShowString());

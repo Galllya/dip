@@ -34,10 +34,12 @@ class CardContainer extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        term,
-                        style:
-                            const TextStyle(color: primaryColor, fontSize: 16),
+                      Expanded(
+                        child: Text(
+                          term,
+                          style: const TextStyle(
+                              color: primaryColor, fontSize: 16),
+                        ),
                       ),
                     ],
                   ),

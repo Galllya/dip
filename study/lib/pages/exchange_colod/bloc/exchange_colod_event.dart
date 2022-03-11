@@ -12,5 +12,6 @@ class ExchangeColodEvent with _$ExchangeColodEvent {
     bool? takeMyHaveAuthour,
     List<String>? tags,
     String userNamem,
+    String? anotherUserUid,
   ) = _PutColoda;
 }

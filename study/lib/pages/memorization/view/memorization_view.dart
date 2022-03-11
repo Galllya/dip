@@ -299,7 +299,9 @@ class _MemorizationViewState extends State<MemorizationView> {
                                   );
                                 });
                           } else {
-                            touchPoints[indexCardNow]--;
+                            if (touchPoints[indexCardNow] > 0) {
+                              touchPoints[indexCardNow]--;
+                            }
                             if (lernNow > touchCards.length &&
                                 notTouchCards.isNotEmpty) {
                               int ran = getRandom();

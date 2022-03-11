@@ -164,6 +164,10 @@ class _ProfileRedactionViewState extends State<ProfileRedactionView> {
                   dateBirth: selectedDate,
                   uni: form.control('uni').value,
                   work: form.control('work').value,
+                  realPoints: widget.appUser.realPoints,
+                  youTake: widget.appUser.youTake,
+                  anotherUserTake: widget.appUser.anotherUserTake,
+                  buyed: widget.appUser.buyed,
                 ),
                 image,
               );

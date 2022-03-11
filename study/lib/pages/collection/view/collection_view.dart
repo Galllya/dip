@@ -166,51 +166,49 @@ class _CollectionViewState extends State<CollectionView> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      SizedBox(
-                                        height: 60,
-                                        child: ElevatedButton(
-                                          style: WidgetStyle()
-                                              .whiteElevatedButtonStyle(),
-                                          onPressed: () {
-                                            Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    RedactionCollectionPage(
-                                                  collection: collection,
+                                      Expanded(
+                                        child: SizedBox(
+                                          height: 60,
+                                          width: double.infinity,
+                                          child: ElevatedButton(
+                                            style: WidgetStyle()
+                                                .whiteElevatedButtonStyle(),
+                                            onPressed: () {
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      RedactionCollectionPage(
+                                                    collection: collection,
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          },
-                                          child: Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                'assets/icons/icon_pan.svg',
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              const Text(
-                                                'редактировать',
-                                                style: TextStyle(
-                                                  color: primaryColor,
-                                                  fontWeight: FontWeight.w800,
-                                                  fontSize: 18,
+                                              );
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/icons/icon_pan.svg',
                                                 ),
-                                              ),
-                                            ],
+                                                const SizedBox(
+                                                  width: 8,
+                                                ),
+                                                const Text(
+                                                  'редактировать',
+                                                  style: TextStyle(
+                                                    color: primaryColor,
+                                                    fontWeight: FontWeight.w800,
+                                                    fontSize: 18,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 30,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: SvgPicture.asset(
-                                            'assets/icons/icon_stat.svg',
-                                          ),
-                                        ),
+                                      const SizedBox(
+                                        width: 10,
                                       ),
                                       CircleAvatar(
                                         backgroundColor: Colors.white,

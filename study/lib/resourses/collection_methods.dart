@@ -1,12 +1,8 @@
 import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study/models/collection.dart';
-import 'package:study/models/coloda/card.dart';
 import 'package:study/models/coloda/coloda.dart';
-import 'package:study/models/coloda/coloda_all.dart';
-import 'package:study/models/coloda/coloda_detail.dart';
 import 'package:study/resourses/storage_methods.dart';
 import 'package:uuid/uuid.dart';
 
@@ -186,5 +182,25 @@ class CollectionMethods {
     });
 
     return colods;
+  }
+
+  Future<List<Collection>> getMainCollections() async {
+    User currentUser = auth.currentUser!;
+    List<Collection> collections = [];
+    dynamic a;
+    a = await fireStore
+        .collection('collections')
+        .where('uid', isEqualTo: currentUser.uid)
+        .orderBy("dateCreate", descending: true)
+        .limit(3)
+        .get();
+
+    for (var element in a.docChanges) {
+      collections.add(
+        Collection.fromSnap(element.doc),
+      );
+    }
+
+    return collections;
   }
 }

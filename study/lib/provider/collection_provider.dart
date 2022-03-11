@@ -58,4 +58,8 @@ class CollectionProvider {
     );
     return res;
   }
+
+  Future<List<Collection>> getMainCollections() async {
+    return await collectionMethods.getMainCollections();
+  }
 }

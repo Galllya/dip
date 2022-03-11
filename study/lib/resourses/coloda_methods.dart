@@ -2,10 +2,12 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:study/models/app_user.dart';
 import 'package:study/models/coloda/card.dart';
 import 'package:study/models/coloda/coloda.dart';
 import 'package:study/models/coloda/coloda_all.dart';
 import 'package:study/models/coloda/coloda_detail.dart';
+import 'package:study/models/litl/take.dart';
 import 'package:study/models/statistic.dart';
 import 'package:study/resourses/storage_methods.dart';
 import 'package:uuid/uuid.dart';
@@ -83,6 +85,7 @@ class ColodaMethods {
     List<String>? tags,
     String? userName,
     String? imageURL,
+    String? anotherUserUid,
   }) async {
     User currentUser = auth.currentUser!;
 
@@ -97,6 +100,35 @@ class ColodaMethods {
       if (file != null) {
         photoURL = await StorageMethods().uploadImageToStorage(
             childName: 'colodaPics', file: file, isPost: true);
+      }
+
+      if (anotherUserUid != null) {
+        DocumentSnapshot meDat =
+            await fireStore.collection('users').doc(currentUser.uid).get();
+
+        DocumentSnapshot anotherDat =
+            await fireStore.collection('users').doc(anotherUserUid).get();
+        Take me = Take(
+          youTake: AppUser.fromSnap(meDat).youTake! + 1,
+          anotherUserTake: AppUser.fromSnap(meDat).anotherUserTake!,
+          points: AppUser.fromSnap(meDat).points!,
+          realPoints: AppUser.fromSnap(meDat).realPoints!,
+        );
+        Take another = Take(
+          youTake: AppUser.fromSnap(anotherDat).youTake!,
+          anotherUserTake: AppUser.fromSnap(anotherDat).anotherUserTake! + 1,
+          points: AppUser.fromSnap(anotherDat).points! + 100,
+          realPoints: AppUser.fromSnap(anotherDat).realPoints! + 100,
+        );
+        await fireStore
+            .collection('users')
+            .doc(currentUser.uid)
+            .update(me.toJson());
+
+        await fireStore
+            .collection('users')
+            .doc(anotherUserUid)
+            .update(another.toJson());
       }
 
       String colodaId = const Uuid().v1();
@@ -140,7 +172,7 @@ class ColodaMethods {
         authorName: userName,
       );
 
-      StatisticColod statisticColod = const StatisticColod(
+      StatisticColod statisticColod = StatisticColod(
         cards: 0,
         memo: 0,
         join: 0,
@@ -150,6 +182,7 @@ class ColodaMethods {
         goodTest: 0,
         bedTest: 0,
         coolTest: 0,
+        uid: currentUser.uid,
       );
 
       await fireStore
@@ -332,6 +365,26 @@ class ColodaMethods {
         );
       }
     } catch (e) {}
+
+    return colods;
+  }
+
+  Future<List<Coloda>> getMainColods() async {
+    User currentUser = auth.currentUser!;
+    List<Coloda> colods = [];
+    dynamic a;
+    a = await fireStore
+        .collection('colods')
+        .where('uid', isEqualTo: currentUser.uid)
+        .orderBy("dateCreate", descending: true)
+        .limit(3)
+        .get();
+
+    for (var element in a.docChanges) {
+      colods.add(
+        Coloda.fromSnap(element.doc),
+      );
+    }
 
     return colods;
   }

@@ -6,8 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:study/pages/authorization/view/authorization_page.dart';
 import 'package:study/pages/home/view/home_page.dart';
 import 'package:study/provider/account_provider.dart';
+import 'package:study/provider/chat_provider.dart';
 import 'package:study/provider/collection_provider.dart';
 import 'package:study/provider/coloda_provider.dart';
+import 'package:study/provider/statistic_provider.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -43,6 +45,12 @@ class MyApp extends StatelessWidget {
           ),
           Provider(
             create: (_) => CollectionProvider(),
+          ),
+          Provider(
+            create: (_) => StatisticProvider(),
+          ),
+          Provider(
+            create: (_) => ChatProvider(),
           ),
         ],
         child: MaterialApp(

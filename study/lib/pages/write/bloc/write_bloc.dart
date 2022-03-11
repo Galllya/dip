@@ -1,12 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:study/models/statistic.dart';
+import 'package:study/provider/statistic_provider.dart';
 
 part 'write_event.dart';
 part 'write_state.dart';
 part 'write_bloc.freezed.dart';
 
 class WriteBloc extends Bloc<WriteEvent, WriteState> {
-  WriteBloc() : super(const _Initial());
+  final StatisticProvider statisticProvider;
+  WriteBloc({
+    required this.statisticProvider,
+  }) : super(const _Initial());
   @override
   Stream<WriteState> mapEventToState(
     WriteEvent event,
@@ -14,6 +19,7 @@ class WriteBloc extends Bloc<WriteEvent, WriteState> {
       event.when(
         started: _started,
         showSheet: _showSheet,
+        resSend: _resSend,
       );
 
   Stream<WriteState> _started() async* {
@@ -25,6 +31,19 @@ class WriteBloc extends Bloc<WriteEvent, WriteState> {
       initial: (initialState) async* {
         yield const WriteState.initial(show: true);
         yield const WriteState.initial(show: false);
+      },
+      orElse: () => Stream.value(state),
+    );
+  }
+
+  Stream<WriteState> _resSend(
+      StatisticColod statisticColod, String colodId) async* {
+    yield const WriteState.initial();
+
+    yield* state.maybeMap(
+      initial: (initialState) async* {
+        await statisticProvider.updateStatisticColod(
+            statisticColod: statisticColod, colodId: colodId);
       },
       orElse: () => Stream.value(state),
     );

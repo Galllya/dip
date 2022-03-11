@@ -20,10 +20,11 @@ import 'package:study/ui/sourse/widget_style.dart';
 
 class TestView extends StatefulWidget {
   final List<model.Card> cards;
-
+  final Function sendRes;
   const TestView({
     Key? key,
     required this.cards,
+    required this.sendRes,
   }) : super(key: key);
 
   @override
@@ -192,6 +193,7 @@ class _TestViewState extends State<TestView> {
         res = 2;
       }
     }
+    widget.sendRes(res);
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -403,6 +405,22 @@ class _TestViewState extends State<TestView> {
                                       : () {
                                           onTabSel(i, 1);
                                         },
+                                  onLongPress: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => AlertDialog(
+                                          content: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Center(
+                                              child: Text(allCardsSel[i]
+                                                      [points[i].indexOf(1)]
+                                                  .definition!))
+                                        ],
+                                      )),
+                                    );
+                                  },
                                   child: SelLitContainer(
                                     isTrue: showResult
                                         ? (cardsSel[i].definition ==

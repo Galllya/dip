@@ -51,6 +51,7 @@ class _ExchangeColodPageState extends State<ExchangeColodPage> {
             bool? takeMyHaveAuthour,
             List<String>? tags,
             String userName,
+            String? anotherUserUid,
           ) {
             exchangeColodBloc.add(ExchangeColodEvent.putColoda(
               name,
@@ -61,6 +62,7 @@ class _ExchangeColodPageState extends State<ExchangeColodPage> {
               takeMyHaveAuthour,
               tags,
               userName,
+              anotherUserUid,
             ));
           },
           coloda: widget.coloda,

@@ -35,12 +35,16 @@ class UserProvider {
     required String anotherUserUID,
     required List<String> anotherUserSubscribers,
     required List<String> curUserSubscrip,
+    required int points,
+    required int realPoints,
     Uint8List? file,
   }) async {
     await authMethods.folow(
       anotherUserUID: anotherUserUID,
       anotherUserSubscribers: anotherUserSubscribers,
       curUserSubscrip: curUserSubscrip,
+      points: points,
+      realPoints: realPoints,
     );
   }
 
@@ -64,11 +68,28 @@ class UserProvider {
     required List<String> anotherUserSubscribers,
     required List<String> curUserSubscrip,
     Uint8List? file,
+    required int points,
+    required int realPoints,
   }) async {
     await authMethods.unFolow(
       anotherUserUID: anotherUserUID,
       anotherUserSubscribers: anotherUserSubscribers,
       curUserSubscrip: curUserSubscrip,
+      points: points,
+      realPoints: realPoints,
     );
+  }
+
+  Future<List<AnotherUser>> getTopUsers({
+    required String title,
+  }) async {
+    return await authMethods.getTopUsers(title: title);
+  }
+
+  Future<void> shop({
+    required int realPoints,
+    required List<bool> buied,
+  }) async {
+    await authMethods.shop(realPoints: realPoints, buied: buied);
   }
 }

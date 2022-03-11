@@ -31,6 +31,7 @@ class SelLitContainer extends StatelessWidget {
         child: Center(
           child: Text(
             title,
+            overflow: TextOverflow.ellipsis,
             style: getBoldTextStyle().copyWith(
               color: isSelect ? Colors.white : primaryColor,
             ),

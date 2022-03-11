@@ -9,10 +9,15 @@ import 'package:study/pages/test/view/test_page.dart';
 import 'package:study/pages/write/view/write_page.dart';
 
 class Regime extends StatelessWidget {
+  final String colodId;
+  final int numberCards;
+
   final List<model.Card> cards;
   const Regime({
     Key? key,
     required this.cards,
+    required this.colodId,
+    required this.numberCards,
   }) : super(key: key);
 
   @override
@@ -26,44 +31,56 @@ class Regime extends StatelessWidget {
       crossAxisCount: 2,
       children: [
         RegimContainer(
+          numberCards: numberCards,
           iconName: 'icon_cards',
           title: "карточки",
           pageName: CardsPage(
+            colodId: colodId,
             cards: cards,
           ),
         ),
         RegimContainer(
+          numberCards: numberCards,
           iconName: 'icon_lerning',
           title: "заучивание",
           pageName: MemorizationPage(
+            colodId: colodId,
             cards: cards,
           ),
         ),
         RegimContainer(
+          numberCards: numberCards,
           iconName: 'icon_connect',
           title: "соединение",
           pageName: JoinPage(
             cards: cards,
+            colodId: colodId,
           ),
         ),
         RegimContainer(
+          numberCards: numberCards,
           iconName: 'icon_chose',
           title: "выбор",
           pageName: ChoicePage(
+            colodId: colodId,
             cards: cards,
           ),
         ),
         RegimContainer(
+          numberCards: numberCards,
           iconName: 'icon_writte',
           title: "письмо",
           pageName: WritePage(
             cards: cards,
+            colodId: colodId,
           ),
         ),
         RegimContainer(
+          numberCards: numberCards,
           iconName: 'icon_test',
           title: "тест",
           pageName: TestPage(
+            colodId: colodId,
             cards: cards,
           ),
         )

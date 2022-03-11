@@ -18,6 +18,7 @@ class ColodaProvider {
     List<String>? tags,
     String? userName,
     String? imageURL,
+    String? anotherUserUid,
   }) async {
     String res = await colodaMethods.putColoda(
       name: name,
@@ -29,6 +30,7 @@ class ColodaProvider {
       takeMyHaveAuthour: takeMyHaveAuthour,
       userName: userName,
       imageURL: imageURL,
+      anotherUserUid: anotherUserUid,
     );
     return res;
   }
@@ -97,5 +99,9 @@ class ColodaProvider {
 
   Future<List<ColodaAll>> getColodsForUser({required String uid}) async {
     return await colodaMethods.getColodsForUser(uid: uid);
+  }
+
+  Future<List<Coloda>> getMainColods() async {
+    return await colodaMethods.getMainColods();
   }
 }

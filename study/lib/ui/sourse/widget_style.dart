@@ -123,6 +123,23 @@ class WidgetStyle {
     );
   }
 
+  InputDecoration customForSendInputDecoration({required String labelText}) {
+    return InputDecoration(
+      suffixIconConstraints: const BoxConstraints(minWidth: 70),
+      labelText: labelText,
+      fillColor: gentlyPrimaryColor.withOpacity(0.3),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+      labelStyle: const TextStyle(fontSize: 16),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: theme.primaryColor),
+      ),
+    );
+  }
+
   ButtonStyle borderButtonStyle() {
     return ButtonStyle(
       elevation: MaterialStateProperty.all<double>(0),

@@ -85,13 +85,6 @@ class _ExchangePageState extends State<ExchangePage> {
                 ),
                 label: 'Пользователи',
               ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/icons/icon_star.svg',
-                  color: _selectedIndex == 2 ? primaryColor : Colors.grey,
-                ),
-                label: 'Рейтинг',
-              ),
             ],
             currentIndex: _selectedIndex,
             selectedItemColor: primaryCoolColor,

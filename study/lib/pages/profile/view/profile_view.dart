@@ -11,6 +11,7 @@ import 'package:study/pages/profile/widgets/about_me.dart';
 import 'package:study/pages/profile/widgets/modal_profile_settion.dart';
 import 'package:study/pages/profile/widgets/sobscribers.dart';
 import 'package:study/pages/profile_redaction.dart/view/profile_redaction_page.dart';
+import 'package:study/pages/stat_user/view/stat_user_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/widget_style.dart';
 import 'package:study/ui/widgets/get_image.dart';
@@ -227,7 +228,17 @@ class _ProfileViewState extends State<ProfileView> {
                                         backgroundColor: Colors.white,
                                         radius: 30,
                                         child: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    StatUserPage(
+                                                  appUser: user,
+                                                ),
+                                              ),
+                                            );
+                                          },
                                           icon: SvgPicture.asset(
                                             'assets/icons/icon_stat.svg',
                                           ),

@@ -55,11 +55,15 @@ class AuthMethods {
           writeCanAll: true,
           statCanSeeEvery: true,
           points: 0,
+          realPoints: 0,
           description: '',
           gender: '',
           dateBirth: DateTime(1000, 1, 1),
           uni: '',
           work: '',
+          youTake: 0,
+          anotherUserTake: 0,
+          buyed: List<bool>.filled(29, false),
         );
 
         await fireStore
@@ -143,6 +147,10 @@ class AuthMethods {
       dateBirth: appUser.dateBirth,
       uni: appUser.uni,
       work: appUser.work,
+      realPoints: appUser.realPoints,
+      youTake: appUser.youTake,
+      anotherUserTake: appUser.anotherUserTake,
+      buyed: appUser.buyed,
     );
 
     await fireStore
@@ -172,8 +180,7 @@ class AuthMethods {
           );
         }
       }
-    } catch (e) {
-    }
+    } catch (e) {}
 
     return users;
   }
@@ -182,13 +189,19 @@ class AuthMethods {
     required String anotherUserUID,
     required List<String> anotherUserSubscribers,
     required List<String> curUserSubscrip,
+    required int points,
+    required int realPoints,
   }) async {
     curUserSubscrip.add(anotherUserUID);
 
     User currentUser = auth.currentUser!;
     anotherUserSubscribers.add(currentUser.uid);
     Folow folow = Folow(folow: curUserSubscrip);
-    Folowers folowers = Folowers(folow: anotherUserSubscribers);
+    Folowers folowers = Folowers(
+      folow: anotherUserSubscribers,
+      points: points + 300,
+      realPoints: realPoints + 300,
+    );
 
     await fireStore
         .collection('users')
@@ -227,13 +240,19 @@ class AuthMethods {
     required String anotherUserUID,
     required List<String> anotherUserSubscribers,
     required List<String> curUserSubscrip,
+    required int points,
+    required int realPoints,
   }) async {
     curUserSubscrip.remove(anotherUserUID);
 
     User currentUser = auth.currentUser!;
     anotherUserSubscribers.remove(currentUser.uid);
     Folow folow = Folow(folow: curUserSubscrip);
-    Folowers folowers = Folowers(folow: anotherUserSubscribers);
+    Folowers folowers = Folowers(
+      folow: anotherUserSubscribers,
+      points: points,
+      realPoints: realPoints,
+    );
 
     await fireStore
         .collection('users')
@@ -244,5 +263,36 @@ class AuthMethods {
         .collection('users')
         .doc(anotherUserUID)
         .update(folowers.toJson());
+  }
+
+  Future<List<AnotherUser>> getTopUsers({
+    required String title,
+  }) async {
+    dynamic a;
+    List<AnotherUser> users = [];
+    a = await fireStore
+        .collection('users')
+        .limit(50)
+        .orderBy(title, descending: true)
+        .get();
+    for (var element in a.docChanges) {
+      if (AppUser.fromSnap(element.doc).showEvery!) {}
+      users.add(
+        AnotherUser.fromSnap(element.doc),
+      );
+    }
+
+    return users;
+  }
+
+  Future<void> shop({
+    required int realPoints,
+    required List<bool> buied,
+  }) async {
+    User currentUser = auth.currentUser!;
+    await fireStore.collection('users').doc(currentUser.uid).update({
+      'buyed': buied,
+      'realPoints': realPoints,
+    });
   }
 }

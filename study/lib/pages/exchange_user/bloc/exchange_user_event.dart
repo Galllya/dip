@@ -9,5 +9,7 @@ class ExchangeUserEvent with _$ExchangeUserEvent {
     String anotherUserUID,
     List<String> anotherUserSubscribers,
     List<String> curUserSubscrip,
+    int points,
+    int realPoints,
   ) = _Folow;
 }

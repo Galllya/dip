@@ -5,16 +5,19 @@ import 'package:study/pages/collection/view/collection_page.dart';
 import 'package:study/pages/colod/bloc/colod_bloc.dart';
 import 'package:study/pages/colod/view/colod_view.dart';
 import 'package:study/pages/colods/view/colods_page.dart';
+import 'package:study/pages/home/view/home_page.dart';
 import 'package:study/provider/coloda_provider.dart';
 
 class ColodPage extends StatefulWidget {
   final String colodId;
   final String? fromCollection;
+  final bool? fromHome;
 
   const ColodPage({
     Key? key,
     required this.colodId,
     this.fromCollection,
+    this.fromHome = false,
   }) : super(key: key);
 
   @override
@@ -51,7 +54,9 @@ class _ColodPageState extends State<ColodPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => fromCollection == null
-                        ? const ColodsPage()
+                        ? widget.fromHome!
+                            ? const HomePage()
+                            : const ColodsPage()
                         : CollectionPage(collectioId: fromCollection!),
                   ), (route) {
                 return route.isFirst;
@@ -69,7 +74,9 @@ class _ColodPageState extends State<ColodPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => fromCollection == null
-                      ? const ColodsPage()
+                      ? widget.fromHome!
+                          ? const HomePage()
+                          : const ColodsPage()
                       : CollectionPage(collectioId: fromCollection!),
                 ), (route) {
               return route.isFirst;

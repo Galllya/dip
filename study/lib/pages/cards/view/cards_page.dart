@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:study/models/coloda/card.dart' as model;
+import 'package:study/models/statistic.dart';
 import 'package:study/pages/cards/bloc/cards_bloc.dart';
 import 'package:study/pages/cards/view/cards_view.dart';
+import 'package:study/provider/statistic_provider.dart';
 
 class CardsPage extends StatefulWidget {
   final List<model.Card> cards;
+  final String colodId;
   const CardsPage({
     Key? key,
     required this.cards,
+    required this.colodId,
   }) : super(key: key);
 
   @override
@@ -18,17 +22,23 @@ class CardsPage extends StatefulWidget {
 
 class _CardsPageState extends State<CardsPage> {
   late CardsBloc cardsBloc;
+  late DateTime timeNow;
 
   @override
   void initState() {
     super.initState();
-
-    cardsBloc = CardsBloc();
+    timeNow = DateTime.now();
+    cardsBloc = CardsBloc(statisticProvider: context.read<StatisticProvider>());
   }
 
   @override
   void dispose() {
+    cardsBloc.add(CardsEvent.resSend(
+        StatisticColod(cards: DateTime.now().difference(timeNow).inMinutes),
+        widget.colodId));
+
     cardsBloc.close();
+
     super.dispose();
   }
 

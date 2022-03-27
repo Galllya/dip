@@ -46,13 +46,7 @@ class _RedactionCollectionPageState extends State<RedactionCollectionPage> {
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => CollectionPage(
-                          collectioId: widget.collection.collectionId!,
-                        )),
-              );
+              Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,

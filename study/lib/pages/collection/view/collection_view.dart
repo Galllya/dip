@@ -141,6 +141,7 @@ class _CollectionViewState extends State<CollectionView> {
                                 ),
                                 Text(
                                   collection.name!,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       fontSize: 36,
                                       fontWeight: FontWeight.w800,
@@ -174,7 +175,7 @@ class _CollectionViewState extends State<CollectionView> {
                                             style: WidgetStyle()
                                                 .whiteElevatedButtonStyle(),
                                             onPressed: () {
-                                              Navigator.pushReplacement(
+                                              Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>

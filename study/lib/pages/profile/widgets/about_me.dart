@@ -17,11 +17,13 @@ class AboutMe extends StatelessWidget {
             (user.dateBirth != DateTime(1000, 1, 1)) ||
             (user.uni != '') ||
             (user.work != ''))
-        ? Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Text(
-              'У вас пока нет описания',
-              style: getBoldTextStyle(),
+        ? Center(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                'У вас пока нет информации о себе',
+                style: getBoldTextStyle(),
+              ),
             ),
           )
         : Padding(

@@ -9,10 +9,12 @@ import 'package:study/provider/collection_provider.dart';
 class CollectionPage extends StatefulWidget {
   final String collectioId;
   final bool? fromHome;
+  final bool afterRedaction;
   const CollectionPage({
     Key? key,
     required this.collectioId,
     this.fromHome = false,
+    this.afterRedaction = false,
   }) : super(key: key);
 
   @override
@@ -43,22 +45,26 @@ class _CollectionPageState extends State<CollectionPage> {
       value: collectionBloc,
       child: Scaffold(
         appBar: AppBar(
-            // leading: IconButton(
-            //   onPressed: () {
-            //     Navigator.pushAndRemoveUntil(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => widget.fromHome!
-            //                 ? const HomePage()
-            //                 : const CollectionsPage()), (route) {
-            //       return route.isFirst;
-            //     });
-            //   },
-            //   icon: const Icon(
-            //     Icons.arrow_back,
-            //   ),
-            // ),
+          leading: IconButton(
+            onPressed: () {
+              widget.afterRedaction
+                  ? Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => widget.fromHome!
+                              ? const HomePage()
+                              : CollectionsPage(
+                                  afterRedaction: widget.afterRedaction,
+                                )), (route) {
+                      return route.isFirst;
+                    })
+                  : Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
             ),
+          ),
+        ),
         body: CollectionView(
           closePage: () {
             Navigator.pushAndRemoveUntil(

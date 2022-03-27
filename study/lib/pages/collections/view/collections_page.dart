@@ -7,9 +7,13 @@ import 'package:study/pages/collections/view/collections_view.dart';
 import 'package:study/pages/colods/widgets/end_drawer_in_colods.dart';
 import 'package:study/provider/collection_provider.dart';
 
+import '../../home/view/home_page.dart';
+
 class CollectionsPage extends StatefulWidget {
+  final bool afterRedaction;
   const CollectionsPage({
     Key? key,
+    this.afterRedaction = false,
   }) : super(key: key);
 
   @override
@@ -47,7 +51,13 @@ class _CollectionsPageState extends State<CollectionsPage> {
               title: const Text('Коллекции'),
               leading: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  !widget.afterRedaction
+                      ? Navigator.pop(context)
+                      : Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()),
+                        );
                 },
                 icon: const Icon(
                   Icons.arrow_back,

@@ -179,6 +179,7 @@ class _ColodaViewState extends State<ColodaView> {
                                 ),
                                 Text(
                                   coloda.name!,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       fontSize: 36,
                                       fontWeight: FontWeight.w800,

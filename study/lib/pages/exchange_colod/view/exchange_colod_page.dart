@@ -20,7 +20,7 @@ class ExchangeColodPage extends StatefulWidget {
 
 class _ExchangeColodPageState extends State<ExchangeColodPage> {
   late ExchangeColodBloc exchangeColodBloc;
-
+  bool haveNewColod = false;
   @override
   void initState() {
     super.initState();
@@ -64,6 +64,9 @@ class _ExchangeColodPageState extends State<ExchangeColodPage> {
               userName,
               anotherUserUid,
             ));
+            setState(() {
+              haveNewColod = true;
+            });
           },
           coloda: widget.coloda,
         ),

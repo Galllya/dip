@@ -156,6 +156,7 @@ class _RedactionViewState extends State<RedactionView> {
             context,
             MaterialPageRoute(
               builder: (context) => ColodPage(
+                afterRedaction: true,
                 fromCollection: widget.fromCollection,
                 colodId: widget.coloda.colodId!,
               ),

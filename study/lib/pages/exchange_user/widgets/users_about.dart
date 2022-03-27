@@ -14,15 +14,20 @@ class UsersAbout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return !((user.description != '') ||
-            ((user.gender == 'Женский') || ((user.gender == 'Мужской'))) ||
-            (user.dateBirth != DateTime(1000, 1, 1)) ||
+            (((user.gender == 'Женский') || ((user.gender == 'Мужской'))) &&
+                (user.dateBirth != DateTime(1000, 1, 1)) &&
+                (user.dateBirth != DateTime(01, 01, 1000))) ||
+            (DateFormat('dd.MM.yyyy').format(user.dateBirth!) !=
+                '31.12.0999') ||
             (user.uni != '') ||
             (user.work != ''))
-        ? Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Text(
-              'Пользователь не добавил описание',
-              style: getBoldTextStyle(),
+        ? Center(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                'Пользователь не добавил описание',
+                style: getBoldTextStyle(),
+              ),
             ),
           )
         : Padding(
@@ -57,7 +62,10 @@ class UsersAbout extends StatelessWidget {
                       ],
                     ),
                   ),
-                if (user.dateBirth != DateTime(1000, 1, 1))
+                if (user.dateBirth != DateTime(1000, 1, 1) &&
+                    (DateFormat('dd.MM.yyyy').format(user.dateBirth!) !=
+                        '31.12.0999') &&
+                    (user.dateBirth != DateTime(01, 01, 1000)))
                   Padding(
                     padding: const EdgeInsets.only(top: 12),
                     child: Row(

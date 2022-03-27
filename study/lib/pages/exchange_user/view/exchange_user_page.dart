@@ -10,10 +10,13 @@ import 'package:study/provider/coloda_provider.dart';
 class ExchangeUserPage extends StatefulWidget {
   final String uid;
   final bool fromProfile;
+  final bool haveNewColod;
+
   const ExchangeUserPage({
     Key? key,
     required this.uid,
     this.fromProfile = false,
+    this.haveNewColod = false,
   }) : super(key: key);
 
   @override

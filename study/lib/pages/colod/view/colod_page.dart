@@ -12,12 +12,14 @@ class ColodPage extends StatefulWidget {
   final String colodId;
   final String? fromCollection;
   final bool? fromHome;
+  final bool? afterRedaction;
 
   const ColodPage({
     Key? key,
     required this.colodId,
     this.fromCollection,
     this.fromHome = false,
+    this.afterRedaction = false,
   }) : super(key: key);
 
   @override
@@ -50,17 +52,21 @@ class _ColodPageState extends State<ColodPage> {
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => fromCollection == null
-                        ? widget.fromHome!
-                            ? const HomePage()
-                            : const ColodsPage()
-                        : CollectionPage(collectioId: fromCollection!),
-                  ), (route) {
-                return route.isFirst;
-              });
+              widget.afterRedaction!
+                  ? Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => fromCollection == null
+                            ? widget.fromHome!
+                                ? const HomePage()
+                                : ColodsPage(
+                                    haveRedaction: widget.afterRedaction!,
+                                  )
+                            : CollectionPage(collectioId: fromCollection!),
+                      ), (route) {
+                      return route.isFirst;
+                    })
+                  : Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,

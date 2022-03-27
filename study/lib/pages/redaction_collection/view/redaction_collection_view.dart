@@ -103,6 +103,7 @@ class _RedactionCollectionView extends State<RedactionCollectionView> {
             MaterialPageRoute(
               builder: (context) => CollectionPage(
                 collectioId: widget.collection.collectionId!,
+                afterRedaction: true,
               ),
             ),
           );

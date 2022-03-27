@@ -11,11 +11,13 @@ import 'package:study/provider/coloda_provider.dart';
 class ColodsPage extends StatefulWidget {
   final Function? onSelect;
   final Function? fromTraining;
+  final bool haveRedaction;
 
   const ColodsPage({
     Key? key,
     this.onSelect,
     this.fromTraining,
+    this.haveRedaction = false,
   }) : super(key: key);
 
   @override
@@ -54,10 +56,13 @@ class _ColodsPageState extends State<ColodsPage> {
               title: const Text('Колоды'),
               leading: IconButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
-                  );
+                  !widget.haveRedaction
+                      ? Navigator.pop(context)
+                      : Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()),
+                        );
                 },
                 icon: const Icon(
                   Icons.arrow_back,

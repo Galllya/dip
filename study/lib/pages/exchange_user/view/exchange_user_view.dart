@@ -257,14 +257,13 @@ class _ExchangeUserViewState extends State<ExchangeUserView> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 60),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Column(
                                     children: [
-                                      const Text(
-                                        'N',
-                                        style: TextStyle(
+                                      Text(
+                                        colods.length.toString(),
+                                        style: const TextStyle(
                                             fontSize: 27,
                                             fontWeight: FontWeight.w800,
                                             color: Colors.white),

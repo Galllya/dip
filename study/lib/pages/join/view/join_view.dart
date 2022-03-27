@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:study/models/coloda/card.dart' as model;
 import 'package:study/pages/join/bloc/join_bloc.dart';
 import 'package:study/pages/join/widgets/lose_dialog.dart';
@@ -12,10 +13,11 @@ import 'package:study/ui/widgets/close_dialog.dart';
 
 class JoinView extends StatefulWidget {
   final List<model.Card> cards;
-
+  final Intro intro;
   const JoinView({
     Key? key,
     required this.cards,
+    required this.intro,
   }) : super(key: key);
 
   @override
@@ -268,6 +270,7 @@ class _JoinViewState extends State<JoinView> {
                 children: [
                   Expanded(
                     child: Column(
+                      key: widget.intro.keys[1],
                       children: [
                         ...cardsNowTerm.map(
                           (e) => e != null
@@ -293,6 +296,7 @@ class _JoinViewState extends State<JoinView> {
                   ),
                   Expanded(
                     child: Column(
+                      key: widget.intro.keys[2],
                       children: [
                         ...cardsNowDef.map(
                           (e) => e != null

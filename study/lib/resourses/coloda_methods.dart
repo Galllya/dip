@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study/models/app_user.dart';
+import 'package:study/models/collection.dart';
 import 'package:study/models/coloda/card.dart';
 import 'package:study/models/coloda/coloda.dart';
 import 'package:study/models/coloda/coloda_all.dart';
@@ -307,13 +308,43 @@ class ColodaMethods {
     required String docId,
   }) async {
     String res = "";
+    User currentUser = auth.currentUser!;
 
     try {
       await fireStore.collection('colods').doc(docId).delete();
       await fireStore.collection('colods_detail').doc(docId).delete();
       await fireStore.collection('colods_all').doc(docId).delete();
       await fireStore.collection('colodStatistic').doc(docId).delete();
-
+      dynamic a;
+      a = await fireStore
+          .collection('collections')
+          .where('uid', isEqualTo: currentUser.uid)
+          .get();
+      for (var element in a.docChanges) {
+        Collection cur = Collection.fromSnap(element.doc);
+        if (cur.colodsId!.contains(docId)) {
+          List<String> colodsId = [];
+          cur.colodsId!.forEach((element) {
+            if (element != docId) {
+              colodsId.add(element);
+            }
+          });
+          Collection collection = Collection(
+            imageURL: cur.imageURL,
+            name: cur.name,
+            description: cur.description,
+            uid: currentUser.uid,
+            colodsId: colodsId,
+            dateCreate: cur.dateCreate,
+            tags: cur.tags,
+            collectionId: cur.collectionId,
+          );
+          await fireStore
+              .collection('collections')
+              .doc(cur.collectionId)
+              .update(collection.toJson());
+        }
+      }
       res = 'success';
     } catch (err) {
       res = 'Произошла ошибка';

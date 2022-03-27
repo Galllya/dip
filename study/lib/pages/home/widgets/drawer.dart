@@ -165,19 +165,6 @@ class DrawerCustom extends StatelessWidget {
                   style: customTextColor(),
                 ),
               ),
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SettingsPage()));
-                },
-                leading: SvgPicture.asset('assets/icons/icon_settings.svg'),
-                title: Text(
-                  'Настройки',
-                  style: customTextColor(),
-                ),
-              ),
             ],
           );
         }),

@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:study/pages/cards/bloc/cards_bloc.dart';
 import 'package:study/models/coloda/card.dart' as model;
 import 'package:study/pages/cards/widgets/modal_cards_setting.dart';
 import 'package:study/pages/profile/widgets/about_me.dart';
 import 'package:study/ui/sourse/colors.dart';
-import 'package:study/ui/widgets/scaffold_messages.dart';
 import 'package:study/ui/widgets/splash_clipper.dart';
 
 class CardsView extends StatefulWidget {
   final List<model.Card> cards;
+  final Intro intro;
 
   const CardsView({
     Key? key,
     required this.cards,
+    required this.intro,
   }) : super(key: key);
 
   @override
@@ -107,6 +109,7 @@ class _CardsViewState extends State<CardsView> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Slider(
+                  key: widget.intro.keys[3],
                   value: _currentSliderValue,
                   max: widget.cards.length.toDouble() - 1,
                   label: _currentSliderValue.round().toString(),
@@ -125,6 +128,7 @@ class _CardsViewState extends State<CardsView> {
                   children: [
                     for (int i = 0; i < widget.cards.length; i++)
                       SplashClipper(
+                        key: widget.intro.keys[1],
                         decoration: BoxDecoration(
                             color: softColor,
                             borderRadius: BorderRadius.circular(10),
@@ -176,6 +180,7 @@ class _CardsViewState extends State<CardsView> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
+                  key: widget.intro.keys[2],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(

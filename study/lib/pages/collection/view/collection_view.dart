@@ -248,8 +248,7 @@ class _CollectionViewState extends State<CollectionView> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 60),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Column(
                                         children: [
@@ -272,24 +271,6 @@ class _CollectionViewState extends State<CollectionView> {
                                               many: 'колод',
                                             )}',
                                             style: const TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        children: const [
-                                          Text(
-                                            'N',
-                                            style: TextStyle(
-                                                fontSize: 27,
-                                                fontWeight: FontWeight.w800,
-                                                color: Colors.white),
-                                          ),
-                                          Text(
-                                            'потраченно',
-                                            style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500,
                                                 color: Colors.white),

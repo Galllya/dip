@@ -33,29 +33,34 @@ class _AddCollectionPageState extends State<AddCollectionPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AddCollectionBloc>.value(
-      value: addCollectionBloc,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Добавить коллекцию'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                addCollectionBloc.add(const AddCollectionEvent.make());
+        value: addCollectionBloc,
+        child: BlocBuilder<AddCollectionBloc, AddCollectionState>(
+            builder: (BuildContext context, AddCollectionState state) {
+          return Scaffold(
+            appBar: AppBar(
+                title: const Text('Добавить коллекцию'),
+                actions: state.maybeWhen(orElse: () {
+                  return [
+                    IconButton(
+                      onPressed: () {
+                        addCollectionBloc.add(const AddCollectionEvent.make());
+                      },
+                      icon: const Icon(Icons.check),
+                    ),
+                  ];
+                }, loading: () {
+                  return [];
+                })),
+            body: AddCollectionView(
+              onTab: (
+                Uint8List? file,
+                Collection collection,
+              ) {
+                addCollectionBloc
+                    .add(AddCollectionEvent.putCollection(file, collection));
               },
-              icon: const Icon(Icons.check),
             ),
-          ],
-        ),
-        body: AddCollectionView(
-          onTab: (
-            Uint8List? file,
-            Collection collection,
-          ) {
-            addCollectionBloc
-                .add(AddCollectionEvent.putCollection(file, collection));
-          },
-        ),
-      ),
-    );
+          );
+        }));
   }
 }

@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:study/models/coloda/card.dart' as model;
 import 'package:study/models/statistic.dart';
@@ -23,7 +26,22 @@ class CardsPage extends StatefulWidget {
 class _CardsPageState extends State<CardsPage> {
   late CardsBloc cardsBloc;
   late DateTime timeNow;
-
+  Intro intro = Intro(
+    stepCount: 5,
+    maskClosable: true,
+    widgetBuilder: StepWidgetBuilder.useDefaultTheme(
+      texts: [
+        'В данном режиме вы можете повторять свои карточки. Попробуйте вспомнить ответ, а потом сравните с правильным.',
+        'Нажмите на карточку - чтобы увидеть правильный ответ',
+        'Перемешайтесь между карточками',
+        'Индикатор покажет, сколько карточек вы уже прошли',
+        'В настройках можно выбрать:  показывать сначало термин или определение',
+      ],
+      buttonTextBuilder: (currPage, totalPage) {
+        return currPage < totalPage - 1 ? 'следующая' : 'закончить';
+      },
+    ),
+  );
   @override
   void initState() {
     super.initState();
@@ -48,9 +66,28 @@ class _CardsPageState extends State<CardsPage> {
       value: cardsBloc,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Карточки'),
+          title: Text(
+            'Карточки',
+            key: intro.keys[0],
+          ),
           actions: [
             IconButton(
+              onPressed: () {
+                Timer(
+                  const Duration(
+                    milliseconds: 500,
+                  ),
+                  () {
+                    intro.start(context);
+                  },
+                );
+              },
+              icon: const Icon(
+                Icons.question_mark,
+              ),
+            ),
+            IconButton(
+                key: intro.keys[4],
                 onPressed: () {
                   cardsBloc.add(const CardsEvent.showSheet());
                 },
@@ -61,6 +98,7 @@ class _CardsPageState extends State<CardsPage> {
           ],
         ),
         body: CardsView(
+          intro: intro,
           cards: widget.cards,
         ),
       ),

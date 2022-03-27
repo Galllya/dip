@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -481,7 +482,30 @@ class _RedactionViewState extends State<RedactionView> {
                     CardInColoda(
                       indexOfCard: i,
                       form: cardForm[i],
-                      deleteCard: () {},
+                      deleteCard: (int indexFrom, FormGroup takeForm) {
+                        List<FormGroup> cardFormNew = [];
+                        cardForm.forEach((element) {
+                          if (element != takeForm) {
+                            cardFormNew.add(element);
+                          }
+                        });
+
+                        setState(() {
+                          cardForm.clear();
+                          Timer(
+                            const Duration(
+                              milliseconds: 10,
+                            ),
+                            () {
+                              setState(() {
+                                cardForm = cardFormNew;
+                              });
+                            },
+                          );
+                        });
+
+                        namberOfCards--;
+                      },
                     ),
                   const SizedBox(
                     height: 12,

@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study/models/chat.dart';
 import 'package:study/models/message.dart';
 import 'package:uuid/uuid.dart';
-import 'package:rxdart/rxdart.dart';
 
 class ChatMethods {
   final FirebaseAuth auth = FirebaseAuth.instance;

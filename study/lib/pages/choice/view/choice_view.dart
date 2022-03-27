@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:study/models/coloda/card.dart' as model;
 import 'package:study/pages/choice/bloc/choice_bloc.dart';
 import 'package:study/pages/join/widgets/lose_dialog.dart';
@@ -14,10 +15,11 @@ import 'package:study/ui/widgets/splash_clipper.dart';
 
 class ChoiceView extends StatefulWidget {
   final List<model.Card> cards;
-
+  final Intro intro;
   const ChoiceView({
     Key? key,
     required this.cards,
+    required this.intro,
   }) : super(key: key);
 
   @override
@@ -226,6 +228,7 @@ class _ChoiceViewState extends State<ChoiceView> {
                     height: 200,
                     width: double.infinity,
                     child: SplashClipper(
+                      key: widget.intro.keys[1],
                       decoration: BoxDecoration(
                           color: softColor,
                           borderRadius: BorderRadius.circular(10),
@@ -248,6 +251,7 @@ class _ChoiceViewState extends State<ChoiceView> {
                     ),
                   ),
                   Row(
+                    key: widget.intro.keys[2],
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(

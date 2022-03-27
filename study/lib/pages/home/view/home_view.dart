@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:study/blocs/accaunt/account_bloc.dart';
 import 'package:study/pages/add_collection/view/add_collection_page.dart';
 import 'package:study/pages/add_coloda.dart/view/add_coloda_page.dart';
@@ -22,6 +25,11 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountBloc, AccountState>(

@@ -5,6 +5,7 @@ import 'package:study/models/chat.dart';
 import 'package:study/pages/chat/bloc/chat_bloc.dart';
 import 'package:study/pages/chat/widgets/chat_container.dart';
 import 'package:study/provider/chat_provider.dart';
+import 'package:study/ui/sourse/colors.dart';
 
 class ChatView extends StatefulWidget {
   const ChatView({
@@ -50,36 +51,59 @@ class _ChatViewState extends State<ChatView> {
                     continue data_ready;
                   data_ready:
                   case ConnectionState.done:
-                    widgetCus = ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        Chat chat = Chat.fromSnap(snapshot.data!.docs[index]);
-                        int indexNow = chat.users!.indexOf(user.uid!);
-                        int indexUid;
-                        indexNow == 0 ? indexUid = 1 : indexUid = 0;
-                        String name = '';
-                        String image = '';
-                        if (indexNow == 1) {
-                          name = chat.user1![0];
-                          image = chat.user1![1];
-                        } else {
-                          name = chat.user2![0];
-                          image = chat.user2![1];
-                        }
+                    widgetCus = snapshot.data!.docs.isEmpty
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Center(
+                                  child: Text(
+                                'У вас пока нет диалогов',
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )),
+                              Image.asset(
+                                'assets/picturies/pic_shop_27.png',
+                                height: 200,
+                                width: 200,
+                              ),
+                            ],
+                          )
+                        : ListView.builder(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: (context, index) {
+                              Chat chat =
+                                  Chat.fromSnap(snapshot.data!.docs[index]);
+                              int indexNow = chat.users!.indexOf(user.uid!);
+                              int indexUid;
+                              indexNow == 0 ? indexUid = 1 : indexUid = 0;
+                              String name = '';
+                              String image = '';
+                              if (indexNow == 1) {
+                                name = chat.user1![0];
+                                image = chat.user1![1];
+                              } else {
+                                name = chat.user2![0];
+                                image = chat.user2![1];
+                              }
 
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: ChatContainer(
-                            image: image,
-                            name: name,
-                            uid: chat.users![indexUid],
-                            text: chat.text!,
-                            time: chat.time!,
-                          ),
-                        );
-                      },
-                    );
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: ChatContainer(
+                                  image: image,
+                                  name: name,
+                                  uid: chat.users![indexUid],
+                                  text: chat.text!,
+                                  time: chat.time!,
+                                ),
+                              );
+                            },
+                          );
+
                     return Padding(
                         padding: const EdgeInsets.only(top: 12),
                         child: widgetCus);

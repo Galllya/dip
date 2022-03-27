@@ -156,11 +156,13 @@ class _ExchangeColodViewState extends State<ExchangeColodView> {
                             style: WidgetStyle().whiteElevatedButtonStyle(),
                             onPressed: () {
                               widget.putColoda(
-                                  '${widget.coloda.name} (копия)',
+                                  widget.coloda.name!.contains('(копия)')
+                                      ? widget.coloda.name!
+                                      : '${widget.coloda.name} (копия)',
                                   widget.coloda.description,
                                   widget.coloda.cards,
                                   widget.coloda.imageURL,
-                                  true,
+                                  false,
                                   true,
                                   widget.coloda.tags,
                                   userName,

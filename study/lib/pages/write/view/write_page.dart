@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:study/models/coloda/card.dart' as model;
 import 'package:study/models/statistic.dart';
@@ -24,6 +27,22 @@ class WritePage extends StatefulWidget {
 class _WritePageState extends State<WritePage> {
   late WriteBloc writeBloc;
   late DateTime timeNow;
+  Intro intro = Intro(
+    stepCount: 5,
+    maskClosable: true,
+    widgetBuilder: StepWidgetBuilder.useDefaultTheme(
+      texts: [
+        'В данном режиме вы можете потренироваться и проверить свои знания. Просто напишите правильный ответ!',
+        'На карточки термин, к которому нужно написать ответ',
+        'Введите в поле правильный ответ',
+        'После ввода нажмите на данную кнопку. Если вы ответили верно - она станет зеленой. Если не верно - крастой, и вы увидете правильный ответ',
+        'В настройках можно начать сначала. А так же переключиться с бесконечного режима в конечный - где вы можете закончить режим ответив на все верно и не сделав много ошибок',
+      ],
+      buttonTextBuilder: (currPage, totalPage) {
+        return currPage < totalPage - 1 ? 'следующая' : 'закончить';
+      },
+    ),
+  );
 
   @override
   void initState() {
@@ -48,9 +67,28 @@ class _WritePageState extends State<WritePage> {
       value: writeBloc,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Письмо'),
+          title: Text(
+            'Письмо',
+            key: intro.keys[0],
+          ),
           actions: [
             IconButton(
+              onPressed: () {
+                Timer(
+                  const Duration(
+                    milliseconds: 500,
+                  ),
+                  () {
+                    intro.start(context);
+                  },
+                );
+              },
+              icon: const Icon(
+                Icons.question_mark,
+              ),
+            ),
+            IconButton(
+                key: intro.keys[4],
                 onPressed: () {
                   writeBloc.add(const WriteEvent.showSheet());
                 },
@@ -62,6 +100,7 @@ class _WritePageState extends State<WritePage> {
         ),
         body: WriteView(
           cards: widget.cards,
+          intro: intro,
         ),
       ),
     );

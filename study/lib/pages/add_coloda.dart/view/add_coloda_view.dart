@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _AddColodaViewState extends State<AddColodaView> {
   Uint8List? image;
   final List<model.Card> cards = [];
   late List<FormGroup> cardForm;
-  late FormArray cardArray;
+  // late FormArray cardArray;
   late bool showEvery;
   late bool takeMyHaveAuthor;
   late bool addTags;
@@ -44,7 +45,7 @@ class _AddColodaViewState extends State<AddColodaView> {
 
   @override
   void initState() {
-    cardArray = FormArray([]);
+    // cardArray = FormArray([]);
     showEvery = true;
     takeMyHaveAuthor = true;
     addTags = false;
@@ -53,13 +54,6 @@ class _AddColodaViewState extends State<AddColodaView> {
     tags = [];
     cardForm = [];
     addCardFrom();
-    // cardForm.first.control('term').valueChanges.listen((value) {
-    //   print(value);
-    // });
-    // form.control('tag').valueChanges.listen((value) {
-    //   print(value);
-    // });
-
     context.read<AccountBloc>().state.maybeWhen(
           orElse: () {},
           loaded: (user) {
@@ -86,20 +80,22 @@ class _AddColodaViewState extends State<AddColodaView> {
           ),
         },
       ));
-      cardArray.add(FormGroup(
-        {
-          'term': FormControl<String>(
-            validators: [
-              Validators.required,
-            ],
-          ),
-          'definition': FormControl<String>(
-            validators: [
-              Validators.required,
-            ],
-          ),
-        },
-      ));
+      // cardArray.add(
+      //   FormGroup(
+      //     {
+      //       'term': FormControl<String>(
+      //         validators: [
+      //           Validators.required,
+      //         ],
+      //       ),
+      //       'definition': FormControl<String>(
+      //         validators: [
+      //           Validators.required,
+      //         ],
+      //       ),
+      //     },
+      //   ),
+      // );
     }
   }
 
@@ -186,27 +182,27 @@ class _AddColodaViewState extends State<AddColodaView> {
           if (shodStart) {
             cards.clear();
 
-            for (var element in cardArray.controls) {
-              if (element.valid) {
-                cards.add(
-                  model.Card(
-                    term: (element as FormGroup).control('term').value,
-                    definition: element.control('definition').value,
-                  ),
-                );
-              }
-            }
-
-            // for (var element in cardForm) {
+            // for (var element in cardArray.controls) {
             //   if (element.valid) {
             //     cards.add(
             //       model.Card(
-            //         term: element.control('term').value,
+            //         term: (element as FormGroup).control('term').value,
             //         definition: element.control('definition').value,
             //       ),
             //     );
             //   }
             // }
+
+            for (var element in cardForm) {
+              if (element.valid) {
+                cards.add(
+                  model.Card(
+                    term: element.control('term').value,
+                    definition: element.control('definition').value,
+                  ),
+                );
+              }
+            }
 
             if (form.control('name').valid && cards.isNotEmpty) {
               widget.putColoda(
@@ -490,53 +486,40 @@ class _AddColodaViewState extends State<AddColodaView> {
                     const SizedBox(
                       height: 20,
                     ),
-
                     ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: cardArray.controls.length,
+                        itemCount: cardForm.length,
                         itemBuilder: (BuildContext context, int index) {
                           return CardInColoda(
                             indexOfCard: index,
                             deleteCard: (int indexFrom, FormGroup takeForm) {
-                              setState(() {
-                                (cardArray).remove(takeForm);
-                                // cardArray.removeAt(indexFrom);
-
-                                namberOfCards--;
+                              List<FormGroup> cardFormNew = [];
+                              cardForm.forEach((element) {
+                                if (element != takeForm) {
+                                  cardFormNew.add(element);
+                                }
                               });
+
+                              setState(() {
+                                cardForm.clear();
+                                Timer(
+                                  const Duration(
+                                    milliseconds: 10,
+                                  ),
+                                  () {
+                                    setState(() {
+                                      cardForm = cardFormNew;
+                                    });
+                                  },
+                                );
+                              });
+
+                              namberOfCards--;
                             },
-                            form: cardArray.controls.elementAt(index)
-                                as FormGroup,
+                            form: cardForm.elementAt(index),
                           );
                         }),
-
-                    // for (int i = 0; i < namberOfCards; i++)
-                    //   ReactiveFormConsumer(builder: (context, form, child) {
-                    //     return CardInColoda(
-                    //       indexOfCard: i,
-                    //       deleteCard: (FormGroup formm) {
-                    //         setState(() {
-                    //           // cardForm.elementAt(i).control('term').value = '';
-                    //           // cardForm.elementAt(i).control('definition').value =
-                    //           //     '';
-
-                    //           // cardForm.forEach((element) {
-                    //           //   print(element.control('term').value);
-                    //           // });
-
-                    //           cardForm.remove(formm);
-
-                    //           namberOfCards--;
-
-                    //           // cardForm.forEach((element) {
-                    //           //   print(element.control('term').value);
-                    //           // });
-                    //         });
-                    //       },
-                    //       form: cardForm[i],
-                    //     );
-                    //   }),
                     const SizedBox(
                       height: 12,
                     ),

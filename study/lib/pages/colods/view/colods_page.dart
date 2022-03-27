@@ -5,13 +5,17 @@ import 'package:study/pages/add_coloda.dart/view/add_coloda_page.dart';
 import 'package:study/pages/colods/bloc/colods_bloc.dart';
 import 'package:study/pages/colods/view/colods_view.dart';
 import 'package:study/pages/colods/widgets/end_drawer_in_colods.dart';
+import 'package:study/pages/home/view/home_page.dart';
 import 'package:study/provider/coloda_provider.dart';
 
 class ColodsPage extends StatefulWidget {
   final Function? onSelect;
+  final Function? fromTraining;
+
   const ColodsPage({
     Key? key,
     this.onSelect,
+    this.fromTraining,
   }) : super(key: key);
 
   @override
@@ -50,7 +54,10 @@ class _ColodsPageState extends State<ColodsPage> {
               title: const Text('Колоды'),
               leading: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
                 },
                 icon: const Icon(
                   Icons.arrow_back,
@@ -58,16 +65,17 @@ class _ColodsPageState extends State<ColodsPage> {
                 ),
               ),
               actions: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AddColodaPage(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.my_library_add)),
+                if (widget.fromTraining == null)
+                  IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AddColodaPage(),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.my_library_add)),
                 IconButton(
                   onPressed: () {
                     colodsBloc.add(const ColodsEvent.changeShowString());
@@ -114,6 +122,7 @@ class _ColodsPageState extends State<ColodsPage> {
               },
             ),
             body: ColodsView(
+              fromTraining: widget.fromTraining,
               onSelect: widget.onSelect,
               onClose: () {
                 colodsBloc.add(

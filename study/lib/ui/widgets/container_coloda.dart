@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:study/models/coloda/coloda.dart';
+import 'package:study/pages/all_cards/view/all_cards_page.dart';
 import 'package:study/pages/colod/view/colod_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/widgets/splash_clipper.dart';
@@ -14,6 +15,7 @@ class ContainerColoda extends StatelessWidget {
   final bool? cantTab;
   final String? fromCollection;
   final bool? fromHome;
+  final Function? fromTraining;
 
   const ContainerColoda({
     Key? key,
@@ -24,6 +26,7 @@ class ContainerColoda extends StatelessWidget {
     this.fromCollection,
     this.onDelete,
     this.fromHome = false,
+    this.fromTraining,
   }) : super(key: key);
 
   @override
@@ -41,18 +44,21 @@ class ContainerColoda extends StatelessWidget {
               : () {
                   if (onSelect == null) {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => fromCollection == null
-                              ? ColodPage(
-                                  colodId: coloda.colodId!,
-                                  fromHome: fromHome,
-                                )
-                              : ColodPage(
-                                  colodId: coloda.colodId!,
-                                  fromCollection: fromCollection,
-                                )),
-                    );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => fromTraining == null
+                                ? fromCollection == null
+                                    ? ColodPage(
+                                        colodId: coloda.colodId!,
+                                        fromHome: fromHome,
+                                      )
+                                    : ColodPage(
+                                        colodId: coloda.colodId!,
+                                        fromCollection: fromCollection,
+                                      )
+                                : AllCardsPage(
+                                    uid: coloda.colodId!,
+                                    fromTraining: fromTraining!)));
                   } else {
                     onSelect!(coloda);
                     Navigator.pop(context);

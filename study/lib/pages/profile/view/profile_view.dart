@@ -342,9 +342,9 @@ class _ProfileViewState extends State<ProfileView> {
                                     children: [
                                       Column(
                                         children: [
-                                          const Text(
-                                            'N',
-                                            style: TextStyle(
+                                          Text(
+                                            user.subscrip!.length.toString(),
+                                            style: const TextStyle(
                                                 fontSize: 27,
                                                 fontWeight: FontWeight.w800,
                                                 color: Colors.white),
@@ -353,11 +353,37 @@ class _ProfileViewState extends State<ProfileView> {
                                             ' ${Intl.plural(
                                               10,
                                               locale: 'ru',
-                                              other: 'колоды',
-                                              one: 'колода',
-                                              two: 'колоды',
-                                              few: 'колоды',
-                                              many: 'колод',
+                                              other: 'подписки',
+                                              one: 'подписка',
+                                              two: 'подписки',
+                                              few: 'подписки',
+                                              many: 'подписок',
+                                            )}',
+                                            style: const TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text(
+                                            user.subscribers!.length.toString(),
+                                            style: const TextStyle(
+                                                fontSize: 27,
+                                                fontWeight: FontWeight.w800,
+                                                color: Colors.white),
+                                          ),
+                                          Text(
+                                            ' ${Intl.plural(
+                                              10,
+                                              locale: 'ru',
+                                              other: 'подписчика',
+                                              one: 'подписчик',
+                                              two: 'подписчика',
+                                              few: 'подписчика',
+                                              many: 'подписчиков',
                                             )}',
                                             style: const TextStyle(
                                                 fontSize: 15,

@@ -13,6 +13,7 @@ import 'package:study/pages/home/view/home_page.dart';
 import 'package:study/ui/sourse/colors.dart';
 import 'package:study/ui/sourse/widget_style.dart';
 import 'package:study/ui/widgets/container_coloda.dart';
+import 'package:study/ui/widgets/loading_custom.dart';
 import 'package:study/ui/widgets/pick_image.dart';
 import 'package:study/ui/widgets/scaffold_messages.dart';
 
@@ -139,297 +140,303 @@ class _AddCollectionViewState extends State<AddCollectionView> {
       );
     }, child: BlocBuilder<AddCollectionBloc, AddCollectionState>(
       builder: (BuildContext context, AddCollectionState state) {
-        return ReactiveForm(
-          formGroup: form,
-          child: ListView(
-            shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            children: [
-              const SizedBox(
-                height: 12,
-              ),
-              Row(
-                children: [
-                  image == null
-                      ? IconButton(
-                          iconSize: 60,
-                          icon: SvgPicture.asset(
-                            'assets/icons/icon_add_image.svg',
-                          ),
-                          onPressed: () {
-                            selectImage();
-                          },
-                        )
-                      : Column(
-                          children: [
-                            SizedBox(
-                              height: 60,
-                              width: 60,
-                              child: Image.memory(
-                                image!,
-                                fit: BoxFit.cover,
-                              ),
+        return state.maybeWhen(loading: () {
+          return const LoadingCustom();
+        }, orElse: () {
+          return ReactiveForm(
+            formGroup: form,
+            child: ListView(
+              shrinkWrap: true,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              children: [
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    image == null
+                        ? IconButton(
+                            iconSize: 60,
+                            icon: SvgPicture.asset(
+                              'assets/icons/icon_add_image.svg',
                             ),
-                            IconButton(
-                              onPressed: () {
-                                selectImage();
-                              },
-                              icon: const Icon(
-                                Icons.add_a_photo,
-                                color: primaryColor,
+                            onPressed: () {
+                              selectImage();
+                            },
+                          )
+                        : Column(
+                            children: [
+                              SizedBox(
+                                height: 60,
+                                width: 60,
+                                child: Image.memory(
+                                  image!,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                  const SizedBox(
-                    width: 18,
-                  ),
-                  Expanded(
-                    child: ReactiveTextField(
-                      formControlName: 'name',
-                      decoration: WidgetStyle().easyCustomInputDecoration(
-                          labelText: 'Название коллекции'),
-                      validationMessages: (control) => {
-                        'required': 'Пожалуйста, введите название коллекции',
-                        'maxLength': 'Название должно быть меньше 64 символов'
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        addDescriptin
-                            ? addDescriptin = false
-                            : addDescriptin = true;
-                      });
-                      if (!addDescriptin) {
-                        form.control('description').value = '';
-                      }
-                    },
-                    child: Text(
-                      addDescriptin ? 'удалить описание' : 'добавить описание',
-                      style: const TextStyle(
-                        color: primaryColor,
-                        decoration: TextDecoration.underline,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              addDescriptin
-                  ? ReactiveTextField(
-                      formControlName: 'description',
-                      decoration: WidgetStyle().largeInputDecoration(
-                        labelText: 'Опишите вашу колоду...',
-                      ),
-                      maxLines: null,
-                    )
-                  : const SizedBox(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        addTags ? addTags = false : addTags = true;
-                      });
-                      if (!addTags) {
-                        form.control('tag').value = '';
-                        tags = [];
-                      }
-                    },
-                    child: Text(
-                      addTags ? 'удалить теги' : 'добавить теги',
-                      style: const TextStyle(
-                        color: primaryColor,
-                        decoration: TextDecoration.underline,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              addTags
-                  ? Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: ReactiveTextField(
-                                formControlName: 'tag',
-                                decoration: WidgetStyle()
-                                    .easyCustomInputDecoration(
-                                        labelText: '#тег'),
-                                validationMessages: (control) => {
-                                  'maxLength':
-                                      'Тег должно быть меньше 20 символов'
+                              IconButton(
+                                onPressed: () {
+                                  selectImage();
                                 },
+                                icon: const Icon(
+                                  Icons.add_a_photo,
+                                  color: primaryColor,
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            ReactiveFormConsumer(
-                                builder: (context, form, child) {
-                              return CircleAvatar(
-                                radius: 20,
-                                backgroundColor: (form.control('tag').valid &&
-                                        form.control('tag').dirty &&
-                                        form.control('tag').value != '')
-                                    ? primaryColor
-                                    : Colors.grey,
-                                child: IconButton(
-                                  onPressed: (form.control('tag').valid &&
+                            ],
+                          ),
+                    const SizedBox(
+                      width: 18,
+                    ),
+                    Expanded(
+                      child: ReactiveTextField(
+                        formControlName: 'name',
+                        decoration: WidgetStyle().easyCustomInputDecoration(
+                            labelText: 'Название коллекции'),
+                        validationMessages: (control) => {
+                          'required': 'Пожалуйста, введите название коллекции',
+                          'maxLength': 'Название должно быть меньше 64 символов'
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          addDescriptin
+                              ? addDescriptin = false
+                              : addDescriptin = true;
+                        });
+                        if (!addDescriptin) {
+                          form.control('description').value = '';
+                        }
+                      },
+                      child: Text(
+                        addDescriptin
+                            ? 'удалить описание'
+                            : 'добавить описание',
+                        style: const TextStyle(
+                          color: primaryColor,
+                          decoration: TextDecoration.underline,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                addDescriptin
+                    ? ReactiveTextField(
+                        formControlName: 'description',
+                        decoration: WidgetStyle().largeInputDecoration(
+                          labelText: 'Опишите вашу колоду...',
+                        ),
+                        maxLines: null,
+                      )
+                    : const SizedBox(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          addTags ? addTags = false : addTags = true;
+                        });
+                        if (!addTags) {
+                          form.control('tag').value = '';
+                          tags = [];
+                        }
+                      },
+                      child: Text(
+                        addTags ? 'удалить теги' : 'добавить теги',
+                        style: const TextStyle(
+                          color: primaryColor,
+                          decoration: TextDecoration.underline,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                addTags
+                    ? Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: ReactiveTextField(
+                                  formControlName: 'tag',
+                                  decoration: WidgetStyle()
+                                      .easyCustomInputDecoration(
+                                          labelText: '#тег'),
+                                  validationMessages: (control) => {
+                                    'maxLength':
+                                        'Тег должно быть меньше 20 символов'
+                                  },
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              ReactiveFormConsumer(
+                                  builder: (context, form, child) {
+                                return CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: (form.control('tag').valid &&
                                           form.control('tag').dirty &&
                                           form.control('tag').value != '')
-                                      ? () {
-                                          form.control('tag').valid == true;
-                                          if (tags.length >= maxTags) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                                    CustomScaffoldMessages().show(
-                                                        title:
-                                                            'Нельзя добавлять больше $maxTags тегов'));
-                                          } else {
-                                            setState(() {
-                                              tags.add(
-                                                  form.control('tag').value);
-                                            });
-                                            form.control('tag').value = '';
+                                      ? primaryColor
+                                      : Colors.grey,
+                                  child: IconButton(
+                                    onPressed: (form.control('tag').valid &&
+                                            form.control('tag').dirty &&
+                                            form.control('tag').value != '')
+                                        ? () {
+                                            form.control('tag').valid == true;
+                                            if (tags.length >= maxTags) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                      CustomScaffoldMessages().show(
+                                                          title:
+                                                              'Нельзя добавлять больше $maxTags тегов'));
+                                            } else {
+                                              setState(() {
+                                                tags.add(
+                                                    form.control('tag').value);
+                                              });
+                                              form.control('tag').value = '';
+                                            }
                                           }
-                                        }
-                                      : null,
-                                  icon: const Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              );
-                            }),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Wrap(
-                          children: [
-                            ...tags.map(
-                              (e) => Padding(
-                                padding: const EdgeInsets.only(
-                                  right: 4,
-                                  bottom: 4,
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      tags.removeWhere((item) => item == e);
-                                    });
-                                  },
-                                  child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      color: primaryColor,
-                                      borderRadius: BorderRadius.circular(10),
+                                        : null,
+                                    icon: const Icon(
+                                      Icons.add,
+                                      color: Colors.white,
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: Text(
-                                        '#$e',
-                                        style: const TextStyle(
-                                            color: Colors.white),
+                                  ),
+                                );
+                              }),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Wrap(
+                            children: [
+                              ...tags.map(
+                                (e) => Padding(
+                                  padding: const EdgeInsets.only(
+                                    right: 4,
+                                    bottom: 4,
+                                  ),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        tags.removeWhere((item) => item == e);
+                                      });
+                                    },
+                                    child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                        color: primaryColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Text(
+                                          '#$e',
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  : const SizedBox(),
-              const SizedBox(
-                height: 20,
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: CircleAvatar(
-                    radius: 30,
-                    backgroundColor: primaryColor,
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ColodsPage(
-                              onSelect: (
-                                Coloda coloda1,
-                              ) {
-                                int num = 0;
-                                for (var element in colods) {
-                                  if (element.name == coloda1.name) {
-                                    num++;
-                                  }
-                                }
-                                if (num == 0) {
-                                  if (colods
-                                      .where((element) =>
-                                          element.name == coloda1.name)
-                                      .isEmpty) {
-                                    setState(() {
-                                      colods.add(coloda1);
-                                    });
-                                  }
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      CustomScaffoldMessages().show(
-                                          title:
-                                              'Вы уже добавили данную колоду'));
-                                }
-                              },
-                            ),
+                            ],
                           ),
-                        );
-                      },
-                      icon: SvgPicture.asset(
-                        'assets/icons/icon_plus.svg',
-                        height: 28,
-                        width: 28,
+                        ],
+                      )
+                    : const SizedBox(),
+                const SizedBox(
+                  height: 20,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: primaryColor,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ColodsPage(
+                                onSelect: (
+                                  Coloda coloda1,
+                                ) {
+                                  int num = 0;
+                                  for (var element in colods) {
+                                    if (element.name == coloda1.name) {
+                                      num++;
+                                    }
+                                  }
+                                  if (num == 0) {
+                                    if (colods
+                                        .where((element) =>
+                                            element.name == coloda1.name)
+                                        .isEmpty) {
+                                      setState(() {
+                                        colods.add(coloda1);
+                                      });
+                                    }
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        CustomScaffoldMessages().show(
+                                            title:
+                                                'Вы уже добавили данную колоду'));
+                                  }
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                        icon: SvgPicture.asset(
+                          'assets/icons/icon_plus.svg',
+                          height: 28,
+                          width: 28,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              for (int i = 0; i < colods.length; i++)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: ContainerColoda(
-                    cantTab: true,
-                    coloda: colods[colods.length - i - 1],
-                    showTegs: false,
-                  ),
+                const SizedBox(
+                  height: 12,
                 ),
-              const SizedBox(
-                height: 24,
-              ),
-            ],
-          ),
-        );
+                for (int i = 0; i < colods.length; i++)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: ContainerColoda(
+                      cantTab: true,
+                      coloda: colods[colods.length - i - 1],
+                      showTegs: false,
+                    ),
+                  ),
+                const SizedBox(
+                  height: 24,
+                ),
+              ],
+            ),
+          );
+        });
       },
     ));
   }

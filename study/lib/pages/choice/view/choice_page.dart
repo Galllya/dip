@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:study/models/coloda/card.dart' as model;
 import 'package:study/models/statistic.dart';
@@ -24,6 +27,21 @@ class ChoicePage extends StatefulWidget {
 class _ChoicePageState extends State<ChoicePage> {
   late ChoiceBloc choiceBloc;
   late DateTime timeNow;
+  Intro intro = Intro(
+    stepCount: 4,
+    maskClosable: true,
+    widgetBuilder: StepWidgetBuilder.useDefaultTheme(
+      texts: [
+        'В данном режиме вы можете потренироваться и проверить свои знания. Просто выбирайте правильный ответ!',
+        'На карточки термин, к которому нужно подобрать ответ',
+        'Выберите среди четырех карточек правильную',
+        'В настройках можно начать сначала. А так же переключиться с бесконечного режима в конечный - где вы можете закончить режим ответив на все верно и не сделав много ошибок',
+      ],
+      buttonTextBuilder: (currPage, totalPage) {
+        return currPage < totalPage - 1 ? 'следующая' : 'закончить';
+      },
+    ),
+  );
 
   @override
   void initState() {
@@ -49,9 +67,28 @@ class _ChoicePageState extends State<ChoicePage> {
       value: choiceBloc,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Выбор'),
+          title: Text(
+            'Выбор',
+            key: intro.keys[0],
+          ),
           actions: [
             IconButton(
+              onPressed: () {
+                Timer(
+                  const Duration(
+                    milliseconds: 500,
+                  ),
+                  () {
+                    intro.start(context);
+                  },
+                );
+              },
+              icon: const Icon(
+                Icons.question_mark,
+              ),
+            ),
+            IconButton(
+                key: intro.keys[3],
                 onPressed: () {
                   choiceBloc.add(const ChoiceEvent.showSheet());
                 },
@@ -62,6 +99,7 @@ class _ChoicePageState extends State<ChoicePage> {
           ],
         ),
         body: ChoiceView(
+          intro: intro,
           cards: widget.cards,
         ),
       ),

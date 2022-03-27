@@ -35,52 +35,61 @@ class _AddColodaPageState extends State<AddColodaPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AddColodaBloc>.value(
-      value: addColodaBloc,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Добавить колоду'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                addColodaBloc.add(const AddColodaEvent.showModal());
-              },
-              icon: SvgPicture.asset(
-                'assets/icons/icon_settings.svg',
-                color: Colors.white,
+        value: addColodaBloc,
+        child: BlocBuilder<AddColodaBloc, AddColodaState>(
+            builder: (BuildContext context, AddColodaState state) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Добавить колоду'),
+              actions: state.maybeWhen(
+                orElse: () {
+                  return [
+                    IconButton(
+                      onPressed: () {
+                        addColodaBloc.add(const AddColodaEvent.showModal());
+                      },
+                      icon: SvgPicture.asset(
+                        'assets/icons/icon_settings.svg',
+                        color: Colors.white,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        addColodaBloc.add(const AddColodaEvent.make());
+                      },
+                      icon: const Icon(Icons.check),
+                    ),
+                  ];
+                },
+                loading: () {
+                  return [];
+                },
               ),
             ),
-            IconButton(
-              onPressed: () {
-                addColodaBloc.add(const AddColodaEvent.make());
+            body: AddColodaView(
+              putColoda: (
+                String name,
+                String? description,
+                List<model.Card> cards,
+                Uint8List? file,
+                bool? showEvery,
+                bool? takeMyHaveAuthour,
+                List<String>? tags,
+                String userName,
+              ) {
+                addColodaBloc.add(AddColodaEvent.putColoda(
+                  name,
+                  description,
+                  cards,
+                  file,
+                  showEvery,
+                  takeMyHaveAuthour,
+                  tags,
+                  userName,
+                ));
               },
-              icon: const Icon(Icons.check),
             ),
-          ],
-        ),
-        body: AddColodaView(
-          putColoda: (
-            String name,
-            String? description,
-            List<model.Card> cards,
-            Uint8List? file,
-            bool? showEvery,
-            bool? takeMyHaveAuthour,
-            List<String>? tags,
-            String userName,
-          ) {
-            addColodaBloc.add(AddColodaEvent.putColoda(
-              name,
-              description,
-              cards,
-              file,
-              showEvery,
-              takeMyHaveAuthour,
-              tags,
-              userName,
-            ));
-          },
-        ),
-      ),
-    );
+          );
+        }));
   }
 }

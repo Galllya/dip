@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:study/models/coloda/card.dart' as model;
 import 'package:study/pages/memorization/bloc/memorization_bloc.dart';
@@ -14,10 +15,11 @@ import 'package:study/ui/widgets/splash_clipper.dart';
 
 class MemorizationView extends StatefulWidget {
   final List<model.Card> cards;
-
+  final Intro intro;
   const MemorizationView({
     Key? key,
     required this.cards,
+    required this.intro,
   }) : super(key: key);
 
   @override
@@ -149,6 +151,7 @@ class _MemorizationViewState extends State<MemorizationView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     StripCardVal(
+                      key: widget.intro.keys[4],
                       allCard: allCards.length.toString(),
                       picName: 'angry',
                       thisCard: notTouchCards.length.toString(),
@@ -158,6 +161,7 @@ class _MemorizationViewState extends State<MemorizationView> {
                       color: primaryColor,
                     ),
                     StripCardVal(
+                      key: widget.intro.keys[5],
                       allCard: allCards.length.toString(),
                       picName: 'netral',
                       thisCard: touchCards.length.toString(),
@@ -167,6 +171,7 @@ class _MemorizationViewState extends State<MemorizationView> {
                       color: primaryColor,
                     ),
                     StripCardVal(
+                      key: widget.intro.keys[6],
                       allCard: allCards.length.toString(),
                       picName: 'heppy',
                       thisCard: goodCards.length.toString(),
@@ -178,6 +183,7 @@ class _MemorizationViewState extends State<MemorizationView> {
                 height: 400,
                 width: 300,
                 child: SplashClipper(
+                  key: widget.intro.keys[1],
                   decoration: BoxDecoration(
                       color: softColor,
                       borderRadius: BorderRadius.circular(10),
@@ -278,6 +284,7 @@ class _MemorizationViewState extends State<MemorizationView> {
                         );
                       },
                       child: CircleAvatar(
+                        key: widget.intro.keys[2],
                         radius: 30,
                         backgroundColor: primaryColor,
                         child: SvgPicture.asset('assets/icons/icon_ok.svg'),
@@ -314,6 +321,7 @@ class _MemorizationViewState extends State<MemorizationView> {
                         });
                       },
                       child: CircleAvatar(
+                        key: widget.intro.keys[3],
                         radius: 30,
                         backgroundColor: primaryColor,
                         child: SvgPicture.asset(

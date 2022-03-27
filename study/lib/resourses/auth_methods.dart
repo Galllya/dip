@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study/models/another_user.dart';
 import 'package:study/models/app_user.dart';
+import 'package:study/models/daile.dart';
 import 'package:study/models/litl/folow.dart';
 import 'package:study/models/litl/folowers.dart';
 import 'package:study/resourses/storage_methods.dart';
@@ -65,6 +66,15 @@ class AuthMethods {
           anotherUserTake: 0,
           buyed: List<bool>.filled(29, false),
         );
+
+        Daily daily = Daily(
+          lastTrain: DateTime(1000, 1, 1),
+        );
+
+        await fireStore
+            .collection('daily')
+            .doc(cred.user!.uid)
+            .set(daily.toJson());
 
         await fireStore
             .collection('users')

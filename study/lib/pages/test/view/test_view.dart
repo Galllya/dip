@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:study/models/coloda/card.dart' as model;
 import 'package:study/pages/profile/widgets/about_me.dart';
@@ -21,10 +22,12 @@ import 'package:study/ui/sourse/widget_style.dart';
 class TestView extends StatefulWidget {
   final List<model.Card> cards;
   final Function sendRes;
+  final Intro intro;
   const TestView({
     Key? key,
     required this.cards,
     required this.sendRes,
+    required this.intro,
   }) : super(key: key);
 
   @override
@@ -280,6 +283,7 @@ class _TestViewState extends State<TestView> {
               height: 20,
             ),
             Row(
+              key: widget.intro.keys[1],
               children: [
                 for (int i = 0; i < numberSor; i++)
                   InkWell(
@@ -380,7 +384,9 @@ class _TestViewState extends State<TestView> {
                   ),
                 ],
               ),
-            const TitleStrip(title: 'Выберите правильный варинт'),
+            TitleStrip(
+              title: 'Выберите правильный варинт',
+            ),
             for (int i = 0; i < number; i++)
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
@@ -532,7 +538,9 @@ class _TestViewState extends State<TestView> {
                   ],
                 ),
               ),
-            const TitleStrip(title: 'Письмо'),
+            TitleStrip(
+              title: 'Письмо',
+            ),
             for (int i = 0; i < number; i++)
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),

@@ -13,6 +13,7 @@ import 'package:study/ui/widgets/loading_custom.dart';
 
 class ColodsView extends StatefulWidget {
   final Function? onSelect;
+  final Function? fromTraining;
 
   final Function onSearch;
   final Function onClose;
@@ -20,6 +21,7 @@ class ColodsView extends StatefulWidget {
     required this.onSearch,
     required this.onClose,
     this.onSelect,
+    this.fromTraining,
     Key? key,
   }) : super(key: key);
 
@@ -158,7 +160,7 @@ class _ColodsViewState extends State<ColodsView> {
                 const SizedBox(
                   height: 20,
                 ),
-                if (colods.isEmpty)
+                if (colods.isEmpty && !showSearchString)
                   Column(
                     children: [
                       const Text(
@@ -238,6 +240,7 @@ class _ColodsViewState extends State<ColodsView> {
                                 onSelect: widget.onSelect,
                                 coloda: e,
                                 showTegs: !isNameSearch,
+                                fromTraining: widget.fromTraining,
                               ),
                             ),
                           ],

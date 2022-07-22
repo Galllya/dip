@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:study/models/collection.dart';
 import 'package:study/models/coloda/coloda.dart';
@@ -42,7 +43,7 @@ class CollectionBloc extends Bloc<CollectionEvent, CollectionState> {
             collection: collection,
             colods: colods,
           );
-        } catch (e) {
+        } on DioError catch (e) {
           yield const CollectionState.error(error: 'Произошла ошибка');
         }
       },

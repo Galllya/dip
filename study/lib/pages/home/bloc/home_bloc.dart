@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:study/models/collection.dart';
 import 'package:study/models/coloda/coloda.dart';
@@ -44,7 +45,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             colods: colods,
             collections: collections,
           );
-        } catch (e) {
+        } on DioError catch (e) {
           yield const HomeState.error(error: 'Произошла ошибка');
         }
       },

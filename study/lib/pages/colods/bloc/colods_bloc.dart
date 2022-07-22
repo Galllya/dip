@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:study/models/coloda/coloda.dart';
 import 'package:study/provider/coloda_provider.dart';
@@ -41,7 +42,7 @@ class ColodsBloc extends Bloc<ColodsEvent, ColodsState> {
             colodas: colodas,
             cardsFilter: cardsFilter,
           );
-        } catch (e) {
+        } on DioError catch (e) {
           yield const ColodsState.error(error: 'Произошла ошибка');
         }
       },

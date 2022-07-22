@@ -20,7 +20,7 @@ class OverboardView extends StatelessWidget {
         imageAssetPath: 'assets/picturies/pic_onbord_1.png',
         title: 'Создавайте',
         titleColor: primaryColor,
-        body: ' свой колоды или воспользуйтесь уже существующими',
+        body: ' свои колоды или воспользуйтесь уже существующими',
         doAnimateImage: true,
       ),
       PageModel(
